@@ -59,7 +59,7 @@ const User = () => {
     // ${BaseURL}/user/${userId}
     const headers = {
       'Content-Type': 'application/json',
-      'X-Auth-Token': `${token}`,
+      'X-Auth-Token': `${localStorage.getItem("token")}`,
     };
     // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
     axios.get(`${BaseURL}/user/${userId}`, headers).then((response) => {
