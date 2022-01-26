@@ -74,7 +74,7 @@ const User = () => {
       setReferred(accounts.length);
     }
   });
-}
+
  
 
  
