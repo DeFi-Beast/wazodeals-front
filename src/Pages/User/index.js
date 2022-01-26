@@ -57,9 +57,10 @@ const User = () => {
       const result = response.data;
       console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
       if (result.success) {
-        return result
         console.log(result.user)
          setCode(result.user.referralCode)
+        return result
+        
       }
     });
   };
