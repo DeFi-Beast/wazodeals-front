@@ -50,10 +50,20 @@ const User = () => {
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
 
+  // const config = {
+  //       headers: {
+  //         "Content-type": "application/json",
+  //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //       },
+  //     };
+
   useEffect(() => {
   setUserId(localStorage.getItem("userId"));
-
-    axios.get(`${BaseURL}/user/${userId}`)
+    const headers ={
+      "Content-type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("token")}`,
+    }
+    axios.get(`${BaseURL}/user/${userId}`, headers)
       .then((res) => res.json())
       .then(
         (data) => {
