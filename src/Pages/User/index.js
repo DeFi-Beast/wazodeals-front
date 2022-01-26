@@ -61,16 +61,16 @@ const User = () => {
     },
   };
     axios.get(`${BaseURL}/user/${userId}`, config)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          console.log(data)
-        },
-        (error) => {
-          console.log(error)
-        }
-      );
-  },);
+      .then((res) => console.log(res))
+      // .then(
+      //   (data) => {
+      //     console.log(data)
+      //   },
+      //   (error) => {
+      //     console.log(error)
+      //   }
+      // );
+  });
 
 
  
