@@ -56,12 +56,12 @@ const User = () => {
 
   useEffect(() => {
 
-    setEmail(localStorage.getItem("email"));
-  setToken(localStorage.getItem("token"));
+    // setEmail(localStorage.getItem("email"));
+  // setToken(localStorage.getItem("token"));
   setUserId(localStorage.getItem("userId"));
     
-    // console.log(`${userId}`)
-    // console.log(`${BaseURL}/user/${userId}`)
+    console.log(`${userId}`)
+    console.log(`${BaseURL}/user/${userId}`)
     // ${BaseURL}/user/${userId}
     
     axios.get(`${BaseURL}/user/${userId}`).then((response) => {
@@ -111,7 +111,7 @@ const User = () => {
         setReferred(accounts.length)
       }
     });
-  });
+  }, [userId]);
 
   return (
     <LayoutDefault>
