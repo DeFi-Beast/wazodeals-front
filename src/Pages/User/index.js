@@ -50,42 +50,22 @@ const User = () => {
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
 
-  // useEffect(() => {
-  // setUserId(localStorage.getItem("userId"));
+  useEffect(() => {
+  setUserId(localStorage.getItem("userId"));
 
-  //   fetch(`${BaseURL}/user/${userId}`)
-  //     .then((res) => res.text())
-  //     .then(
-  //       (data) => {
-  //         console.log(data)
-  //       },
-  //       (error) => {
-  //         console.log(error)
-  //       }
-  //     );
-  // });
+    axios.get(`${BaseURL}/user/${userId}`)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data)
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
+  });
 
 
-  const getRequest = async (userId) => {
-    try {
-      // setIsFetching(true);
-      const token = localStorage.getItem("token");
-      
-        const response = await Api.get(
-          `${BaseURL}/user/${userId}`,
-          
-        );
-        // setIsFetching(false);
-        const data = response;
-        console.log(data)
-        return data;
-      
-    } catch (err) {
-      throw err;
-    }
-  };
- 
-  getRequest()
  
   
   // useEffect(() => {
