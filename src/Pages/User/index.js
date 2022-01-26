@@ -64,7 +64,8 @@ const User = () => {
     console.log(`${BaseURL}/user/${userId}`)
     // ${BaseURL}/user/${userId}
     
-    axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+    // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+    fetch(`${BaseURL}/user/${userId}`).then((response) => {
       const result = response.data;
     
       // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
@@ -124,9 +125,9 @@ const User = () => {
                 <FontAwesomeIcon icon={faUserCheck} />
                 <div className="circularContainer">
 
-                {/* <Pie point={point}>
+                <Pie point={point}>
                  
-                 </Pie> */}
+                 </Pie>
                 </div>
                 
               </div>
