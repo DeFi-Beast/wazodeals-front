@@ -48,7 +48,7 @@ const User = () => {
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
   // setUserId(localStorage.getItem("userId"));
-useEffect(() => {
+
 
   const config = {
     headers: {
@@ -74,7 +74,7 @@ useEffect(() => {
       setReferred(accounts.length);
     }
   });
-}, [])
+}
  
 
  
