@@ -64,78 +64,103 @@ const User = () => {
 // }
 
 useEffect(() => {
-  axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
-    console.log(response);
-    const result = response.data;
+//   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
+//     console.log(response);
+//     const result = response.data;
 
-    // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+//     // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+//     if (result.success) {
+//       console.log(result.user);
+//       setCode(result.user.referralCode);
+//     }
+//   });
+
+const config = {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+  axios.get(`${BaseURL}/referred`, config).then((response) => {
+    // axios.get(`/referred`, config).then((response) => {
+        console.log(response)
+    const result = response.data;
+    //   console.log(result);
     if (result.success) {
-      console.log(result.user);
-      setCode(result.user.referralCode);
+      let accounts = [];
+      result.accounts.map((account) => {
+        if (account.active) {
+          return accounts.push(account);
+        } else console.log("not referred");
+      });
+      console.log(accounts);
+      console.log(result.accounts);
+      setPoint(100 + accounts.length * 30);
+      setReferred(accounts.length);
     }
   });
 }, [])
  
   
-  // useEffect(() => {
-  //   // setEmail(localStorage.getItem("email"));
-  //   setToken(localStorage.getItem("token"));
-  //   setUserId(localStorage.getItem("userId"));
+//   useEffect(() => {
+//     // setEmail(localStorage.getItem("email"));
+//     setToken(localStorage.getItem("token"));
+//     setUserId(localStorage.getItem("userId"));
 
-  //   console.log(`${userId}`);
-  //   console.log(`${BaseURL}/user/${userId}`);
-  //   // ${BaseURL}/user/${userId}
-  //   // const headers = {
-  //   //   'Content-Type': 'application/json',
-  //   //   'X-Auth-Token': `${localStorage.getItem("token")}`,
-  //   // };
-  //   // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-  //     axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-  //     console.log(response);
-  //     const result = response.data;
+//     console.log(`${userId}`);
+//     console.log(`${BaseURL}/user/${userId}`);
+//     // ${BaseURL}/user/${userId}
+//     // const headers = {
+//     //   'Content-Type': 'application/json',
+//     //   'X-Auth-Token': `${localStorage.getItem("token")}`,
+//     // };
+//     // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+//       axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+//       console.log(response);
+//       const result = response.data;
 
-  //     // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-  //     if (result.success) {
-  //       console.log(result.user);
-  //       setCode(result.user.referralCode);
-  //     }
-  //   });
+//       // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+//       if (result.success) {
+//         console.log(result.user);
+//         setCode(result.user.referralCode);
+//       }
+//     });
 
-  //   // axios.get(`${BaseURL}/user`).then((response) => {
-  //   //   console.log(response);
+//     axios.get(`${BaseURL}/user`).then((response) => {
+//       console.log(response);
 
-  //   //   // axios.get(`/user`).then((response) => {
-  //   //   const result = response.data;
-  //   //   //   console.log(result);
-  //   //   if (result.success) {
-  //   //     // console.log("user");
-  //   //     // console.log(result.users);
-  //   //   }
-  //   // });
-  //   // const config = {
-  //   //   headers: {
-  //   //     "Content-type": "application/json",
-  //   //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   //   },
-  //   // };
-  //   // axios.get(`${BaseURL}/referred`, config).then((response) => {
-  //   //   // axios.get(`/referred`, config).then((response) => {
-  //   //   const result = response.data;
-  //   //   //   console.log(result);
-  //   //   if (result.success) {
-  //   //     let accounts = [];
-  //   //     result.accounts.map((account) => {
-  //   //       if (account.active) {
-  //   //         return accounts.push(account);
-  //   //       } else console.log("not referred");
-  //   //     });
-  //   //     console.log(accounts);
-  //   //     console.log(result.accounts);
-  //   //     setPoint(100 + accounts.length * 30);
-  //   //     setReferred(accounts.length);
-  //   //   }
-  //   // });
-  // });
+//       // axios.get(`/user`).then((response) => {
+//       const result = response.data;
+//       //   console.log(result);
+//       if (result.success) {
+//         // console.log("user");
+//         // console.log(result.users);
+//       }
+//     });
+//     const config = {
+//       headers: {
+//         "Content-type": "application/json",
+//         Authorization: `Bearer ${localStorage.getItem("token")}`,
+//       },
+//     };
+//     axios.get(`${BaseURL}/referred`, config).then((response) => {
+//       // axios.get(`/referred`, config).then((response) => {
+//       const result = response.data;
+//       //   console.log(result);
+//       if (result.success) {
+//         let accounts = [];
+//         result.accounts.map((account) => {
+//           if (account.active) {
+//             return accounts.push(account);
+//           } else console.log("not referred");
+//         });
+//         console.log(accounts);
+//         console.log(result.accounts);
+//         setPoint(100 + accounts.length * 30);
+//         setReferred(accounts.length);
+//       }
+//     });
+//   });
 
   return (
     <LayoutDefault>
