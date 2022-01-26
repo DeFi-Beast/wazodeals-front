@@ -63,7 +63,7 @@ const User = () => {
           console.log(error)
         }
       );
-  });
+  }, []);
 
 
  
