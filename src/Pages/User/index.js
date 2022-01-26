@@ -107,7 +107,7 @@ const User = () => {
     //     setReferred(accounts.length);
     //   }
     // });
-  }, [userId]);
+  });
 
   return (
     <LayoutDefault>
