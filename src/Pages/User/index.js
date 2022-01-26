@@ -57,12 +57,12 @@ const User = () => {
     console.log(`${userId}`);
     console.log(`${BaseURL}/user/${userId}`);
     // ${BaseURL}/user/${userId}
-    const headers = {
-      'Content-Type': 'application/json',
-      'X-Auth-Token': `${localStorage.getItem("token")}`,
-    };
+    // const headers = {
+    //   'Content-Type': 'application/json',
+    //   'X-Auth-Token': `${localStorage.getItem("token")}`,
+    // };
     // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-      axios.get(`${BaseURL}/user/${userId}`, headers).then((response) => {
+      axios.get(`${BaseURL}/user/${userId}`).then((response) => {
       console.log(response);
       const result = response.data;
 
