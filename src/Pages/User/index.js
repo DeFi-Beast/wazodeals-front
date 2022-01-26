@@ -37,14 +37,14 @@ const User = () => {
 
   // 827e656f-42db-445a-8c03-41bea37b393e
   // const getUser = () => {
-  //   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
-  //     const result = response.data;
-  //     console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-  //     if (result.success) {
-  //       console.log(result.user)
-  //        setCode(result.user.referralCode)
-  //     }
-  //   });
+    axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
+      const result = response.data;
+      console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+      if (result.success) {
+        console.log(result.user)
+         setCode(result.user.referralCode)
+      }
+    });
   // }
 
   // setEmail(localStorage.getItem("email"));
@@ -52,20 +52,20 @@ const User = () => {
 
 
 
-  useEffect(() => {
-  setUserId(localStorage.getItem("userId"));
+  // useEffect(() => {
+  // setUserId(localStorage.getItem("userId"));
   
-    axios.get(`${BaseURL}/user/${userId}`)
-      .then((res) => res.json())
-      .then(
-        (data) => {
-          console.log(data)
-        },
-        (error) => {
-          console.log(error)
-        }
-      );
-  },);
+  //   axios.get(`${BaseURL}/user/${userId}`)
+  //     .then((res) => res.json())
+  //     .then(
+  //       (data) => {
+  //         console.log(data)
+  //       },
+  //       (error) => {
+  //         console.log(error)
+  //       }
+  //     );
+  // },);
 
 
  
