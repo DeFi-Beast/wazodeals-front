@@ -10,11 +10,13 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Pie from "../../Components/Pie";
 import BaseURL from "../../Components/Helper";
+import Api from "../../Pages/Api/api";
+
 
 const User = () => {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("827e656f-42db-445a-8c03-41bea37b393e");
   const [referred, setReferred] = useState("");
   const [code, setCode] = useState("");
   const [point, setPoint] = useState();
@@ -48,23 +50,42 @@ const User = () => {
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
 
-  useEffect(() => {
-  setUserId(localStorage.getItem("userId"));
+  // useEffect(() => {
+  // setUserId(localStorage.getItem("userId"));
 
-    fetch(`${BaseURL}/user/${userId}`)
-      .then((res) => res.text())
-      .then(
-        (data) => {
-          console.log(data)
-        },
-        (error) => {
-          console.log(error)
-        }
-      );
-  });
+  //   fetch(`${BaseURL}/user/${userId}`)
+  //     .then((res) => res.text())
+  //     .then(
+  //       (data) => {
+  //         console.log(data)
+  //       },
+  //       (error) => {
+  //         console.log(error)
+  //       }
+  //     );
+  // });
 
+
+  const getRequest = async (userId) => {
+    try {
+      // setIsFetching(true);
+      const token = localStorage.getItem("token");
+      
+        const response = await Api.get(
+          `${BaseURL}/user/${userId}`,
+          
+        );
+        // setIsFetching(false);
+        const data = response;
+        console.log(data)
+        return data;
+      
+    } catch (err) {
+      throw err;
+    }
+  };
  
-
+  getRequest()
  
   
   // useEffect(() => {
