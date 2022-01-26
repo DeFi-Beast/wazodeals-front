@@ -52,7 +52,7 @@ const User = () => {
   setUserId(localStorage.getItem("userId"));
 
     fetch(`${BaseURL}/user/${userId}`)
-      .then((res) => res.json())
+      .then((res) => res.text())
       .then(
         (data) => {
           console.log(data)
