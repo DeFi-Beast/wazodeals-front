@@ -37,53 +37,40 @@ const User = () => {
 
   // 827e656f-42db-445a-8c03-41bea37b393e
   // const getUser = () => {
-    // axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
-    //   const result = response.data;
-    //   console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-    //   if (result.success) {
-    //     console.log(result.user)
-    //      setCode(result.user.referralCode)
-    //   }
-    // });
+  //   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
+  //     const result = response.data;
+  //     console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+  //     if (result.success) {
+  //       console.log(result.user)
+  //        setCode(result.user.referralCode)
+  //     }
+  //   });
   // }
-
-
-  useEffect(() => {
-    fetchuser();
-  }, []);
-
-  const fetchuser = async () => {
-    await axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
-      const result = response.data;
-      console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-      if (result.success) {
-        console.log(result.user)
-         setCode(result.user.referralCode)
-        return result
-        
-      }
-    });
-  };
 
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
 
 
 
-  // useEffect(() => {
-  // setUserId(localStorage.getItem("userId"));
-  
-  //   axios.get(`${BaseURL}/user/${userId}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (data) => {
-  //         console.log(data)
-  //       },
-  //       (error) => {
-  //         console.log(error)
-  //       }
-  //     );
-  // },);
+  useEffect(() => {
+  setUserId(localStorage.getItem("userId"));
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+    axios.get(`${BaseURL}/user/${userId}`, config)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data)
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
+  },);
 
 
  
