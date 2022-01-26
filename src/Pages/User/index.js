@@ -50,9 +50,9 @@ const User = () => {
   //   });
   // }
   
-  setEmail(localStorage.getItem("email"));
-  setToken(localStorage.getItem("token"));
-  setUserId(localStorage.getItem("userId"));
+  // setEmail(localStorage.getItem("email"));
+  // setToken(localStorage.getItem("token"));
+  // setUserId(localStorage.getItem("userId"));
 
   useEffect(() => {
 
@@ -60,13 +60,14 @@ const User = () => {
   setToken(localStorage.getItem("token"));
   setUserId(localStorage.getItem("userId"));
     
-    console.log(`${userId}`)
-    console.log(`${BaseURL}/user/${userId}`)
-
+    // console.log(`${userId}`)
+    // console.log(`${BaseURL}/user/${userId}`)
+    // ${BaseURL}/user/${userId}
     
     axios.get(`${BaseURL}/user/${userId}`).then((response) => {
       const result = response.data;
-      console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+    
+      // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
       if (result.success) {
         console.log(result.user)
          setCode(result.user.referralCode)
@@ -76,6 +77,7 @@ const User = () => {
     
     
     axios.get(`${BaseURL}/user`).then((response) => {
+    // axios.get(`/user`).then((response) => {
       const result = response.data;
     //   console.log(result);
       if (result.success) {
@@ -91,6 +93,7 @@ const User = () => {
       },
  };
     axios.get(`${BaseURL}/referred`, config).then((response) => {
+    // axios.get(`/referred`, config).then((response) => {
       const result = response.data;
     //   console.log(result);
       if (result.success) {
@@ -108,7 +111,7 @@ const User = () => {
         setReferred(accounts.length)
       }
     });
-  }, []);
+  });
 
   return (
     <LayoutDefault>
