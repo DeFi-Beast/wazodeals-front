@@ -49,6 +49,21 @@ const User = () => {
   // setToken(localStorage.getItem("token"));
   // setUserId(localStorage.getItem("userId"));
 
+//   async componentDidMount() {
+//     // GET request using axios with async/await
+//     const response = await axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
+//       console.log(response);
+//       const result = response.data;
+  
+//       // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+//       if (result.success) {
+//         console.log(result.user);
+//         setCode(result.user.referralCode);
+//       }
+//     });
+// }
+
+useEffect(() => {
   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
     console.log(response);
     const result = response.data;
@@ -59,6 +74,8 @@ const User = () => {
       setCode(result.user.referralCode);
     }
   });
+}, [])
+ 
   
   // useEffect(() => {
   //   // setEmail(localStorage.getItem("email"));
