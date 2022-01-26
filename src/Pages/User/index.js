@@ -51,21 +51,18 @@ const User = () => {
 
   useEffect(() => {
     // setEmail(localStorage.getItem("email"));
-    // setToken(localStorage.getItem("token"));
+    setToken(localStorage.getItem("token"));
     setUserId(localStorage.getItem("userId"));
 
     console.log(`${userId}`);
     console.log(`${BaseURL}/user/${userId}`);
     // ${BaseURL}/user/${userId}
-
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-Auth-Token': `${token}`,
+    };
     // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-    fetch(`${BaseURL}/user/${userId}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "GET",
-      credentials: "include",
-    }).then((response) => {
+    fetch(`${BaseURL}/user/${userId}`, headers).then((response) => {
       console.log(response);
       const result = response.data;
 
