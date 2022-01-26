@@ -49,7 +49,7 @@ const User = () => {
   // setToken(localStorage.getItem("token"));
   // setUserId(localStorage.getItem("userId"));
 
-  axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+  axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
     console.log(response);
     const result = response.data;
 
