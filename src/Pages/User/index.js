@@ -54,13 +54,8 @@ const User = () => {
 
   useEffect(() => {
   setUserId(localStorage.getItem("userId"));
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
-    axios.get(`${BaseURL}/user/${userId}`, config)
+  
+    axios.get(`${BaseURL}/user/${userId}`)
       .then((res) => res.json())
       .then(
         (data) => {
@@ -70,7 +65,7 @@ const User = () => {
           console.log(error)
         }
       );
-  }, []);
+  },);
 
 
  
