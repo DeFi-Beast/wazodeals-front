@@ -66,6 +66,8 @@ const User = () => {
     
     // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
     fetch(`${BaseURL}/user/${userId}`).then((response) => {
+
+      console.log(response)
       const result = response.data;
     
       // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
@@ -78,6 +80,8 @@ const User = () => {
     
     
     axios.get(`${BaseURL}/user`).then((response) => {
+      console.log(response)
+
     // axios.get(`/user`).then((response) => {
       const result = response.data;
     //   console.log(result);
