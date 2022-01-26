@@ -8,9 +8,8 @@ import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../Components/Button";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Pie from "../../Components/Pie"
-import BaseURL from "../../Components/Helper"
-
+import Pie from "../../Components/Pie";
+import BaseURL from "../../Components/Helper";
 
 const User = () => {
   const [email, setEmail] = useState("");
@@ -22,22 +21,18 @@ const User = () => {
   const [copied, setCopied] = useState(false);
 
   const CopyToClipboard = () => {
-      
-        //   console.log(navigator.clipboard.write.length)
-      if (navigator.clipboard.write.length >= 1){
-          setCopied("true")
-      }
-    navigator.clipboard.writeText(`${code}`)
-  }
- 
+    //   console.log(navigator.clipboard.write.length)
+    if (navigator.clipboard.write.length >= 1) {
+      setCopied("true");
+    }
+    navigator.clipboard.writeText(`${code}`);
+  };
 
   // useEffect(() => {
   //   // ⬇ This calls my get request from the server
   //   getUser();
   // });
-   
-  
- 
+
   // 827e656f-42db-445a-8c03-41bea37b393e
   // const getUser = () => {
   //   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
@@ -49,71 +44,70 @@ const User = () => {
   //     }
   //   });
   // }
-  
+
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
   // setUserId(localStorage.getItem("userId"));
 
   useEffect(() => {
-
     // setEmail(localStorage.getItem("email"));
-  // setToken(localStorage.getItem("token"));
-  setUserId(localStorage.getItem("userId"));
-    
-    console.log(`${userId}`)
-    console.log(`${BaseURL}/user/${userId}`)
-    // ${BaseURL}/user/${userId}
-    
-    // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-    fetch(`${BaseURL}/user/${userId}`).then((response) => {
+    // setToken(localStorage.getItem("token"));
+    setUserId(localStorage.getItem("userId"));
 
-      console.log(response)
+    console.log(`${userId}`);
+    console.log(`${BaseURL}/user/${userId}`);
+    // ${BaseURL}/user/${userId}
+
+    // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+    fetch(`${BaseURL}/user/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "GET",
+      credentials: "include",
+    }).then((response) => {
+      console.log(response);
       const result = response.data;
-    
+
       // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
       if (result.success) {
-        console.log(result.user)
-         setCode(result.user.referralCode)
+        console.log(result.user);
+        setCode(result.user.referralCode);
       }
     });
-  
-    
-    
-    axios.get(`${BaseURL}/user`).then((response) => {
-      console.log(response)
 
-    // axios.get(`/user`).then((response) => {
+    axios.get(`${BaseURL}/user`).then((response) => {
+      console.log(response);
+
+      // axios.get(`/user`).then((response) => {
       const result = response.data;
-    //   console.log(result);
+      //   console.log(result);
       if (result.success) {
         // console.log("user");
         // console.log(result.users);
-       
       }
     });
     const config = {
       headers: {
-          "Content-type": "application/json",
-           "Authorization": `Bearer ${localStorage.getItem("token")}`,
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
- };
+    };
     axios.get(`${BaseURL}/referred`, config).then((response) => {
-    // axios.get(`/referred`, config).then((response) => {
+      // axios.get(`/referred`, config).then((response) => {
       const result = response.data;
-    //   console.log(result);
+      //   console.log(result);
       if (result.success) {
-        let accounts = []
-        result.accounts.map(account => {
-          if(account.active){
-            return accounts.push(account)
-            
-          }
-          else console.log("not referred")
-        })
+        let accounts = [];
+        result.accounts.map((account) => {
+          if (account.active) {
+            return accounts.push(account);
+          } else console.log("not referred");
+        });
         console.log(accounts);
         console.log(result.accounts);
-        setPoint(100 + (accounts.length * 30))
-        setReferred(accounts.length)
+        setPoint(100 + accounts.length * 30);
+        setReferred(accounts.length);
       }
     });
   }, [userId]);
@@ -128,12 +122,8 @@ const User = () => {
               <div className={Classes.UserCardRow}>
                 <FontAwesomeIcon icon={faUserCheck} />
                 <div className="circularContainer">
-
-                <Pie point={point}>
-                 
-                 </Pie>
+                  <Pie point={point}></Pie>
                 </div>
-                
               </div>
               <Button className={Classes.Button} disabled>
                 <Link to={"/"}>Redeem Points</Link>
@@ -142,26 +132,22 @@ const User = () => {
           </div>
           <div className={`${Classes.UserCard} ${Classes.UserCardMargin}`}>
             <div className={Classes.UserCardRow}>
-               <h4>
-               Your Referral Code
-                   </h4> 
-                </div>
+              <h4>Your Referral Code</h4>
+            </div>
             <div className={Classes.UserCodeRow}>
               <div className={Classes.UserCode}>
-                 <p style={{fontSize:"16px"}}>{code}</p> 
+                <p style={{ fontSize: "16px" }}>{code}</p>
               </div>
-              <Button className={Classes.Button} onClick={CopyToClipboard}>{copied ?"Copied!" : "Copy"}</Button>
+              <Button className={Classes.Button} onClick={CopyToClipboard}>
+                {copied ? "Copied!" : "Copy"}
+              </Button>
             </div>
-            <div style={{marginTop:"20px", textAlign:"left"}}>
-            <h3>Referred : {referred} Persons</h3>
-
+            <div style={{ marginTop: "20px", textAlign: "left" }}>
+              <h3>Referred : {referred} Persons</h3>
             </div>
-
           </div>
 
-          <div className={Classes.UserColumn}>
-              History Review
-          </div>
+          <div className={Classes.UserColumn}>History Review</div>
         </div>
       </div>
     </LayoutDefault>
