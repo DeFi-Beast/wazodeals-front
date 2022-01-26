@@ -47,32 +47,20 @@ const User = () => {
 
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
-  // setUserId(localStorage.getItem("userId"));
 
+  useEffect(() => {
+  setUserId(localStorage.getItem("userId"));
 
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
-  axios.get(`${BaseURL}/referred`, config).then((response) => {
-    // axios.get(`/referred`, config).then((response) => {
-        console.log(response)
-    const result = response.data;
-    //   console.log(result);
-    if (result.success) {
-      let accounts = [];
-      result.accounts.map((account) => {
-        if (account.active) {
-          return accounts.push(account);
-        } else console.log("not referred");
-      });
-      console.log(accounts);
-      console.log(result.accounts);
-      setPoint(100 + accounts.length * 30);
-      setReferred(accounts.length);
-    }
+    fetch(`${BaseURL}/user/${userId}`)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data)
+        },
+        (error) => {
+          console.log(error)
+        }
+      );
   });
 
  
