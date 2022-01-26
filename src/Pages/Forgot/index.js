@@ -57,7 +57,7 @@ const Forgot = ({ dispatch }) => {
           )
           // dispatch(redAction(result.email));
           
-          window.location.replace(`${BaseURL}/reset-password`);
+          window.location.replace(`/reset-password`);
          
         }
       },

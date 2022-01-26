@@ -61,7 +61,7 @@ const Reset = ({ dispatch }) => {
           )
           // dispatch(redAction(result.password));
           // localStorage.setItem("password", result.password )
-          window.location.replace(`${BaseURL}/reset-password`);
+          window.location.replace(`/reset-password`);
           // props.history.push('/')
         }
       },

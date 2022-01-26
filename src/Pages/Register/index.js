@@ -48,7 +48,7 @@ const Register = ({dispatch}) => {
           console.log(result.success)
           // dispatch(redAction(result.email));
           localStorage.setItem("email", result.email )
-          window.location.replace(`${BaseURL}/activate`);
+          window.location.replace(`/activate`);
           // props.history.push('/')
         }
 
