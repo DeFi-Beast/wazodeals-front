@@ -62,7 +62,7 @@ const User = () => {
       'X-Auth-Token': `${token}`,
     };
     // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-    fetch(`${BaseURL}/user/${userId}`, headers).then((response) => {
+    axios.get(`${BaseURL}/user/${userId}`, headers).then((response) => {
       console.log(response);
       const result = response.data;
 
