@@ -124,9 +124,9 @@ const User = () => {
                 <FontAwesomeIcon icon={faUserCheck} />
                 <div className="circularContainer">
 
-                <Pie point={point}>
+                {/* <Pie point={point}>
                  
-                 </Pie>
+                 </Pie> */}
                 </div>
                 
               </div>
