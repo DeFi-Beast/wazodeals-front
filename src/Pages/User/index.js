@@ -37,15 +37,32 @@ const User = () => {
 
   // 827e656f-42db-445a-8c03-41bea37b393e
   // const getUser = () => {
-    axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
+    // axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
+    //   const result = response.data;
+    //   console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+    //   if (result.success) {
+    //     console.log(result.user)
+    //      setCode(result.user.referralCode)
+    //   }
+    // });
+  // }
+
+
+  useEffect(() => {
+    fetchuser();
+  }, []);
+
+  const fetchuser = async () => {
+    await axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
       const result = response.data;
       console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
       if (result.success) {
+        return result
         console.log(result.user)
          setCode(result.user.referralCode)
       }
     });
-  // }
+  };
 
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
