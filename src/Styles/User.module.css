@@ -1,0 +1,67 @@
+.UserContainer {
+    display: flex;
+    /* align-items: center; */
+    justify-content: space-between;
+    text-align: center;
+}
+.UserCard {
+    width: 30%;
+    box-shadow: 0px 10px 40px #37489A5C;
+    border-radius: 10px;
+    padding: 20px 30px;
+    text-align: center;
+    /* height: 200px; */
+}
+.UserColumn {
+    flex-grow: 1;
+    background: #F0F0F0;
+}
+h4 {
+    width: 100%;
+}
+.UserCardRow {
+    width: 100%;
+    display: flex;
+    margin-bottom: 20px;
+    text-align: center;
+    justify-content: space-between;
+    align-items: center;
+    /* height:135px */
+}
+.UserCode {
+    background: #F0F0F0;
+    width: 80%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.UserCodeRow {
+    display: flex;
+    margin-top: 50px;
+    /* text-align: center;
+    justify-content: center;
+    align-items: center; */
+}
+.UserCardMargin {
+    margin: 0px 40px;
+}
+.UserCard svg {
+    font-size: 100px;
+    color: #D9D9D9;
+}
+.Button{
+    color:white ;
+    margin: 0 ;
+}
+.Button:hover a{
+    color:#AE00BB ;
+}
+.UserCard a {
+    text-decoration: none;
+    color: white;
+    
+}
+.UserCard a:hover{
+    color: #AE00BB;
+}
