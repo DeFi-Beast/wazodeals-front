@@ -16,7 +16,7 @@ class User extends Component {
     async componentDidMount() {
     // GET request using axios with async/await
     const response = await axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
-      console.log(response);
+      console.log(this.response);
       const result = response.data;
   
       // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
