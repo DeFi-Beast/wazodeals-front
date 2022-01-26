@@ -39,7 +39,7 @@ const Login = () => {
 
           // dispatch(redAction(result.email));
           // localStorage.setItem("email", result.email )
-          window.location.replace(`${BaseURL}/user/${result.userId}`);
+          window.location.replace(`/user/${result.userId}`);
           // window.location.replace(`/user/${result.userId}`);
           // props.history.push('/')
         }
