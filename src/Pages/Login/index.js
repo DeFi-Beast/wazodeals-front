@@ -22,10 +22,12 @@ const Login = () => {
       email: email,
       password: password,
     };
-    axios.post(`${BaseURL}/login`, queryObj).then(
+
+    console.log(email)
+    console.log(password)
+    axios.post(`/login`, queryObj).then(
       (response) => {
         var result = response.data;
-        setShow(false);
         console.log(result);
         // setMessage(result);
 
@@ -35,6 +37,8 @@ const Login = () => {
           console.log(result.success);
           localStorage.setItem("token", result.accessToken);
           localStorage.setItem("userId", result.userId);
+        setShow(false);
+
           // setUserId(result.userId)
 
           // dispatch(redAction(result.email));

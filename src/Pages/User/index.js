@@ -35,7 +35,7 @@ const User = () => {
   //   getUser();
   // });
 
-  // 827e656f-42db-445a-8c03-41bea37b393e
+  // // 827e656f-42db-445a-8c03-41bea37b393e
   // const getUser = () => {
   //   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
   //     const result = response.data;
@@ -50,27 +50,125 @@ const User = () => {
   // setEmail(localStorage.getItem("email"));
   // setToken(localStorage.getItem("token"));
 
+  //   useEffect(() => {
+  //   // setEmail(localStorage.getItem("email"));
+  //   setToken(localStorage.getItem("token"));
+  //   setUserId(localStorage.getItem("userId"));
 
+  //   console.log(`${userId}`);
+  //   // console.log(`${BaseURL}/user/${userId}`);
+  //   // ${BaseURL}/user/${userId}
+  //   // const headers = {
+  //   //   'Content-Type': 'application/json',
+  //   //   'X-Auth-Token': `${localStorage.getItem("token")}`,
+  //   // };
+  //   // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
+  //     axios.get(`/user/${userId}`).then((response) => {
+  //     console.log(response);
+  //     const result = response.data;
+
+  //     // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
+  //     if (result.success) {
+  //       console.log(result.user);
+  //       setCode(result.user.referralCode);
+  //     }
+  //   });
+
+  //   axios.get(`/user`).then((response) => {
+  //     console.log(response);
+
+  //     // axios.get(`/user`).then((response) => {
+  //     const result = response.data;
+  //     //   console.log(result);
+  //     if (result.success) {
+  //       // console.log("user");
+  //       // console.log(result.users);
+  //     }
+  //   });
+  //   const config = {
+  //     headers: {
+  //       "Content-type": "application/json",
+  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+  //     },
+  //   };
+  //   axios.get(`/referred`, config).then((response) => {
+  //     // axios.get(`/referred`, config).then((response) => {
+  //     const result = response.data;
+  //     //   console.log(result);
+  //     if (result.success) {
+  //       let accounts = [];
+  //       result.accounts.map((account) => {
+  //         if (account.active) {
+  //           return accounts.push(account);
+  //         } else console.log("not referred");
+  //       });
+  //       console.log(accounts);
+  //       console.log(result.accounts);
+  //       setPoint(100 + accounts.length * 30);
+  //       setReferred(accounts.length);
+  //     }
+  //   });
+  // });
 
   useEffect(() => {
-  setUserId(localStorage.getItem("userId"));
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
-    axios.get(`${BaseURL}/user/${userId}`, config)
-      .then((res) => console.log(res))
-      // .then(
-      //   (data) => {
-      //     console.log(data)
-      //   },
-      //   (error) => {
-      //     console.log(error)
-      //   }
-      // );
-  }, []);
+    let queryObj = {
+      userId:localStorage.getItem("userId")
+    };
+   
+    axios.get(`https://wazodeal.herokuapp.com/user/${userId}`, {headers: {
+      'Access-Control-Allow-Origin': '*',
+    }},).then(
+      (response) => {
+        console.log(response)
+        var result = response.data;
+        console.log(result);
+        // setMessage(result);
+  
+        console.log(result);
+        if (result.success) {
+          console.log(result);
+          console.log(result.success);
+          
+      
+  
+          // setUserId(result.userId)
+  
+          // dispatch(redAction(result.email));
+          // localStorage.setItem("email", result.email )
+          // window.location.replace(`/user/${result.userId}`);
+          // window.location.replace(`/user/${result.userId}`);
+          // props.history.push('/')
+        }
+      },
+      (error) => {
+        console.log(error);
+        // setShow(false);
+        // setMessage(error.message);
+      }
+    );
+  }, [])
+
+
+
+
+
+  // useEffect(() => {
+  // setUserId(localStorage.getItem("userId"));
+  //   const headers ={
+  //     "Content-type": "application/json",
+  //     authorization: `Bearer ${localStorage.getItem("token")}`,
+  //   }
+  //   axios.get(`${BaseURL}/user/${userId}`)
+  //     .then((res) => res.json())
+  //     .then(
+  //       (data) => {
+  //         console.log(data)
+  //       },
+  //       (error) => {
+  //         console.log(error)
+  //       }
+  //     );
+  // }, []);
 
 
  
