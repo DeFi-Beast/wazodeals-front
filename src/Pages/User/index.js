@@ -93,9 +93,11 @@ const User = () => {
   //   });
   // }, []);
 
+  setUserId(localStorage.getItem("userId"))
+
+
   useEffect(() => {
    
-     setUserId(localStorage.getItem("userId"))
   
 
   let one = `${BaseURL}/user/${userId}`;
