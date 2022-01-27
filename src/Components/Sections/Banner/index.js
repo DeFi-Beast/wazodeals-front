@@ -2,6 +2,7 @@ import {Row, Div} from "./BannerRow"
 import Classes from "../../../Styles/banner.module.css"
 import BannerItem from "../../../Assets/banner.png"
 import {Button} from "../../Button"
+import { Link } from "react-router-dom"
 
 const Banner = ()  => {
     return <div className="Row">
@@ -13,7 +14,7 @@ const Banner = ()  => {
                 <p className={Classes.Content}>
                 Register in less than a minute &amp; enjoy unlimited discounts
                 </p>
-                <Button >Get Started</Button>
+                <Button as="a" href="/register" >Get Started</Button>
             </Div>
             <Div className="banner">
                 <img src={BannerItem} alt="Banner"></img>

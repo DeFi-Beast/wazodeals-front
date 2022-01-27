@@ -31,6 +31,7 @@ export const OrderBtn = styled.button`
   text-align: center;
   margin-top:16px;
   border: 1px solid #ae00bb;
+  display:block;
 
   &:hover {
     background: #ae00bb;

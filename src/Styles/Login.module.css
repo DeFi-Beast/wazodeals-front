@@ -9,6 +9,7 @@
     justify-content: space-between;
 
 }
+
 .LogoWrapper {
     width: 100%;
     text-align:center;
@@ -61,4 +62,16 @@ form > div {
 .styledLink {
     text-decoration: none;
     color: rgba(176, 0, 185, 1);
+}
+
+
+/*Media QUeries***/
+
+@media only screen and (max-width:750px) {
+    .Wrapper {
+        height: 100vh;
+    }
+    .formExtended > div {
+        text-align: end;
+    }
 }

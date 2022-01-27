@@ -23,7 +23,7 @@ const StyledCoupon = (props) => {
                 <p>Up to <span className={Classes.bold}>{props.coupon.discount}</span> OFF fries</p> 
             </div>     
             <div style={{textAlign:"center"}}>
-          <OrderBtn>Order</OrderBtn>
+          <OrderBtn as="a" href="/login">Order</OrderBtn>
                 
             </div>     
         </Div>

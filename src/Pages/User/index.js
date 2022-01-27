@@ -135,7 +135,7 @@ const User = () => {
         let accounts = [];
         resultTwo.accounts.map((account) => {
           if (account.active) {
-            return accounts.push(account);
+            return (accounts.push(account))
           } else console.log("not referred");
         });
         console.log(accounts);

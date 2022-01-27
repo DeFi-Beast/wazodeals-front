@@ -3,14 +3,18 @@
     /* align-items: center; */
     justify-content: space-between;
     text-align: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
 }
 .UserCard {
-    width: 30%;
+  
     box-shadow: 0px 10px 40px #37489A5C;
     border-radius: 10px;
     padding: 20px 30px;
     text-align: center;
-    /* height: 200px; */
+    height: 200px;
+    width:75%;
 }
 .UserColumn {
     flex-grow: 1;
@@ -44,8 +48,9 @@ h4 {
     align-items: center; */
 }
 .UserCardMargin {
-    margin: 0px 40px;
+    margin: 10px 0px;
 }
+
 .UserCard svg {
     font-size: 100px;
     color: #D9D9D9;
@@ -64,4 +69,33 @@ h4 {
 }
 .UserCard a:hover{
     color: #AE00BB;
+}
+
+
+/**Media Querries**/
+
+@media only screen and (min-width:425px){
+    
+    .UserColumn {
+        margin-top: 20px;
+    }
+    .UserCard{width: 70%;}
+
+
+}
+@media only screen and (min-width:655px){
+    
+    .UserColumn {
+        margin-top: 20px;
+    }
+    .UserCard{width: 50%;}
+
+
+}
+@media only screen and (min-width:1000px){
+    .UserCard{width: 30%;}
+    .UserCardMargin {
+    margin: 0px 40px;
+}
+.UserContainer{flex-direction: row; align-items: center;}
 }

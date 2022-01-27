@@ -61,17 +61,7 @@ p {
 
 }
 
-@media only screen and (max-width:512px){
-  .swiper-slide {
-    display: flex;
-    justify-content: space-around;
-  }
-}
-@media only screen and (max-width:420px){
-  .hide-input {
-    display: none;
-  }
-}
+
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -105,3 +95,22 @@ p {
 }
 
 
+/**media queries***/
+
+@media only screen and (max-width:512px){
+  .swiper-slide {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+@media only screen and (max-width:420px){
+  .hide-input {
+    display: none;
+  }
+  .circularContainer {
+    width: 100px;
+  }
+  .svg-inline--fa.fa-w-20 {
+    width: 0.8em;
+  }
+}
