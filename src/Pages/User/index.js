@@ -94,9 +94,9 @@ const User = () => {
   // }, []);
 
   useEffect(() => {
-    let queryObj = {
-      userId: localStorage.getItem("userId"),
-    };
+   
+     setUserId(localStorage.getItem("userId"))
+  
 
   let one = `${BaseURL}/user/${userId}`;
   let two = `${BaseURL}/referred`;
