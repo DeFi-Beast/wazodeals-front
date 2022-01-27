@@ -25,35 +25,35 @@ const Login = () => {
 
     console.log(email)
     console.log(password)
-    // axios.post(`${BaseURL}/login`, queryObj).then(
-    //   (response) => {
-    //     var result = response.data;
-    //     console.log(result);
-    //     // setMessage(result);
+    axios.post(`${BaseURL}/login`, queryObj).then(
+      (response) => {
+        var result = response.data;
+        console.log(result);
+        // setMessage(result);
 
-    //     console.log(result);
-    //     if (result.success) {
-    //       console.log(result);
-    //       console.log(result.success);
-    //       localStorage.setItem("token", result.accessToken);
-    //       localStorage.setItem("userId", result.userId);
-    //     setShow(false);
+        console.log(result);
+        if (result.success) {
+          console.log(result);
+          console.log(result.success);
+          localStorage.setItem("token", result.accessToken);
+          localStorage.setItem("userId", result.userId);
+        setShow(false);
 
-    //       // setUserId(result.userId)
+          // setUserId(result.userId)
 
-    //       // dispatch(redAction(result.email));
-    //       // localStorage.setItem("email", result.email )
-    //       window.location.replace(`/user/${result.userId}`);
-    //       // window.location.replace(`/user/${result.userId}`);
-    //       // props.history.push('/')
-    //     }
-    //   },
-    //   (error) => {
-    //     console.log(error);
-    //     // setShow(false);
-    //     // setMessage(error.message);
-    //   }
-    // );
+          // dispatch(redAction(result.email));
+          // localStorage.setItem("email", result.email )
+          window.location.replace(`/user/${result.userId}`);
+          // window.location.replace(`/user/${result.userId}`);
+          // props.history.push('/')
+        }
+      },
+      (error) => {
+        console.log(error);
+        // setShow(false);
+        // setMessage(error.message);
+      }
+    );
   };
   return (
     <LayoutLogin>
