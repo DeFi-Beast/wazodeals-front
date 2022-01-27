@@ -16,7 +16,7 @@ import Api from "../../Pages/Api/api";
 const User = () => {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("827e656f-42db-445a-8c03-41bea37b393e");
+  const [userId, setUserId] = useState("");
   const [referred, setReferred] = useState("");
   const [code, setCode] = useState("");
   const [point, setPoint] = useState();
@@ -115,19 +115,20 @@ const User = () => {
       userId:localStorage.getItem("userId")
     };
    
-    axios.get(`https://wazodeal.herokuapp.com/user/${userId}`, {headers: {
+    axios.get(`${BaseURL}/user/${userId}`, {headers: {
       'Access-Control-Allow-Origin': '*',
     }},).then(
       (response) => {
         console.log(response)
         var result = response.data;
         console.log(result);
-        // setMessage(result);
+        
   
         console.log(result);
         if (result.success) {
           console.log(result);
           console.log(result.success);
+        setCode(result.user.referralCode);
           
       
   
@@ -146,6 +147,30 @@ const User = () => {
         // setMessage(error.message);
       }
     );
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    axios.get(`${BaseURL}/referred`, config).then((response) => {
+      // axios.get(`/referred`, config).then((response) => {
+      const result = response.data;
+      //   console.log(result);
+      if (result.success) {
+        let accounts = [];
+        result.accounts.map((account) => {
+          if (account.active) {
+            return accounts.push(account);
+          } else console.log("not referred");
+        });
+        console.log(accounts);
+        console.log(result.accounts);
+        setPoint(100 + accounts.length * 30);
+        setReferred(accounts.length);
+      }
+    });
   }, [])
 
 
