@@ -93,14 +93,14 @@ const User = () => {
   //   });
   // }, []);
 
-  setUserId(localStorage.getItem("userId"))
+  // setUserId(localStorage.getItem("userId"))
 
 
   useEffect(() => {
    
   
 
-  let one = `${BaseURL}/user/${userId}`;
+  let one = `${BaseURL}/user/${localStorage.getItem("userId")}`;
   let two = `${BaseURL}/referred`;
   const config = {
     headers: {
