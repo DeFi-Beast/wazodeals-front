@@ -4,6 +4,7 @@ import { StyledDiv, StyledLogo } from "../../Components/Logo/Logo";
 import Classes from "../../Styles/Login.module.css";
 import Logbg from "../../Assets/Logbg.png";
 import LoginLogo from "../../Assets/Loginlogo.png";
+import  Loader  from "../../Components/Loader";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BaseURL from "../../Components/Helper"
@@ -16,7 +17,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    setShow(false);
+    setShow(true);
     e.preventDefault();
     let queryObj = {
       email: email,
@@ -43,7 +44,7 @@ const Login = () => {
           // dispatch(redAction(result.email));
           // localStorage.setItem("email", result.email )
           window.location.replace(`/user/${result.userId}`);
-        setShow(true);
+        setShow(false);
 
           // window.location.replace(`/user/${result.userId}`);
           // props.history.push('/')
@@ -95,7 +96,13 @@ const Login = () => {
               />
             </div>
             <button type="submit" className={Classes.button}>
-              Login
+            {show ? (
+                <div>
+                  <Loader></Loader>
+                </div>
+              ) : (
+                "Login"
+              )}
             </button>
           </form>
           <div className={Classes.formExtended}>
