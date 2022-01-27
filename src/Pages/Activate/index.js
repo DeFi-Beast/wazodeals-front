@@ -35,7 +35,12 @@ const Activate = ({ dispatch }) => {
     let queryObj = {
       email: email,
       code: code,
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("email")}`,
+      },
     };
+    
     axios.patch(`${BaseURL}/activate`, queryObj).then(
       (response) => {
         var result = response.data;
