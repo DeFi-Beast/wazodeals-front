@@ -38,6 +38,8 @@ const Activate = ({ dispatch }) => {
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("email")}`,
+      "Access-Control-Allow-Origin": "*",
+
       },
     };
     
