@@ -12,7 +12,6 @@ import Pie from "../../Components/Pie";
 import BaseURL from "../../Components/Helper";
 import Api from "../../Pages/Api/api";
 
-
 const User = () => {
   const [email, setEmail] = useState("");
   const [token, setToken] = useState("");
@@ -31,67 +30,51 @@ const User = () => {
   };
 
   // useEffect(() => {
-  //   // ⬇ This calls my get request from the server
-  //   getUser();
-  // });
+  //   let queryObj = {
+  //     userId: localStorage.getItem("userId"),
+  //   };
 
-  // // 827e656f-42db-445a-8c03-41bea37b393e
-  // const getUser = () => {
-  //   axios.get(`${BaseURL}/user/827e656f-42db-445a-8c03-41bea37b393e`).then((response) => {
-  //     const result = response.data;
-  //     console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-  //     if (result.success) {
-  //       console.log(result.user)
-  //        setCode(result.user.referralCode)
-  //     }
-  //   });
-  // }
+  //   axios
+  //     .get(`${BaseURL}/user/${userId}`, {
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*",
+  //       },
+  //     })
+  //     .then(
+  //       (response) => {
+  //         console.log(response);
+  //         var result = response.data;
+  //         console.log(result);
 
-  // setEmail(localStorage.getItem("email"));
-  // setToken(localStorage.getItem("token"));
+  //         console.log(result);
+  //         if (result.success) {
+  //           console.log(result);
+  //           console.log(result.success);
+  //           setCode(result.user.referralCode);
 
-  //   useEffect(() => {
-  //   // setEmail(localStorage.getItem("email"));
-  //   setToken(localStorage.getItem("token"));
-  //   setUserId(localStorage.getItem("userId"));
+  //           // setUserId(result.userId)
 
-  //   console.log(`${userId}`);
-  //   // console.log(`${BaseURL}/user/${userId}`);
-  //   // ${BaseURL}/user/${userId}
-  //   // const headers = {
-  //   //   'Content-Type': 'application/json',
-  //   //   'X-Auth-Token': `${localStorage.getItem("token")}`,
-  //   // };
-  //   // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-  //     axios.get(`/user/${userId}`).then((response) => {
-  //     console.log(response);
-  //     const result = response.data;
+  //           // dispatch(redAction(result.email));
+  //           // localStorage.setItem("email", result.email )
+  //           // window.location.replace(`/user/${result.userId}`);
+  //           // window.location.replace(`/user/${result.userId}`);
+  //           // props.history.push('/')
+  //         }
+  //       },
+  //       (error) => {
+  //         console.log(error);
+  //         // setShow(false);
+  //         // setMessage(error.message);
+  //       }
+  //     );
 
-  //     // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-  //     if (result.success) {
-  //       console.log(result.user);
-  //       setCode(result.user.referralCode);
-  //     }
-  //   });
-
-  //   axios.get(`/user`).then((response) => {
-  //     console.log(response);
-
-  //     // axios.get(`/user`).then((response) => {
-  //     const result = response.data;
-  //     //   console.log(result);
-  //     if (result.success) {
-  //       // console.log("user");
-  //       // console.log(result.users);
-  //     }
-  //   });
   //   const config = {
   //     headers: {
   //       "Content-type": "application/json",
   //       Authorization: `Bearer ${localStorage.getItem("token")}`,
   //     },
   //   };
-  //   axios.get(`/referred`, config).then((response) => {
+  //   axios.get(`${BaseURL}/referred`, config).then((response) => {
   //     // axios.get(`/referred`, config).then((response) => {
   //     const result = response.data;
   //     //   console.log(result);
@@ -108,74 +91,64 @@ const User = () => {
   //       setReferred(accounts.length);
   //     }
   //   });
-  // });
+  // }, []);
 
   useEffect(() => {
     let queryObj = {
-      userId:localStorage.getItem("userId")
+      userId: localStorage.getItem("userId"),
     };
-   
-    axios.get(`${BaseURL}/user/${userId}`, {headers: {
-      'Access-Control-Allow-Origin': '*',
-    }},).then(
-      (response) => {
-        console.log(response)
-        var result = response.data;
-        console.log(result);
-        
-  
-        console.log(result);
-        if (result.success) {
-          console.log(result);
-          console.log(result.success);
-        setCode(result.user.referralCode);
-          
-      
-  
-          // setUserId(result.userId)
-  
-          // dispatch(redAction(result.email));
-          // localStorage.setItem("email", result.email )
-          // window.location.replace(`/user/${result.userId}`);
-          // window.location.replace(`/user/${result.userId}`);
-          // props.history.push('/')
-        }
-      },
-      (error) => {
-        console.log(error);
-        // setShow(false);
-        // setMessage(error.message);
-      }
-    );
 
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-    axios.get(`${BaseURL}/referred`, config).then((response) => {
-      // axios.get(`/referred`, config).then((response) => {
-      const result = response.data;
-      //   console.log(result);
-      if (result.success) {
+  let one = `${BaseURL}/user/${userId}`;
+  let two = `${BaseURL}/referred`;
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  };
+
+  const requestOne = axios.get(one, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+  const requestTwo = axios.get(two, config);
+
+  axios
+    .all([requestOne, requestTwo])
+    .then(
+      axios.spread((...responses) => {
+        const responseOne = responses[0];
+        const responseTwo = responses[1];
+
+        // use/access the results
+        console.log(responseOne, responseTwo);
+        
+        const resultOne = responseOne.data;
+        setCode(resultOne.user.referralCode)
+
+            const resultTwo = responseTwo.data;
+        console.log(resultTwo);
+      if (resultTwo.success) {
         let accounts = [];
-        result.accounts.map((account) => {
+        resultTwo.accounts.map((account) => {
           if (account.active) {
             return accounts.push(account);
           } else console.log("not referred");
         });
         console.log(accounts);
-        console.log(result.accounts);
+        console.log(resultTwo.accounts);
         setPoint(100 + accounts.length * 30);
         setReferred(accounts.length);
       }
+      })
+    )
+    .catch((errors) => {
+      // react on errors.
+      console.error(errors);
     });
+
   }, [])
-
-
-
-
 
   // useEffect(() => {
   // setUserId(localStorage.getItem("userId"));
@@ -195,9 +168,6 @@ const User = () => {
   //     );
   // }, []);
 
-
- 
-  
   // useEffect(() => {
   //   // setEmail(localStorage.getItem("email"));
   //   setToken(localStorage.getItem("token"));
