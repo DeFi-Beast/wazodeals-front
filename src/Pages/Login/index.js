@@ -16,7 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
-    setShow(true);
+    setShow(false);
     e.preventDefault();
     let queryObj = {
       email: email,
@@ -37,13 +37,14 @@ const Login = () => {
           console.log(result.success);
           localStorage.setItem("token", result.accessToken);
           localStorage.setItem("userId", result.userId);
-        setShow(false);
 
           // setUserId(result.userId)
 
           // dispatch(redAction(result.email));
           // localStorage.setItem("email", result.email )
           window.location.replace(`/user/${result.userId}`);
+        setShow(true);
+
           // window.location.replace(`/user/${result.userId}`);
           // props.history.push('/')
         }
