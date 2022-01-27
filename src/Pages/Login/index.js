@@ -25,7 +25,7 @@ const Login = () => {
 
     console.log(email)
     console.log(password)
-    axios.post(`/login`, queryObj).then(
+    axios.post(`${BaseURL}/login`, queryObj).then(
       (response) => {
         var result = response.data;
         console.log(result);
