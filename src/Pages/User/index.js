@@ -140,7 +140,7 @@ const User = () => {
         });
         console.log(accounts);
         console.log(resultTwo.accounts);
-        setPoint(100 + accounts.length * 30);
+        setPoint(500 + accounts.length * 200);
         setReferred(accounts.length);
       }
       })
