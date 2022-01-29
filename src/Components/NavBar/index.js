@@ -19,15 +19,35 @@ const NavBar = () => {
   const handleLogout = (e) => {
     e.preventDefault();
 
-    const config = {
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
+  
     // localStorage.setItem("userId", " ")
     // localStorage.setItem("email", " ")
     // localStorage.setItem("token", " ")
+    // return new Promise((resolve, reject) => {
+    //   const config = {
+    //     headers: {
+    //       'Content-Type': 'application/json;charset=UTF-8',
+    //       "Access-Control-Allow-Origin": "*",
+    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     },
+    //   };
+    //   axios
+    //     .get(`${BaseURL}/logout`, config)
+    //     .then(res => 
+    //       resolve(res.data), 
+    //       dispatch(logout()),
+
+    //       // console.log(resolve(res.data)),
+    //       err => reject(err))
+    // });
+
+      const config = {
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
 
     axios.get(`${BaseURL}/logout`, config)
       .then((response) => {
@@ -36,8 +56,7 @@ const NavBar = () => {
 
         if (result.success) {
           dispatch(logout())
-         
-          
+           
         }
       })
 
