@@ -10,6 +10,8 @@ export const Button = styled.button`
   text-align: center;
   border: none;
     white-space:nowrap;
+    margin-left: ${(props) => (props.log === "logout" ? "20px" : "0")};
+
   &:hover {
     border: ${(props) =>
       props.bg === "white" ? "1px solid white" : "1px solid #AE00BB"};

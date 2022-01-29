@@ -17,6 +17,10 @@ import Forgot from "./Pages/Forgot";
 import Reset from "./Pages/Reset"; 
 
 function App() {
+
+
+
+  
   return (
     <Router>
       <div className="App">
@@ -26,9 +30,9 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/activate" element={<Activate />}></Route>
+          {/* <Route path="/logout" element={<Activate />}></Route> */}
           <Route path="/user" element={<Users />} />
           <Route path="/user/:id" element={<User />} />
-
           <Route path="/forgot-password" element={<Forgot />} />
           <Route path="/reset-password" element={<Reset />} />
           <Route path="*" element={<ErrorPage />}></Route>

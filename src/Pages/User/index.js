@@ -11,6 +11,10 @@ import axios from "axios";
 import Pie from "../../Components/Pie";
 import BaseURL from "../../Components/Helper";
 import Api from "../../Pages/Api/api";
+import { useDispatch, useSelector } from 'react-redux'
+import { login, logout } from "../../App/authSlice";
+
+
 
 const User = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +24,12 @@ const User = () => {
   const [code, setCode] = useState("");
   const [point, setPoint] = useState();
   const [copied, setCopied] = useState(false);
+  const isLoggedIn = useSelector((state) => state.authSliceReducer)
+  const dispatch = useDispatch()
+
+  console.log(isLoggedIn)
+
+  
 
   const CopyToClipboard = () => {
     //   console.log(navigator.clipboard.write.length)
@@ -95,9 +105,13 @@ const User = () => {
 
   // setUserId(localStorage.getItem("userId"))
 
+  
 
   useEffect(() => {
    
+    if(localStorage.getItem("token")){
+    dispatch(login())
+    }
   
 
   let one = `${BaseURL}/user/${localStorage.getItem("userId")}`;

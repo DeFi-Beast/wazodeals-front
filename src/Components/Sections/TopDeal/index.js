@@ -8,16 +8,11 @@ import "swiper/css";
 
 
 
-import cImg1 from "../../../Assets/food.png";
-import cImg2 from "../../../Assets/fashion.png";
-import cImg3 from "../../../Assets/cloth.png";
-import cImg4 from "../../../Assets/cinema.png";
-import cImg5 from "../../../Assets/electronics.png";
-import cLogo1 from "../../../Assets/brandlogos/kfc.png";
-import cLogo2 from "../../../Assets/brandlogos/marykay.png";
-import cLogo3 from "../../../Assets/brandlogos/hermes.png";
-import cLogo4 from "../../../Assets/brandlogos/genesis.png";
-import cLogo5 from "../../../Assets/brandlogos/lg.png";
+import cImg1 from "../../../Assets/kbn.png";
+import cImg2 from "../../../Assets/aq.png";
+import cImg3 from "../../../Assets/tc.png";
+import cImg4 from "../../../Assets/rol.png";
+
 
 SwiperCore.use([Autoplay])
 
@@ -27,38 +22,45 @@ const TopDeal = () => {
     {
       id: 1,
       cImg: `${cImg1}`,
-      cLogo: `${cLogo1}`,
-      title: "KFC Food Feast",
-      discount: "40%",
+      title: "Kissed By Nature",
+      description:"about 60mins of deep relaxing and healing treatment",
+      discount: 20,
+      price:25000,
+      location:"Ikeja, Lagos", 
+      point:100,
     },
     {
       id: 2,
       cImg: `${cImg2}`,
-      cLogo: `${cLogo2}`,
-      title: "Mary Kay Galore",
-      discount: "20%",
+      title: "Aquilla Kitchen",
+      description:"fried rice(coleslaw and chicken)",
+      discount: 20,
+      price:5000,
+      location:"Ikeja, Lagos", 
+      point:50,
+
     },
     {
       id: 3,
       cImg: `${cImg3}`,
-      cLogo: `${cLogo3}`,
-      title: "Hermes Cloth Festival",
-      discount: "50%",
+      title: "Teeth City",
+      description:"teeth whitening, scaling and polishing & tooth filling",
+      discount: 20,
+      price:10000,
+      location:"Ikeja, Lagos", 
+      point:100,
     },
     {
       id: 4,
       cImg: `${cImg4}`,
-      cLogo: `${cLogo4}`,
-      title: "Genesis Cinema Promo",
-      discount: "30%",
+      title: "Rollance Logistics",
+      description:"freight and cargo",
+      discount: 20,
+      price:10000,
+      location:"Ikeja, Lagos", 
+      point:100,
     },
-    {
-      id: 5,
-      cImg: `${cImg5}`,
-      cLogo: `${cLogo5}`,
-      title: "LG ElectroFeast",
-      discount: "15%",
-    },
+    
   ];
   return (
     <div>
@@ -80,15 +82,15 @@ const TopDeal = () => {
             spaceBetween: 20,
           },
           640: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 20,
           },
           768: {
-            slidesPerView: 4,
+            slidesPerView: 3,
             spaceBetween: 40,
           },
           1024: {
-            slidesPerView: 5,
+            slidesPerView: 4,
             spaceBetween: 50,
           },
         }}

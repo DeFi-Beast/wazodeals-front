@@ -1,20 +1,84 @@
-import {Button} from "../Button";
-import {StyledInput} from "../Input";
+import { Button } from "../Button";
+import { StyledInput } from "../Input";
 import Logo from "../Logo";
-import {Row, Div, RowWrapper} from "./NavBarStyled"
+import { Row, Div, RowWrapper } from "./NavBarStyled";
+import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import BaseURL from "../Helper";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { logout } from "../../App/authSlice";
 
 const NavBar = () => {
+  const { isLoggedIn, userId } = useSelector((state) => state.authSliceReducer);
+  const dispatch = useDispatch()
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+
+    const config = {
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    // localStorage.setItem("userId", " ")
+    // localStorage.setItem("email", " ")
+    // localStorage.setItem("token", " ")
+
+    axios.get(`${BaseURL}/logout`, config)
+      .then((response) => {
+        const result = response.data;
+        console.log(result);
+
+        if (result.success) {
+          dispatch(logout())
+         
+          
+        }
+      })
+
+      .catch((errors) => {
+        // react on errors.
+        console.error(errors);
+      });
+  };
+
   return (
     <Row>
       <RowWrapper className="Row">
         <Logo>Hi</Logo>
         <Div>
-          
-            <StyledInput className="hide-input" placeholder="Try Searching.."></StyledInput>
-        
-
-           
-            <Button as="a" href="/login" bg="white">Login</Button>
+          <StyledInput
+            className="hide-input"
+            placeholder="Try Searching.."
+          ></StyledInput>
+          {isLoggedIn ? (
+            <div>
+              <Link to={`/user/${userId}`}>
+                <FontAwesomeIcon
+                  style={{ color: "white" }}
+                  icon={faUserAlt}
+                ></FontAwesomeIcon>
+              </Link>
+              <Button
+                as="a"
+                href="/logout"
+                bg="white"
+                log="logout"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <Button as="a" href="/login" bg="white">
+              Login
+            </Button>
+          )}
         </Div>
       </RowWrapper>
     </Row>

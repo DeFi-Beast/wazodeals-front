@@ -8,6 +8,8 @@ import  Loader  from "../../Components/Loader";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import BaseURL from "../../Components/Helper"
+import { useDispatch, useSelector } from 'react-redux'
+import { login } from "../../App/authSlice";
 
 
 const Login = () => {
@@ -15,6 +17,12 @@ const Login = () => {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
+  const isLoggedIn = useSelector((state) => state.authSliceReducer)
+
+  console.log(isLoggedIn)
+
+
 
   const handleSubmit = (e) => {
     setShow(true);
@@ -35,7 +43,9 @@ const Login = () => {
         console.log(result);
         if (result.success) {
           console.log(result);
-          console.log(result.success);
+          console.log(result.success)
+        dispatch(login())
+
           localStorage.setItem("token", result.accessToken);
           localStorage.setItem("userId", result.userId);
 
@@ -43,6 +53,7 @@ const Login = () => {
 
           // dispatch(redAction(result.email));
           // localStorage.setItem("email", result.email )
+
           window.location.replace(`/user/${result.userId}`);
         setShow(false);
 

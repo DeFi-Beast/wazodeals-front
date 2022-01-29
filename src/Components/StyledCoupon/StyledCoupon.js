@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const StyledDiv = styled.div`
     display:flex;
     flex-direction:column;
-    max-width:180px;
+    min-width:${(props) => (props.type === "deals" ? "0px" : "200px")};
     box-shadow: 3px 3px 6px #00000029;
 border-radius:0px 0px 5px 5px;
     
