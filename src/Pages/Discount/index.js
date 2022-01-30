@@ -46,9 +46,15 @@ const Discount = () => {
       price:price,
       point:point,
     };
+    const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
 
     
-    axios.post(`${BaseURL}/discount`, queryObj).then(
+    axios.post(`${BaseURL}/discount`,config, queryObj).then(
       (response) => {
         var result = response.data;
         console.log(result);
