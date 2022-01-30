@@ -35,7 +35,7 @@ const Discount = () => {
 //     "merchant":"Mr X"
 // }
 
-  const handleSubmit = (e) => {
+  const handleSubmitText = (e) => {
     setShow(true);
     e.preventDefault();
     let queryObj = {
@@ -46,15 +46,14 @@ const Discount = () => {
       price:price,
       point:point,
     };
-    const config = {
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-
-    
-    axios.post(`${BaseURL}/discount`,config, queryObj).then(
+    // const config = {
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //     },
+    //   };
+   
+    axios.post(`${BaseURL}/discount`,queryObj).then(
       (response) => {
         var result = response.data;
         console.log(result);
@@ -90,8 +89,7 @@ const Discount = () => {
           <form
             action="/discount"
             method="POST"
-            target="/"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmitText}
           >
             <div></div>
             <div>
