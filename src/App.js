@@ -15,6 +15,7 @@ import User from "./Pages/User";
 import Users from "./Pages/Users";
 import Forgot from "./Pages/Forgot"; 
 import Reset from "./Pages/Reset"; 
+import Discount from "./Pages/Discount";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/activate" element={<Activate />}></Route>
           {/* <Route path="/logout" element={<Activate />}></Route> */}
+          <Route path="/discount" element={<Discount />}></Route>
           <Route path="/user" element={<Users />} />
           <Route path="/user/:id" element={<User />} />
           <Route path="/forgot-password" element={<Forgot />} />
