@@ -39,21 +39,28 @@ const Discount = () => {
     setShow(true);
     e.preventDefault();
     let queryObj = {
-      title: title,
-      description: description,
-      discount:discount,
-      merchant:merchant,
-      price:price,
-      point:point,
+      title: "tit",
+      description:"gdggd",
+      discount:10,
+      
     };
-    // const config = {
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-    //     },
-    //   };
+    const config = {
+        headers: {
+          "Content-type": "application/json",
+          'Access-Control-Allow-Origin': "*",
+          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH, OPTIONS',
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      };
+    const data = JSON.stringify(queryObj)
+    console.log(data)
    
-    axios.post(`${BaseURL}/discount`,queryObj).then(
+    axios({
+        method:'post',
+        url:`${BaseURL}/discounted`,
+        data:data,
+        headers: config.headers
+    }).then(
       (response) => {
         var result = response.data;
         console.log(result);
