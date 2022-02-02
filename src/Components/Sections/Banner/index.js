@@ -9,10 +9,10 @@ const Banner = ()  => {
         <Row>
             <Div>
                 <h2>
-                SIGN UP NOW &amp; EARN 500 POINTS
+                SIGN UP NOW &amp; EARN 1000 POINTS
                 </h2>
                 <p className={Classes.Content}>
-                Refer &amp; earn 200 points per referral
+                Refer &amp; earn 500 points per referral
                 </p>
                 <Button as="a" href="/register" >SIGN UP NOW</Button>
             </Div>
