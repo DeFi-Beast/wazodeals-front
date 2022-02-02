@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import BaseURL from "../../Components/Helper"
 import { useDispatch, useSelector } from 'react-redux'
 import { login } from "../../App/authSlice";
-
+import fetch from "isomorphic-unfetch";
 
 const Discount = () => {
   const [showText, setShowText] = useState(false);
@@ -35,50 +35,87 @@ const Discount = () => {
 //     "merchant":"Mr X"
 // }
 
-  const handleSubmitText = (e) => {
-    setShow(true);
-    e.preventDefault();
-    let queryObj = {
-      title: "tit",
-      description:"gdggd",
-      discount:10,
+//   const handleSubmitText = (e) => {
+//     setShow(true);
+//     e.preventDefault();
+//     let queryObj = {
+//       title:title,
+//       description:description,
+//       discount:discount,
       
-    };
-    const config = {
-        headers: {
-          "Content-type": "application/json",
-          'Access-Control-Allow-Origin': "*",
-          'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH, OPTIONS',
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      };
-    const data = JSON.stringify(queryObj)
-    console.log(data)
+//     };
+//     // const config = {
+//     //     headers: {
+//     //       "Content-type": "application/json",
+//     //       'Access-Control-Allow-Origin': "*",
+//     //       'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH, OPTIONS',
+//     //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+//     //     },
+//     //   };
+//     const data = JSON.stringify(queryObj)
+//     console.log(data)
    
-    axios({
-        method:'post',
-        url:`${BaseURL}/discounted`,
-        data:data,
-        headers: config.headers
-    }).then(
-      (response) => {
-        var result = response.data;
-        console.log(result);
-        // setMessage(result);
+//     // axios.post(`${BaseURL}/discounted`, data)
+    
+//     axios.post(`${BaseURL}/discounted`, {
+//         method: 'post',
+//         body: queryObj,  
+//         headers: {
+//           'Content-Type': 'application/json',
+//           Authorization: `Bearer ${localStorage.getItem("token")}`,
+//         }
+//       })
+//     .then(
+//         (response) => {
+//           var result = response.data;
+//           console.log(result);
+//           // setMessage(result);
+  
+//           console.log(result);
+//           if (result.success) {
+//             console.log(result);
+//             console.log(result.success)
+//         //   dispatch(login())
+  
+//             localStorage.setItem("token", result.accessToken);
+//             localStorage.setItem("userId", result.userId);
+  
+//             // setUserId(result.userId)
+  
+//             // dispatch(redAction(result.email));
+//             // localStorage.setItem("email", result.email )
+  
+//             window.location.replace(`/user/${result.userId}`);
+//           setShow(false);
+  
+//             // window.location.replace(`/user/${result.userId}`);
+//             // props.history.push('/')
+//           }
+//         },
+//         (error) => {
+//           console.log(error);
+//           // setShow(false);
+//           // setMessage(error.message);
+//         }
+//       );
+//   };
 
-        console.log(result);
-        if (result.success) {
-          console.log(result);
-          console.log(result.success)
-      
-        }
-      },
-      (error) => {
-        console.log(error);
-        // setShow(false);
-        // setMessage(error.message);
+
+const handleSubmitText = async ev => {
+    try {
+      ev.preventDefault();
+      const res = await fetch(`${BaseURL}/discounted`, { method:"POST" });
+      if (res.ok) {
+        console.log("ok");
+        // setResponse(
+        //   res.status === 204 ? "STATUS CODE: 204" : (await res.json()).text
+        // );
+      } else {
+        throw await res.text();
       }
-    );
+    } catch (err) {
+      console.log(err)
+    }
   };
   return (
     <LayoutLogin>

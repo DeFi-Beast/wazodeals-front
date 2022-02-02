@@ -1,5 +1,5 @@
-{ 
-  "proxy":"https://wazodeal.herokuapp.com",
+{
+  "proxy": "https://wazodeal.herokuapp.com",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -12,9 +12,11 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
+    "isomorphic-unfetch": "^3.1.0",
     "react": "^17.0.2",
     "react-circular-progressbar": "^2.0.4",
     "react-dom": "^17.0.2",
+    "react-filepond": "^7.1.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
     "redux": "^4.1.2",

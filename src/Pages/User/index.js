@@ -12,7 +12,7 @@ import Pie from "../../Components/Pie";
 import BaseURL from "../../Components/Helper";
 import Api from "../../Pages/Api/api";
 import { useDispatch, useSelector } from 'react-redux'
-import { login, logout } from "../../App/authSlice";
+import { login } from "../../App/authSlice";
 
 
 
@@ -105,13 +105,10 @@ const User = () => {
 
   // setUserId(localStorage.getItem("userId"))
 
-  
 
   useEffect(() => {
    
-    if(localStorage.getItem("token")){
     dispatch(login())
-    }
   
 
   let one = `${BaseURL}/user/${localStorage.getItem("userId")}`;
@@ -154,7 +151,7 @@ const User = () => {
         });
         console.log(accounts);
         console.log(resultTwo.accounts);
-        setPoint(500 + accounts.length * 200);
+        setPoint(1000 + accounts.length * 500);
         setReferred(accounts.length);
       }
       })
