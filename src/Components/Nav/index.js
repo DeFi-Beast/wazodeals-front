@@ -7,7 +7,7 @@ const Nav = ()  => {
     <Row>
         <Div>
             <ul>
-        <li>
+        {/* <li>
             <StyledNavLink to="/food">
             <FontAwesomeIcon icon={faUtensils} />
             <p>Food</p>
@@ -24,14 +24,14 @@ const Nav = ()  => {
             <FontAwesomeIcon icon={faShoppingCart} />
             <p>Stores</p>
             </StyledNavLink>
-        </li>
+        </li> */}
         <li>
             <StyledNavLink to="/">
             <FontAwesomeIcon icon={faHome} />
             <p>Home</p>
             </StyledNavLink>
         </li>
-        <li>
+        {/* <li>
             <StyledNavLink to="/fashion">
             <FontAwesomeIcon icon={faFemale} />
             <p>Fashion</p>
@@ -48,7 +48,7 @@ const Nav = ()  => {
             <FontAwesomeIcon icon={faDumbbell} />
             <p>LifeStyle</p>
             </StyledNavLink>
-        </li>
+        </li> */}
             </ul>
         </Div>
     </Row>
