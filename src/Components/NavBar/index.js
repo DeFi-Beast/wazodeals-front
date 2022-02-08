@@ -69,6 +69,9 @@ const NavBar = () => {
   return (
     <Row>
       <RowWrapper className="Row">
+        <div className="ann-bar">
+          <p>Site still in Beta Phase, Kindly join our signup list to try it out</p>
+        </div>
         <Logo>Hi</Logo>
         <Div>
           <StyledInput
