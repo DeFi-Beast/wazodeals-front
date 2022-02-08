@@ -25,6 +25,7 @@ const percentage = props.point/150;
             {/* <span style={{fontSize:"15px"}}>
            <br></br> WAZO
              </span>  */}
+             <br></br>
              <span style={{fontSize:"17px"}}>
              &nbsp; NGN
 
