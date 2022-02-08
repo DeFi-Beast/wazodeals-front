@@ -151,7 +151,7 @@ const User = () => {
         });
         console.log(accounts);
         console.log(resultTwo.accounts);
-        setPoint(1000 + accounts.length * 500);
+        setPoint(500 + accounts.length * 250);
         setReferred(accounts.length);
       }
       })
@@ -255,7 +255,7 @@ const User = () => {
                 </div>
               </div>
               <Button className={Classes.Button} disabled>
-                <Link to={"/"}>Redeem Points</Link>
+                <Link to={"/"}>Redeem</Link>
               </Button>
             </div>
           </div>

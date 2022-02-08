@@ -22,11 +22,11 @@ const percentage = props.point/150;
            
           </strong>
         
-            <span style={{fontSize:"15px"}}>
+            {/* <span style={{fontSize:"15px"}}>
            <br></br> WAZO
-             </span> 
+             </span>  */}
              <span style={{fontSize:"17px"}}>
-             &nbsp; POINTS
+             &nbsp; NGN
 
              </span> 
            

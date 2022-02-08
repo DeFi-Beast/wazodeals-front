@@ -60,7 +60,7 @@ const Activate = ({ dispatch }) => {
 
           Swal.fire(
             '',
-            'You\'ve earned 100 points!',
+            'Congrats!, You\'ve earned 500 NGN!',
             'Refer more to earn more',
             'Thank You for Signing Up!!!'
           )
