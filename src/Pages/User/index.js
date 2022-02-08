@@ -36,7 +36,7 @@ const User = () => {
     if (navigator.clipboard.write.length >= 1) {
       setCopied("true");
     }
-    navigator.clipboard.writeText(`${code}`);
+    navigator.clipboard.writeText(`https://wazodeals.com/register?user=${code}`);
   };
 
   // useEffect(() => {
@@ -265,7 +265,7 @@ const User = () => {
             </div>
             <div className={Classes.UserCodeRow}>
               <div className={Classes.UserCode}>
-                <p style={{ fontSize: "16px" }}>{code}</p>
+                <p ><a href={`https://wazodeals.com/register?user=${code}`}> https://wazodeals.com/register?user={code}</a></p>
               </div>
               <Button className={Classes.Button} onClick={CopyToClipboard}>
                 {copied ? "Copied!" : "Copy"}

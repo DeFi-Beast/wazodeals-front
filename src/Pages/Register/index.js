@@ -11,7 +11,7 @@ import { connect } from "react-redux";
 import { redAction } from "../../Helper/Action";
 import { Link } from "react-router-dom";
 import BaseURL from "../../Components/Helper"
-
+import {useLocation} from "react-router-dom";
 
 const Register = ({dispatch}) => {
   const [showText, setShowText] = useState(false);
@@ -22,9 +22,14 @@ const Register = ({dispatch}) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [referrer, setReferrer] = useState("");
 
+  // const search = useLocation().search;
+  // const username = new URLSearchParams(search).get('user');
+
+  const useQuery = () => new URLSearchParams(useLocation().search);
+  const username = useQuery().get('user');
+console.log(username)
 
   console.log(email,password)
-
 
   const handleSubmit = (e) => {
     setShow(true);
@@ -110,7 +115,7 @@ const Register = ({dispatch}) => {
                 name="referrer"
                 id="referrer"
                 placeholder="referral code?"
-                value={referrer}
+                value={referrer || username}
                 onChange={e => setReferrer(e.target.value)}
               />
             </div>

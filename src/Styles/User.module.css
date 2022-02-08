@@ -13,7 +13,7 @@
     border-radius: 10px;
     padding: 20px 30px;
     text-align: center;
-    height: 200px;
+    min-height: 200px;
     width:75%;
 }
 .UserColumn {
@@ -34,15 +34,23 @@ h4 {
 }
 .UserCode {
     background: #F0F0F0;
-    width: 80%;
+    width: 100%;
     height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
+}
+.UserCode p {
+    font-size: 14px;
+}
+.UserCode p a {
+    color: purple;
 }
 .UserCodeRow {
     display: flex;
     margin-top: 50px;
+    flex-direction: column;
     /* text-align: center;
     justify-content: center;
     align-items: center; */
@@ -89,7 +97,15 @@ h4 {
         margin-top: 20px;
     }
     .UserCard{width: 50%;}
-
+    .UserCodeRow {
+        flex-direction: row;
+    }
+    .UserCode {
+        width: 80%;
+    }
+    .UserCode p {
+        font-size: 16px;
+    }
 
 }
 @media only screen and (min-width:1000px){
