@@ -9,10 +9,11 @@ import  Loader  from "../../Components/Loader";
 // import {Redirect} from 'react-router-dom';
 import { connect } from "react-redux";
 import { redAction } from "../../Helper/Action";
-import { Link } from "react-router-dom";
+import { Link , useLocation} from "react-router-dom";
 import BaseURL from "../../Components/Helper"
-import {useLocation} from "react-router-dom";
-import { useEffect } from "react";
+import Swal from "sweetalert2";
+
+
 
 const Register = ({dispatch}) => {
   const [showText, setShowText] = useState(false);
@@ -21,20 +22,18 @@ const Register = ({dispatch}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [referrer, setReferrer] = useState( '');
-  const [username, setUsername] = useState(new URLSearchParams(useLocation().search).get('user'));
-
-  // const search = useLocation().search;
-  // const username = new URLSearchParams(search).get('user');
+  const [referrer, setReferrer] = useState("");
+  const [username, setUsername] = useState( new URLSearchParams(useLocation().search).get('user'));
   
 
-  // const useQuery = () => new URLSearchParams(useLocation().search).get('user');
-  // const user = useQuery().get('user')
+  // const useQuery = () => new URLSearchParams(useLocation().search);
+  // const username = useQuery().get('user');
 
+  
 
-
-
+  console.log(username)
   console.log(email,password)
+
 
   const handleSubmit = (e) => {
     setShow(true);
@@ -43,9 +42,8 @@ const Register = ({dispatch}) => {
       email: email,
       password: password,
       confirmPassword: confirmPassword,
-      referrer:username || referrer
+      referrer:referrer || username
     };
-    console.log(queryObj)
   
     axios.post(`${BaseURL}/register`, queryObj).then(
       (response) => {
@@ -68,6 +66,11 @@ const Register = ({dispatch}) => {
         console.log(error);
         setShow(false)
         setMessage(error.message)
+        Swal.fire(
+          `server busy, TRY LATER!!`,
+          '',
+          
+        )
       }
     );
     
@@ -121,7 +124,7 @@ const Register = ({dispatch}) => {
                 name="referrer"
                 id="referrer"
                 placeholder="referral code?"
-                value={referrer || username}
+                value={referrer}
                 onChange={e => setReferrer(e.target.value)}
               />
             </div>
