@@ -12,6 +12,7 @@ import { redAction } from "../../Helper/Action";
 import { Link } from "react-router-dom";
 import BaseURL from "../../Components/Helper"
 import {useLocation} from "react-router-dom";
+import { useEffect } from "react";
 
 const Register = ({dispatch}) => {
   const [showText, setShowText] = useState(false);
@@ -20,14 +21,18 @@ const Register = ({dispatch}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [referrer, setReferrer] = useState("");
+  const [referrer, setReferrer] = useState( '');
+  const [username, setUsername] = useState(new URLSearchParams(useLocation().search).get('user'));
 
   // const search = useLocation().search;
   // const username = new URLSearchParams(search).get('user');
+  
 
-  const useQuery = () => new URLSearchParams(useLocation().search);
-  const username = useQuery().get('user');
-console.log(username)
+  // const useQuery = () => new URLSearchParams(useLocation().search).get('user');
+  // const user = useQuery().get('user')
+
+
+
 
   console.log(email,password)
 
@@ -38,8 +43,9 @@ console.log(username)
       email: email,
       password: password,
       confirmPassword: confirmPassword,
-      referrer:referrer
+      referrer:username || referrer
     };
+    console.log(queryObj)
   
     axios.post(`${BaseURL}/register`, queryObj).then(
       (response) => {
