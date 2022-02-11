@@ -19,7 +19,7 @@ const Home = ()  => {
         <div className="bgStyled">
         <TopDeal></TopDeal>
         <Partners></Partners>
-        <Featured></Featured>
+        {/* <Featured></Featured> */}
         <Deals></Deals>
         </div>
         
