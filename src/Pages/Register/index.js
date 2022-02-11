@@ -124,7 +124,7 @@ const Register = ({dispatch}) => {
                 name="referrer"
                 id="referrer"
                 placeholder="referral code?"
-                value={referrer}
+                value={referrer || username}
                 onChange={e => setReferrer(e.target.value)}
               />
             </div>
