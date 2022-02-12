@@ -1,6 +1,9 @@
 import StyledCoupon from "../../StyledCoupon";
 // import Classes from "../../../Styles/Coupon.module.css";
 import Classes from "../../../Styles/Deals.module.css";
+import {useEffect, useState} from "react"
+import axios from "axios";
+import BaseURL from "../../Helper";
 
 
 
@@ -152,6 +155,62 @@ const Deals = () => {
     },
     
   ];
+
+
+  
+  const [deals, setDeals] = useState("")
+  const [merchants, setMerchants] = useState("")
+
+  useEffect(() => {
+   
+    // dispatch(login())
+  
+
+  let one = `${BaseURL}/discount`;
+  let two = `${BaseURL}/merchant`;
+  // let two = `${BaseURL}/referred`;
+  const config = {
+    headers: {
+      "Content-type": "application/json",
+    },
+  };
+  const requestOne = axios.get(one, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+  });
+
+  const requestTwo = axios.get(two, config);
+
+  axios
+    .all([requestOne, requestTwo])
+    .then(
+      axios.spread((...responses) => {
+        const responseOne = responses[0];
+        const responseTwo = responses[1];
+
+        // use/access the results
+        console.log(responseOne, responseTwo);
+        
+        const resultOne = responseOne.data;
+        setDeals(resultOne.discounts)
+        console.log(resultOne)
+            const resultTwo = responseTwo.data;
+        console.log(resultTwo);
+      if (resultTwo.success) {
+       
+        setMerchants(resultTwo.merchants)
+        console.log(resultTwo)
+       
+      }
+      })
+    )
+    .catch((errors) => {
+      // react on errors.
+      console.error(errors);
+    });
+
+  }, [])
   return (
     <div>
         <h2 className="Row title">Discount Deals</h2>

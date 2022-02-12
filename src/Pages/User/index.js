@@ -116,6 +116,7 @@ const User = () => {
   const config = {
     headers: {
       "Content-type": "application/json",
+      "Access-Control-Allow-Origin": "*",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
   };
@@ -151,8 +152,15 @@ const User = () => {
         });
         console.log(accounts);
         console.log(resultTwo.accounts);
-        setPoint(500 + accounts.length * 250);
-        setReferred(accounts.length);
+        if(accounts.length > 0){
+          setPoint(500 + accounts.length * 250);
+          setReferred(accounts.length);
+
+        } else {
+          setPoint(500);
+          setReferred(accounts.length);
+        }
+        
       }
       })
     )
