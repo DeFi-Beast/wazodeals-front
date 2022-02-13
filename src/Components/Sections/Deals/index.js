@@ -169,18 +169,27 @@ const Deals = () => {
   let one = `${BaseURL}/discount`;
   let two = `${BaseURL}/merchant`;
   // let two = `${BaseURL}/referred`;
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-    },
-  };
+  // const config = {
+  //   headers: {
+  //     "Content-type": "application/json",
+  //   },
+  // };
   const requestOne = axios.get(one, {
     headers: {
       "Access-Control-Allow-Origin": "*",
+      "Content-type": "application/json",
+
+    },
+  });
+  const requestTwo = axios.get(two, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-type": "application/json",
+
     },
   });
 
-  const requestTwo = axios.get(two, config);
+  // const requestTwo = axios.get(two, config);
 
   axios
     .all([requestOne, requestTwo])
@@ -193,13 +202,16 @@ const Deals = () => {
         console.log(responseOne, responseTwo);
         
         const resultOne = responseOne.data;
-        setDeals(resultOne.discounts)
+        setDeals(resultOne.discount)
+
         console.log(resultOne)
+        console.log(deals)
+        
             const resultTwo = responseTwo.data;
         console.log(resultTwo);
       if (resultTwo.success) {
        
-        setMerchants(resultTwo.merchants)
+        setMerchants(resultTwo.merchant)
         console.log(resultTwo)
        
       }
@@ -211,6 +223,9 @@ const Deals = () => {
     });
 
   }, [])
+
+  console.log(deals)
+
   return (
     <div>
         <h2 className="Row title">Discount Deals</h2>
