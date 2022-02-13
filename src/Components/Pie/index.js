@@ -8,7 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 const Pie = (props) => {
 
     console.log(props.point)
-const percentage = props.point/300;
+const percentage = props.point/400;
 
   return (
     <div>
@@ -18,7 +18,7 @@ const percentage = props.point/300;
       styles={buildStyles({pathColor: "#AE00BB"})}>
         <div className="piePoint" >
           <strong style={{fontSize:"20px"}}>
-            {percentage * 300}
+            {percentage * 400}
            
           </strong>
         

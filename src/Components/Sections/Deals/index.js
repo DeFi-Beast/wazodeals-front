@@ -167,7 +167,7 @@ const Deals = () => {
   
 
   let one = `${BaseURL}/discount`;
-  let two = `${BaseURL}/merchant`;
+  let two = `${BaseURL}/api/merchant`;
   // let two = `${BaseURL}/referred`;
   // const config = {
   //   headers: {
@@ -202,16 +202,18 @@ const Deals = () => {
         console.log(responseOne, responseTwo);
         
         const resultOne = responseOne.data;
+        const resultTwo = responseTwo.data;
+
         setDeals(resultOne.discount)
+        setMerchants(resultTwo.merchant)
+
 
         console.log(resultOne)
         console.log(deals)
         
-            const resultTwo = responseTwo.data;
         console.log(resultTwo);
       if (resultTwo.success) {
        
-        setMerchants(resultTwo.merchant)
         console.log(resultTwo)
        
       }
@@ -225,6 +227,7 @@ const Deals = () => {
   }, [])
 
   console.log(deals)
+  
 
   return (
     <div>

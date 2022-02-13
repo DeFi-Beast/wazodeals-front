@@ -41,7 +41,7 @@ const Merchant = () => {
 
   useEffect(() => {
     
-   axios.get(`${BaseURL}/merchant`).then((response) => {
+   axios.get(`${BaseURL}/api/merchant`).then((response) => {
       console.log(response);
 
       // axios.get(`/merchant`).then((response) => {
