@@ -20,6 +20,7 @@ const Register = ({dispatch}) => {
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState("hi");
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [referrer, setReferrer] = useState("");
@@ -42,7 +43,8 @@ const Register = ({dispatch}) => {
       email: email,
       password: password,
       confirmPassword: confirmPassword,
-      referrer:referrer || username
+      referrer:referrer || username,
+      name:name
     };
   
     axios.post(`${BaseURL}/register`, queryObj).then(
@@ -97,11 +99,16 @@ const Register = ({dispatch}) => {
             target="_blank"
           >
             <div>
-              {/* <input type="text" name="username" id="username" placeholder="username"  /> */}
               <input type="email" name="email" id="email" placeholder="email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               />
+              <input type="string" name="name" id="name" placeholder="name"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              />
+              {/* <input type="text" name="username" id="username" placeholder="username"  /> */}
+
               <input
                 type="password"
                 name="password"

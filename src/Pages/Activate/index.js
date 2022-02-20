@@ -60,7 +60,7 @@ const Activate = ({ dispatch }) => {
 
           Swal.fire(
             '',
-            'Congrats!, You\'ve earned 500 NGN! <br> Refer more to earn more',
+            'Congrats!, You\'ve earned 25 Points! <br> Refer more to earn more',
             
           )
           // dispatch(redAction(result.email));
