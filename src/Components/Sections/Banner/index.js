@@ -9,10 +9,10 @@ const Banner = ()  => {
         <Row>
             <Div>
                 <h2>
-                SIGN UP NOW &amp; EARN 500 NGN
+                Join our Referral contest for a grand prize of #15,000 naira
                 </h2>
                 <p className={Classes.Content}>
-                Refer &amp; earn 250 NGN per referral
+                Earn additional 25 points upon signup, Refer &amp; earn 12.5 points per referral
                 </p>
                 <Button as="a" href="/register" >SIGN UP NOW</Button>
             </Div>

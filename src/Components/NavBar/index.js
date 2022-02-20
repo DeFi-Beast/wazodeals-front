@@ -70,7 +70,7 @@ const NavBar = () => {
     <Row>
       <RowWrapper className="Row">
         <div className="ann-bar">
-          <p>Site still in Beta Phase, Kindly join our signup list to try it out</p>
+          <p style={{textAlign:"justify"}}>Site still in Beta Phase,Join our Referral contest for a grand prize of #15,000 naira and also every point earned is equivalent to #20 naira</p>
         </div>
         <Logo>Hi</Logo>
         <Div>
