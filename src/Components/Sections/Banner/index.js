@@ -9,7 +9,7 @@ const Banner = ()  => {
         <Row>
             <Div>
                 <h2>
-                Join our Referral contest for a grand prize of #15,000 naira
+                Join our Referral contest to be among the 5 luckiest winners with a Grand prize of #15,000 naira
                 </h2>
                 <p className={Classes.Content}>
                 Earn additional 25 points upon signup, Refer &amp; earn 12.5 points per referral
