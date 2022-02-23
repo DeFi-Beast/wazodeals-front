@@ -103,7 +103,7 @@ const Register = ({dispatch}) => {
               value={email}
               onChange={e => setEmail(e.target.value)}
               />
-              <input type="string" name="name" id="name" placeholder="name"
+              <input type="string" name="name" id="name" placeholder="name (optional)"
               value={name}
               onChange={e => setName(e.target.value)}
               />
@@ -130,7 +130,7 @@ const Register = ({dispatch}) => {
                 type="text"
                 name="referrer"
                 id="referrer"
-                placeholder="referral code?"
+                placeholder="referral code? (optional)"
                 value={referrer || username}
                 onChange={e => setReferrer(e.target.value)}
               />
