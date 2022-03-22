@@ -10,9 +10,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Pie from "../../Components/Pie";
 import BaseURL from "../../Components/Helper";
-import Api from "../../Pages/Api/api";
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from "../../App/authSlice";
+
 
 
 
@@ -24,10 +23,10 @@ const User = () => {
   const [code, setCode] = useState("");
   const [point, setPoint] = useState();
   const [copied, setCopied] = useState(false);
-  const isLoggedIn = useSelector((state) => state.authSliceReducer)
+ 
   const dispatch = useDispatch()
 
-  console.log(isLoggedIn)
+
 
   
 
@@ -39,137 +38,10 @@ const User = () => {
     navigator.clipboard.writeText(`https://wazodeals.com/register?user=${code}`);
   };
 
-  // useEffect(() => {
-  //   let queryObj = {
-  //     userId: localStorage.getItem("userId"),
-  //   };
-
-  //   axios
-  //     .get(`${BaseURL}/user/${userId}`, {
-  //       headers: {
-  //         "Access-Control-Allow-Origin": "*",
-  //       },
-  //     })
-  //     .then(
-  //       (response) => {
-  //         console.log(response);
-  //         var result = response.data;
-  //         console.log(result);
-
-  //         console.log(result);
-  //         if (result.success) {
-  //           console.log(result);
-  //           console.log(result.success);
-  //           setCode(result.user.referralCode);
-
-  //           // setUserId(result.userId)
-
-  //           // dispatch(redAction(result.email));
-  //           // localStorage.setItem("email", result.email )
-  //           // window.location.replace(`/user/${result.userId}`);
-  //           // window.location.replace(`/user/${result.userId}`);
-  //           // props.history.push('/')
-  //         }
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //         // setShow(false);
-  //         // setMessage(error.message);
-  //       }
-  //     );
-
-  //   const config = {
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   };
-  //   axios.get(`${BaseURL}/referred`, config).then((response) => {
-  //     // axios.get(`/referred`, config).then((response) => {
-  //     const result = response.data;
-  //     //   console.log(result);
-  //     if (result.success) {
-  //       let accounts = [];
-  //       result.accounts.map((account) => {
-  //         if (account.active) {
-  //           return accounts.push(account);
-  //         } else console.log("not referred");
-  //       });
-  //       console.log(accounts);
-  //       console.log(result.accounts);
-  //       setPoint(100 + accounts.length * 30);
-  //       setReferred(accounts.length);
-  //     }
-  //   });
-  // }, []);
-
-  // setUserId(localStorage.getItem("userId"))
-
-
-  useEffect(() => {
-   
-    dispatch(login())
   
 
-  let one = `${BaseURL}/user/${localStorage.getItem("userId")}`;
-  let two = `${BaseURL}/referred`;
-  const config = {
-    headers: {
-      "Content-type": "application/json",
-      "Access-Control-Allow-Origin": "*",
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  };
 
-  const requestOne = axios.get(one, {
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-    },
-  });
-  const requestTwo = axios.get(two, config);
 
-  axios
-    .all([requestOne, requestTwo])
-    .then(
-      axios.spread((...responses) => {
-        const responseOne = responses[0];
-        const responseTwo = responses[1];
-
-        // use/access the results
-        console.log(responseOne, responseTwo);
-        
-        const resultOne = responseOne.data;
-        setCode(resultOne.user.referralCode)
-
-            const resultTwo = responseTwo.data;
-        console.log(resultTwo);
-      if (resultTwo.success) {
-        let accounts = [];
-        resultTwo.accounts.map((account) => {
-          if (account.active) {
-            return (accounts.push(account))
-          } else console.log("not referred");
-        });
-        console.log(accounts);
-        console.log(resultTwo.accounts);
-        if(accounts.length > 0){
-          setPoint(500 + accounts.length * 250);
-          setReferred(accounts.length);
-
-        } else {
-          setPoint(500);
-          setReferred(accounts.length);
-        }
-        
-      }
-      })
-    )
-    .catch((errors) => {
-      // react on errors.
-      console.error(errors);
-    });
-
-  }, [])
 
   // useEffect(() => {
   // setUserId(localStorage.getItem("userId"));

@@ -24,7 +24,7 @@ input,  button {
     border-radius: 5px;
     outline: none;
     padding: 10px 10px;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 input::focus{
     border: none;
@@ -36,12 +36,12 @@ input::focus{
     flex-direction: column;
     /* justify-content: space-around; */
 }
-form > div {
+/* form > div {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin-bottom: 40px;
-}
+} */
 .button{
     background-color: rgba(176, 0, 185, 1);
     color: white;

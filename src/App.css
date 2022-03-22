@@ -111,8 +111,55 @@ p {
     /* transform: translateX(-50%); */
     right: 0;
 }
-
-
+.MuiInputLabel-formControl {
+  z-index: 1;
+  transform: translate(14px, 20px) scale(1) !important;
+  pointer-events: none;
+}
+.MuiInputLabel-formControl.MuiInputLabel-shrink{
+  z-index: 1;
+  transform: translate(14px, -6px) scale(0.75) !important;
+  /* width: 147px; */
+  background: white;
+  pointer-events: none;
+}
+.MuiPopover-paper {
+  top: 330px !important;
+}
+.MuiListItem-root.Mui-selected, .MuiListItem-root.Mui-selected:hover {
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+.MuiChip-root {
+  font: 0.5rem !important;
+  margin: 3px !important;
+}
+.MuiChip-label {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+.nice-dates-popover {
+  box-shadow: none;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  max-width: 300px !important;
+  transition: none;
+}
+ label#price-label:after {
+	content: " (\20A6)";
+	color: black;
+  }
+ 
+ label#discount-label:after {
+	content: " (\0025)";
+	color: black;
+  }
+  .MuiDropzoneArea-text.MuiTypography-h5 {
+    font-size: 1rem;
+  }
+  .MuiDropzoneArea-root {
+    min-height: 100px !important;
+  }
+  
 /**media queries***/
 
 @media only screen and (max-width:512px){

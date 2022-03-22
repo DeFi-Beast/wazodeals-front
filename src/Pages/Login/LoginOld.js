@@ -1,42 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import LayoutLogin from "../../Components/Layouts/LayoutLogin";
 import { StyledDiv, StyledLogo } from "../../Components/Logo/Logo";
 import Classes from "../../Styles/Login.module.css";
 import Logbg from "../../Assets/Logbg.png";
 import LoginLogo from "../../Assets/Loginlogo.png";
+import  Loader  from "../../Components/Loader";
 import axios from "axios";
-import Loader from "../../Components/Loader";
-import { connect } from "react-redux";
-
-import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import BaseURL from "../../Components/Helper"
+import { useDispatch, useSelector } from 'react-redux'
+;
 
 
-
-const Forgot = ({ dispatch }) => {
+const Login = () => {
   const [showText, setShowText] = useState(false);
   const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [code, setCode] = useState("");
-  const [userId, setUserId] = useState("")
-  const [activated, setActivated] = useState(false);
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch()
 
-  
 
-  
+
+
+
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     setShow(true);
+    e.preventDefault();
     let queryObj = {
       email: email,
-      
+      password: password,
     };
-  
-  };
 
+    console.log(email)
+    console.log(password)
+   
+   
+  };
   return (
     <LayoutLogin>
       <div className={Classes.Wrapper}>
@@ -45,24 +45,20 @@ const Forgot = ({ dispatch }) => {
             <img src={Logbg} alt="amoeba"></img>
           </StyledDiv>
 
-         <Link to={"/"}>
+          <Link to={"/"}>
          <StyledLogo src={LoginLogo}></StyledLogo>
-         </Link> 
+         </Link>
         </div>
-
         <div className={Classes.formContainer}>
           <form
-            action="/forgot"
-            onSubmit={handleSubmit}
+            action="/login"
             method="POST"
-            
+            target="/"
+            onSubmit={handleSubmit}
           >
-            <h1>Forgot Password</h1>
-            {/* <div>{success &&  <p>{message}</p>}</div> */}
-
+            <div></div>
             <div>
-              
-                   <input
+              <input
                 type="email"
                 name="email"
                 id="email"
@@ -70,23 +66,42 @@ const Forgot = ({ dispatch }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-             
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </div>
-
             <button type="submit" className={Classes.button}>
-              {show ? (
+            {show ? (
                 <div>
                   <Loader></Loader>
                 </div>
               ) : (
-                "Reset Password"
+                "Login"
               )}
             </button>
           </form>
+          <div className={Classes.formExtended}>
+            <a href="/forgot-password" className={Classes.styledLink}>
+              Forgot Password?{" "}
+            </a>
+            <div>
+              Don't Have An Account?
+              <span>
+                <a className={Classes.styledLink} href="/register">
+                  Sign Up
+                </a>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </LayoutLogin>
   );
 };
 
-export default Forgot;
+export default Login;

@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import { Button } from "../../Components/Button";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import Pie from "../../Components/Pie"
 import BaseURL from "../../Components/Helper"
 
@@ -27,20 +27,6 @@ const Users = () => {
     navigator.clipboard.writeText()
   }
 
-  useEffect(() => {
-
-    console.log(BaseURL)
-    
-    axios.get(`${BaseURL}/user`).then((response) => {
-      const result = response.data;
-      console.log(result);
-      if (result.success) {
-        console.log("user");
-        console.log(result.users);
-       
-      }
-    });
-  });
 
   return (
     <LayoutDefault>

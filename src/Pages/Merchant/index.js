@@ -1,297 +1,89 @@
-// import merchantLayout from "../../Components/Layouts/merchantLayout.js"
-
 import { useState, useEffect } from "react";
-import LayoutDefault from "../../Components/Layouts/LayoutDefault";
-import Classes from "../../Styles/User.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
-import { Button } from "../../Components/Button";
-import { Link } from "react-router-dom";
-import axios from "axios";
-// import Pie from "../../Components/Pie";
-import BaseURL from "../../Components/Helper";
-import Api from "../Api/api";
-import { useDispatch, useSelector } from 'react-redux'
-import { login } from "../../App/authSlice";
+import {
+  Container,
+  Grow,
+  Grid,
+  Paper,
+  AppBar,
+  TextField,
+  Button,
+} from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import Discounts from "../Discounts";
+import ChipInput from "material-ui-chip-input";
+import Form from "../../Components/Form/Form";
+// import Pagination from "../Pagination";
+import useStyles from "./styles";
+// import { getPostsBySearch } from "../../actions/posts";
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
-
-const Merchant = () => {
-  const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
-  const [merchantId, setMerchantId] = useState("");
-  const [referred, setReferred] = useState("");
-  const [code, setCode] = useState("");
-  const [point, setPoint] = useState();
-  const [copied, setCopied] = useState(false);
-  const isLoggedIn = useSelector((state) => state.authSliceReducer)
-  const dispatch = useDispatch()
-
-  // console.log(isLoggedIn)
-
+const Index = () => {
+  const [currentId, setCurrentId] = useState(null);
+  const [search, setSearch] = useState("");
+  const [tags, setTags] = useState([]);
   
+  const dispatch = useDispatch();
+  const classes = useStyles();
+  const query = useQuery();
+  const navigate = useNavigate();
 
-  const CopyToClipboard = () => {
-    //   console.log(navigator.clipboard.write.length)
-    if (navigator.clipboard.write.length >= 1) {
-      setCopied("true");
-    }
-    navigator.clipboard.writeText(`https://wazodeals.com/register?merchant=${code}`);
-  };
+  const page = query.get("page") || 1;
+  const searchQuery = query.get("searchQuery");
+  console.log(currentId )
 
-  useEffect(() => {
-    
-   axios.get(`${BaseURL}/api/merchant`).then((response) => {
-      console.log(response);
-
-      // axios.get(`/merchant`).then((response) => {
-      const result = response.data;
-      //   console.log(result);
-      if (result.success) {
-        // console.log("merchant");
-        // console.log(result.merchants);
-      }
-    })}, []);
-
-    
-    // axios
-    //   .get(`${BaseURL}/merchant`, {
-    //     headers: {
-    //       "Access-Control-Allow-Origin": "*",
-    //     },
-    //   })
-    //   .then(
-    //     (response) => {
-    //       console.log(response);
-    //       var result = response.data;
-    //       console.log(result);
-
-    //       console.log(result);
-    //       if (result.success) {
-    //         console.log(result);
-    //         console.log(result.success);
-    //         setCode(result.merchant.referralCode);
-
-    //         // setmerchantId(result.merchantId)
-
-    //         // dispatch(redAction(result.email));
-    //         // localStorage.setItem("email", result.email )
-    //         // window.location.replace(`/merchant/${result.merchantId}`);
-    //         // window.location.replace(`/merchant/${result.merchantId}`);
-    //         // props.history.push('/')
-    //       }
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //       // setShow(false);
-    //       // setMessage(error.message);
-    //     }
-    //   )});
-
-  //   const config = {
-  //     headers: {
-  //       "Content-type": "application/json",
-  //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //     },
-  //   };
-  //   axios.get(`${BaseURL}/referred`, config).then((response) => {
-  //     // axios.get(`/referred`, config).then((response) => {
-  //     const result = response.data;
-  //     //   console.log(result);
-  //     if (result.success) {
-  //       let accounts = [];
-  //       result.accounts.map((account) => {
-  //         if (account.active) {
-  //           return accounts.push(account);
-  //         } else console.log("not referred");
-  //       });
-  //       console.log(accounts);
-  //       console.log(result.accounts);
-  //       setPoint(100 + accounts.length * 30);
-  //       setReferred(accounts.length);
-  //     }
-  //   });
-  // }, []);
-
-  // setmerchantId(localStorage.getItem("merchantId"))
-
-
-  // useEffect(() => {
-   
-  //   dispatch(login())
-  
-
-  // let one = `${BaseURL}/merchant}`;
-  // let two = `${BaseURL}/referred`;
-  // const config = {
-  //   headers: {
-  //     "Content-type": "application/json",
-  //     "Access-Control-Allow-Origin": "*",
-  //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   },
-  // };
-
-  // const requestOne = axios.get(one, {
-  //   headers: {
-  //     "Access-Control-Allow-Origin": "*",
-  //   },
-  // });
-  // const requestTwo = axios.get(two, config);
-
-  // axios
-  //   .all([requestOne, requestTwo])
-  //   .then(
-  //     axios.spread((...responses) => {
-  //       const responseOne = responses[0];
-  //       const responseTwo = responses[1];
-
-  //       // use/access the results
-  //       console.log(responseOne, responseTwo);
-        
-  //       const resultOne = responseOne.data;
-  //       setCode(resultOne.merchant.referralCode)
-
-  //           const resultTwo = responseTwo.data;
-  //       console.log(resultTwo);
-  //     if (resultTwo.success) {
-  //       let accounts = [];
-  //       resultTwo.accounts.map((account) => {
-  //         if (account.active) {
-  //           return (accounts.push(account))
-  //         } else console.log("not referred");
-  //       });
-  //       console.log(accounts);
-  //       console.log(resultTwo.accounts);
-  //       setPoint(500 + accounts.length * 250);
-  //       setReferred(accounts.length);
-  //     }
-  //     })
-  //   )
-  //   .catch((errors) => {
-  //     // react on errors.
-  //     console.error(errors);
-  //   });
-
-  // }, [])
-
-  // useEffect(() => {
-  // setmerchantId(localStorage.getItem("merchantId"));
-  //   const headers ={
-  //     "Content-type": "application/json",
-  //     authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   }
-  //   axios.get(`${BaseURL}/merchant/${merchantId}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (data) => {
-  //         console.log(data)
-  //       },
-  //       (error) => {
-  //         console.log(error)
-  //       }
+  // const searchPost = () => {
+  //   if (search.trim() || tags) {
+  //     dispatch(getPostsBySearch({ search, tags: tags.join(",") }));
+  //     navigate(
+  //       `/posts/search?searchQuery=${search || "null"}&tags=${tags.join(",")}`
   //     );
-  // }, []);
+  //   } else {
+  //     navigate("/");
+  //   }
+  // };
+  const handleAdd = (tag) => {
+    setTags([...tags, tag]);
+  };
+  console.log(tags);
 
-  // useEffect(() => {
-  //   // setEmail(localStorage.getItem("email"));
-  //   setToken(localStorage.getItem("token"));
-  //   setmerchantId(localStorage.getItem("merchantId"));
-
-  //   console.log(`${merchantId}`);
-  //   console.log(`${BaseURL}/merchant/${merchantId}`);
-  //   // ${BaseURL}/merchant/${merchantId}
-  //   // const headers = {
-  //   //   'Content-Type': 'application/json',
-  //   //   'X-Auth-Token': `${localStorage.getItem("token")}`,
-  //   // };
-  //   // axios.get(`${BaseURL}/merchant/${merchantId}`).then((response) => {
-  //     axios.get(`${BaseURL}/merchant/${merchantId}`).then((response) => {
-  //     console.log(response);
-  //     const result = response.data;
-
-  //     // console.log(`${BaseURL}/merchant/${localStorage.getItem("merchantId")}`)
-  //     if (result.success) {
-  //       console.log(result.merchant);
-  //       setCode(result.merchant.referralCode);
-  //     }
-  //   });
-
-  //   // axios.get(`${BaseURL}/merchant`).then((response) => {
-  //   //   console.log(response);
-
-  //   //   // axios.get(`/merchant`).then((response) => {
-  //   //   const result = response.data;
-  //   //   //   console.log(result);
-  //   //   if (result.success) {
-  //   //     // console.log("merchant");
-  //   //     // console.log(result.merchants);
-  //   //   }
-  //   // });
-  //   // const config = {
-  //   //   headers: {
-  //   //     "Content-type": "application/json",
-  //   //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   //   },
-  //   // };
-  //   // axios.get(`${BaseURL}/referred`, config).then((response) => {
-  //   //   // axios.get(`/referred`, config).then((response) => {
-  //   //   const result = response.data;
-  //   //   //   console.log(result);
-  //   //   if (result.success) {
-  //   //     let accounts = [];
-  //   //     result.accounts.map((account) => {
-  //   //       if (account.active) {
-  //   //         return accounts.push(account);
-  //   //       } else console.log("not referred");
-  //   //     });
-  //   //     console.log(accounts);
-  //   //     console.log(result.accounts);
-  //   //     setPoint(100 + accounts.length * 30);
-  //   //     setReferred(accounts.length);
-  //   //   }
-  //   // });
-  // });
-
+  const handleDelete = (tagToDelete) => {
+    setTags(tags.filter((tag) => tag !== tagToDelete));
+  };
+  // const handleKeyPress = (e) => {
+  //   if (e.keyCode === 13) {
+  //     searchPost();
+  //   }
+  // };
   return (
-    <LayoutDefault>
-      <div className="Row">
-        merchant Dashboard
-        <div className={Classes.merchantContainer}>
-          <div className={Classes.merchantCard}>
-            <div>
-              <div className={Classes.merchantCardRow}>
-                <FontAwesomeIcon icon={faUserCheck} />
-                <div className="circularContainer">
-                  {/* <Pie point={point}></Pie> */}
-                </div>
-              </div>
-              <Button className={Classes.Button} disabled>
-                <Link to={"/"}>Redeem</Link>
-              </Button>
-            </div>
-          </div>
-          <div className={`${Classes.merchantCard} ${Classes.merchantCardMargin}`}>
-            <div className={Classes.merchantCardRow}>
-              <h4>Your Referral Code</h4>
-            </div>
-            <div className={Classes.merchantCodeRow}>
-              <div className={Classes.merchantCode}>
-                <p ><a href={`https://wazodeals.com/register?merchant=${code}`}> https://wazodeals.com/register?merchant={code}</a></p>
-              </div>
-              <Button className={Classes.Button} onClick={CopyToClipboard}>
-                {copied ? "Copied!" : "Copy"}
-              </Button>
-            </div>
-            <div style={{ marginTop: "20px", textAlign: "left" }}>
-              <h3>Referred : {referred} Persons</h3>
-            </div>
-          </div>
-
-          <div className={Classes.merchantColumn}>History Review</div>
-        </div>
-      </div>
-    </LayoutDefault>
+    <Grow in>
+      <Container maxWidth="xl">
+        <Grid
+          container
+          justifyContent="space-between"
+          alignItems="stretch"
+          spacing={3}
+          className={classes.gridContainer}
+        >
+          <Grid item xs={12} sm={6} md={9}>
+            <Discounts setCurrentId={setCurrentId} />
+          </Grid>
+          <Grid item xs={12} sm={6} md={3}>
+           
+            <Form currentId={currentId} setCurrentId={setCurrentId} />
+            {!searchQuery && !tags.length && (
+              <Paper elevation={6} className={classes.pagination}>
+                {/* <Pagination page={page} /> */}
+              </Paper>
+            )}
+          </Grid>
+        </Grid>
+      </Container>
+    </Grow>
   );
 };
 
-export default Merchant;
+export default Index;

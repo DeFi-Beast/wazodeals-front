@@ -6,11 +6,10 @@ import Logbg from "../../Assets/Logbg.png";
 import LoginLogo from "../../Assets/Loginlogo.png";
 import axios from "axios";
 import Loader from "../../Components/Loader";
-import { connect } from "react-redux";
-import { redAction } from "../../Helper/Action";
+
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import BaseURL from "../../Components/Helper"
+
 
 
 const Reset = ({ dispatch }) => {
@@ -38,46 +37,7 @@ const Reset = ({ dispatch }) => {
       token: code,
       
     };
-    axios.patch(`${BaseURL}/reset`, queryObj).then(
-      (response) => {
-        var result = response.data;
-        setShow(false);
-        console.log(result);
-        setMessage(result);
-  
-        console.log(result);
-        if (result.success) {
-          console.log(result.success);
-          console.log(result.success);
-          localStorage.setItem("token", result.token )
-          localStorage.setItem("userId", result.userId )
-          setUserId(result.userId)
-          setSuccess(true)
-          setMessage(result.message)
-          Swal.fire(
-            '',
-            `${result.message}`,
-            
-          )
-          // dispatch(redAction(result.password));
-          // localStorage.setItem("password", result.password )
-          window.location.replace(`/reset-password`);
-          // props.history.push('/')
-        }
-      },
-      (error) => {
-        console.log(error);
-        setShow(false);
-        setMessage(error.message);
-        Swal.fire(
-          '',
-          `${error.message}`,
-          "kkjjj",
-          "kkjj"
-          
-        )
-      }
-    );
+
   };
 
   return (

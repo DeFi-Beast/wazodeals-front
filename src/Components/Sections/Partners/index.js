@@ -1,9 +1,7 @@
 import StyledCoupon from "../../StyledCoupon";
 import Classes from "../../../Styles/Coupon.module.css";
-// Import Swiper React components
 import  { Swiper, SwiperSlide} from "swiper/react";
 import SwiperCore, { Autoplay }from "swiper"
-// Import Swiper styles
 import "swiper/css";
 import styled from "styled-components";
 

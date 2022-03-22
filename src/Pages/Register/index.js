@@ -4,13 +4,12 @@ import { StyledDiv, StyledLogo } from "../../Components/Logo/Logo";
 import Classes from "../../Styles/Login.module.css";
 import Logbg from "../../Assets/Logbg.png";
 import LoginLogo from "../../Assets/Loginlogo.png";
-import axios from "axios";
+
 import  Loader  from "../../Components/Loader";
-// import {Redirect} from 'react-router-dom';
-import { connect } from "react-redux";
-import { redAction } from "../../Helper/Action";
+
+
 import { Link , useLocation} from "react-router-dom";
-import BaseURL from "../../Components/Helper"
+
 import Swal from "sweetalert2";
 
 
@@ -47,34 +46,7 @@ const Register = ({dispatch}) => {
       name:name
     };
   
-    axios.post(`${BaseURL}/register`, queryObj).then(
-      (response) => {
-        var result = response.data;
-        setShow(false)
-        console.log(result)
-        setMessage(result)
-        console.log(result);
-        if(result.success){
-          console.log(result.success)
-          console.log(result.success)
-          // dispatch(redAction(result.email));
-          localStorage.setItem("email", result.email )
-          window.location.replace(`/activate`);
-          // props.history.push('/')
-        }
 
-      },
-      (error) => {
-        console.log(error);
-        setShow(false)
-        setMessage(error.message)
-        Swal.fire(
-          `server busy, TRY LATER!!`,
-          '',
-          
-        )
-      }
-    );
     
   };
 

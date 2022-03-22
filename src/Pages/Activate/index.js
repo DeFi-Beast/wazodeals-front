@@ -8,10 +8,10 @@ import axios from "axios";
 import Loader from "../../Components/Loader";
 // import {Redirect} from 'react-router-dom';
 import { connect } from "react-redux";
-import { redAction } from "../../Helper/Action";
+
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import BaseURL from "../../Components/Helper"
+
 
 
 const Activate = ({ dispatch }) => {
@@ -30,51 +30,10 @@ const Activate = ({ dispatch }) => {
   console.log(email, code);
 
   const handleSubmit = (e) => {
-    setShow(true);
-    e.preventDefault();
-    let queryObj = {
-      email: email,
-      code: code,
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("email")}`,
-      "Access-Control-Allow-Origin": "*",
-
-      },
-    };
     
-    axios.patch(`${BaseURL}/activate`, queryObj).then(
-      (response) => {
-        var result = response.data;
-        setShow(false);
-        console.log(result);
-        setMessage(result);
-        setActivated(result.success);
-        console.log(result);
-        if (result.success) {
-          console.log(result.success);
-          console.log(result.success);
-          localStorage.setItem("token", result.token )
-          localStorage.setItem("userId", result.userId )
-          setUserId(result.userId)
-
-          Swal.fire(
-            '',
-            'Congrats!, You\'ve earned 25 Points! <br> Refer more to earn more',
-            
-          )
-          // dispatch(redAction(result.email));
-          // localStorage.setItem("email", result.email )
-          window.location.replace(`/user/${result.userId}`);
-          // props.history.push('/')
-        }
-      },
-      (error) => {
-        console.log(error);
-        setShow(false);
-        setMessage(error.message);
-      }
-    );
+   
+    
+   
   };
 
   return (

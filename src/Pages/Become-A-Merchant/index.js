@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import LayoutDefault from "../../Components/Layouts/LayoutDefault";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+
 import {
   Avatar,
   Button,
@@ -14,49 +15,58 @@ import {
   TextareaAutosize,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { GoogleLogin } from "react-google-login";
-
-
 import useStyles from "../../Components/LoginFiles/styles";
 import Input from "../../Components/LoginFiles/Input";
 import Icon from "../../Components/LoginFiles/icon";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { usersignup, usersignin } from "../../actions/auth";
+import { useNavigate, useLocation } from "react-router-dom";
+import { merchantsignup, merchantsignin } from "../../actions/auth";
 import FileBase from "react-file-base64";
 
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const initialState = {
-  name:"",
-  phone:"",
+  firstName: "",
+  lastName: "",
   password: "",
   confirmPassword: "",
   email: "",
-  referrer:""
+ 
 };
 
-const Login = () => {
+const Merchant = () => {
   const [showPassword, setShowPassword] = useState(false);
   const classes = useStyles();
   const [formData, setFormData] = useState(initialState);
-  const [isSignup, setIsSignup] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const query = useQuery();
+ const location = useLocation()
+  // const login = query.get("login")
+  const [isSignup, setIsSignup] = useState();
 
+  useEffect(() => {
+    setIsSignup(!(JSON.parse(query.get("login"))))
+  }, [])
+
+  // console.log(login)
+  console.log(isSignup)
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (isSignup) {
-      dispatch(usersignup(formData, navigate));
+      dispatch(merchantsignup(formData, navigate));
     } else {
-      dispatch(usersignin(formData, navigate));
+      dispatch(merchantsignin(formData, navigate));
     }
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  console.log(formData)
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
@@ -80,49 +90,43 @@ const Login = () => {
     console.log("google sign in was unsuccesful. Try Again later");
   };
 
+  
+
   return (
+    
+    
+    
     <LayoutDefault>
       <div className="Row">
-        Login Dashboard
+        merchant Dashboard
         <Container component="main" maxWidth="sm">
           <Paper className={classes.paper} elevation={3}>
-            <Grid
-              className={classes.menu}
-              style={{
-                display: "flex",
-                width: "100%",
-                justifyContent: "space-around",
-              }}
-            >
-              <Grid item xs={6} >
-                <Link to={`/user/${isSignup ? "signup" : "login"}`}>
-                  {isSignup ? "User Sign Up" : "User Login"}
-                </Link>
-              </Grid>
-              <Grid xs={6} >
-                <Link
-                  to={`/merchant/${isSignup ? "become-a-merchant" : "login"}?${isSignup ? `login=${!isSignup}` : `login=${!isSignup}`}`}
-                >
-                  {isSignup ? "Become A Merchant" : "Merchant Login"}
-                </Link>
-              </Grid>
-            </Grid>
             <Avatar className={classes.avatar}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography variant="h5">
-              {isSignup ? "User Sign Up" : "User Sign In"}
+              {isSignup ? "Merchant Sign Up" : "Merchant Sign In"}
             </Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                
+                {isSignup && (
+                  <>
+                    <Input
+                      name="merchantName"
+                      label="Merchant Name"
+                      handleChange={handleChange}
+                      autoFocus
+                      half
+                      quarter
+                    />
+                  </>
+                )}
                 <Input
                   name="email"
                   label="Email"
                   handleChange={handleChange}
                   type="email"
-                  required={true}
-                
+                  twothird={isSignup ? "twothird" : ""}
                 />
                 {isSignup && (
                   <>
@@ -136,12 +140,30 @@ const Login = () => {
                       quarter
                     />
                     <Input
-                      name="name"
-                      label="Name"
+                      name="address"
+                      label="Address"
                       handleChange={handleChange}
                       twothird
                     />
-                    
+                    <Input
+                      name="description"
+                      placeholder="description"
+                      label="Description"
+                      multiline
+                      handleChange={handleChange}
+                    />
+                    <Grid item xs={12}>
+                      <div className={classes.fileInput}>
+                        <FileBase
+                          type="file"
+                          multiple={false}
+                          
+                          onDone={({ base64 }) => {
+                            setFormData({ ...formData, selectedFile: base64 });
+                          }}
+                        />
+                      </div>
+                    </Grid>
                    
                   </>
                 )}
@@ -152,7 +174,6 @@ const Login = () => {
                   handleChange={handleChange}
                   type={showPassword ? "text" : "password"}
                   handleShowPassword={handleShowPassword}
-                  required={true}
                 />
                 {isSignup && (
                   <Input
@@ -160,19 +181,8 @@ const Login = () => {
                     label="Repeat Password"
                     handleChange={handleChange}
                     type="password"
-                    required
                   />
                 )}
-                {isSignup && (
-                  <Input
-                    name="referrer"
-                    label="Referrer Code"
-                    handleChange={handleChange}
-                    type="text"
-                    
-                  />
-                )}
-
               </Grid>
 
               <Button
@@ -184,7 +194,7 @@ const Login = () => {
               >
                 {isSignup ? "Sign Up" : "Sign In"}
               </Button>
-              <GoogleLogin
+              {/* <GoogleLogin
             clientId="57511145551-jofdo3npaipgfj4u8nkeh496jf526gbf.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button
@@ -202,15 +212,16 @@ const Login = () => {
             onSuccess={googleSuccess}
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
-          />
+          /> */}
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Button onClick={switchMode}>
-                    <Link to={`/user/${isSignup ? "login" : "signup"}`}>
-                      {isSignup
-                        ? "Already have an account? SIgn In"
-                        : "Don't have an account? Sign Up"}
+                    <Link to={`/merchant/${isSignup ? "login" : "become-a-merchant"}`}>
+                    {isSignup
+                      ? "Already have an account? SIgn In"
+                      : "Don't have an account? Sign Up"}
                     </Link>
+                    
                   </Button>
                 </Grid>
               </Grid>
@@ -222,4 +233,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Merchant;
