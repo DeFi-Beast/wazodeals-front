@@ -30,7 +30,6 @@ const Input = ({
         label={label}
         autoFocus={autoFocus}
         type={type}
-       
         rows={4}
         multiline={multiline}
         InputProps={

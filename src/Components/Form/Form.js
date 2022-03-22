@@ -23,6 +23,7 @@ import DatePicker from "../DatePicker";
 import NumberInput from "../NumberInput";
 import ImageUploads from "../ImageUploads"
 import {updateDiscount } from "../../actions";
+import { categories, discounts } from "../../constants";
 
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -31,6 +32,8 @@ const Form = ({ currentId, setCurrentId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
+  const user = JSON.parse(localStorage.getItem("profile"))
+  const {merchants} = useSelector(state => state.merchants)
   const discount = useSelector((state) =>
     currentId ? state.discounts.discounts.discount.find((p) => p._id === currentId) : null
   );
@@ -58,35 +61,40 @@ const Form = ({ currentId, setCurrentId }) => {
   }, [numberformat]);
 
   console.log(discountData);
-
-
- 
-  // const discounted = useSelector((state) =>
-  //    state.discounts.discounts
-  // );
-  const {merchants} = useSelector(state => state.merchants)
-  console.log(merchants.merchant)
-
   useEffect(() => {
     if (discount) 
     setDiscountData({...discount, merchant:merchants?.merchant?.find((p) => p._id === discount.merchant), categories: discount.categories.split(",").filter(e => e) });
    
   }, [discount]);
 
+  useEffect(() => {
+    if (user) 
+    setDiscountData({...discountData, merchant:(merchants?.merchant?.find((p) => p._id === user?.merchant?._id)).merchantName});
+   
+  }, []);
+
+  console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
+  console.log(discountData)
+
+const newMerch = merchants?.merchant?.find((p) => p._id === user?.merchant?._id) 
+
+console.log(newMerch)
+ 
+  // const discounted = useSelector((state) =>
+  //    state.discounts.discounts
+  // );
+  // db.users.find({}, { _id: 0, email: 1 })
+  console.log(merchants.merchant)
+
+  
+
   console.log(discount)
  
-//  const testData = "ade,deji,andy"
-
-//  const newData = testData.split(",")
-
-//  console.log(newData)
 
   
   
-  
-  console.log (merchants)
 
-  const user = JSON.parse(localStorage.getItem("profile"));
+
 
   const [images, setImages] = useState([]);
   console.log(images);
@@ -101,8 +109,7 @@ const Form = ({ currentId, setCurrentId }) => {
     },
   };
 
-  const categories = ["food", "travel", "lifestyle", "beauty", "fashion", "stores"];
-  const discounts = [5, 10, 15, 20, 25];
+
 
  
 
@@ -228,7 +235,7 @@ const Form = ({ currentId, setCurrentId }) => {
         onSubmit={handleSubmit}
       >
         <Typography variant="h6">
-          {currentId ? "Edit" : "Create"} Discount
+          {currentId ? "Edit" : "Create"} A Campaign
         </Typography>
 
         <TextField
@@ -322,7 +329,7 @@ const Form = ({ currentId, setCurrentId }) => {
                 onChange={handleMerchantChange}
               >
                 {merchants?.merchant?.map((merchant) => (
-                  <MenuItem value={merchant}>{merchant.merchant}</MenuItem>
+                  <MenuItem value={merchant?.merchant || merchant?.merchantName }>{merchant?.merchant || merchant?.merchantName}</MenuItem>
                   
                 ))}
               </Select>

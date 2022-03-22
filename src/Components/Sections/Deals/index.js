@@ -16,7 +16,7 @@ const Deals = () => {
       <h2 className="Row title">Discount Deals</h2>
 
       <div className={Classes.StyledDealsWrapper}>
-        {discounts?.discount?.map((discount, index) => (
+        {discounts?.discounts?.map((discount, index) => (
           
             <StyledCoupon
               key={discount?._id}

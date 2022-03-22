@@ -10,16 +10,19 @@ import { useEffect } from "react";
 import BaseURL from "../Helper";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { LOG_OUT } from "../../constants";
 
 
 const NavBar = () => {
   const dispatch = useDispatch()
 
+  const user = JSON.parse(localStorage.getItem("profile"))
+
+  console.log(user)
+
   const handleLogout = (e) => {
     e.preventDefault();
-     
- 
-
+    dispatch({type:LOG_OUT})
     
   };
 
@@ -34,7 +37,7 @@ const NavBar = () => {
           <StyledInput
             className="hide-input"
             placeholder="Try Searching.."
-          ></StyledInput>
+          ></StyledInput>{user ?
          (
             <div>
               <Link to={`/user`}>
@@ -53,11 +56,11 @@ const NavBar = () => {
                 Logout
               </Button>
             </div>
-          )  (
+          ) : (
             <Button as="a" href="/user/login" bg="white">
               Login
             </Button>
-          )
+          )}
         </Div>
       </RowWrapper>
     </Row>

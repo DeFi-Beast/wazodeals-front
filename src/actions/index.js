@@ -14,6 +14,21 @@ export const getAllDiscounts = ()=> async(dispatch) => {
     }
 
 }
+export const getAllDiscountsById = (id)=> async(dispatch) => {
+
+    try {
+
+        const {data} = await api.fetchAllDiscountsById(id)
+
+        console.log(data)
+
+        // dispatch({type:FETCH_ALL, payload:data})
+        
+    } catch (error) {
+        
+    }
+
+}
 export const updateDiscount = (id, discount)=> async(dispatch) => {
 
     try {

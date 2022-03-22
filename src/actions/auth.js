@@ -4,8 +4,9 @@ import * as api from "../api"
 export const usersignin = (user, navigate) => async(dispatch) => {
     try {
         const {data} = await api.userSignIn(user)
-
-        console.log(data)
+        dispatch({type:SIGN_IN, data:data})
+        navigate("/")
+        
     } catch (error) {
         
     }
@@ -25,16 +26,22 @@ export const usersignup = (user, navigate) => async(dispatch) => {
 export const merchantsignin = (merchant) => async(dispatch) => {
     try {
         const {data} = await api.merchantSignIn(merchant)
+
+        console.log(data)
     } catch (error) {
         
     }
     
 }
-export const merchantsignup = (merchant) => async(dispatch) => {
+export const merchantsignup = (merchant, navigate) => async(dispatch) => {
 
     try {
         const {data} = await api.merchantSignup(merchant)
 
+        dispatch({type:SIGN_IN, data:data})
+        console.log(data.merchant._id)
+        navigate(`/merchant/${data.merchant._id}`)
+        console.log(data)
         
     } catch (error) {
         

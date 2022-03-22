@@ -4,6 +4,7 @@ const API = axios.create({baseURL:'http://localhost:5000'})
 
 
 export const fetchAllDiscounts =() => API.get('/discounts')
+export const fetchAllDiscountsById =(id) => API.get(`/discounts/merchants/${id}`)
 export const updateDiscount =(id, discount) => API.patch(`/discounts/${id}`, discount)
 export const fetchAllMerchants =() => API.get('/merchant')
 // export const fetchDiscount = (id) =>  API.get(`/discount/${id}`)

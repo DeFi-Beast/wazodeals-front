@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import LayoutDefault from "../../Components/Layouts/LayoutDefault";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
+import NumberInput from "../../Components/NumberInput";
+import { discounts, categories } from "../../constants";
 
 import {
   Avatar,
@@ -11,8 +13,11 @@ import {
   Grid,
   Typography,
   Container,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
   TextField,
-  TextareaAutosize,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "../../Components/LoginFiles/styles";
@@ -23,18 +28,21 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { merchantsignup, merchantsignin } from "../../actions/auth";
 import FileBase from "react-file-base64";
 
-
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const initialState = {
-  firstName: "",
-  lastName: "",
+  merchantName: "",
   password: "",
   confirmPassword: "",
   email: "",
- 
+  address: "",
+  category: "",
+  phone: "",
+  discount:"",
+  price: null,
+  logo: "",
 };
 
 const Merchant = () => {
@@ -44,16 +52,16 @@ const Merchant = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const query = useQuery();
- const location = useLocation()
+  const location = useLocation();
   // const login = query.get("login")
   const [isSignup, setIsSignup] = useState();
 
   useEffect(() => {
-    setIsSignup(!(JSON.parse(query.get("login"))))
-  }, [])
+    setIsSignup(!JSON.parse(query.get("login")));
+  }, []);
 
   // console.log(login)
-  console.log(isSignup)
+  console.log(isSignup);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -90,12 +98,21 @@ const Merchant = () => {
     console.log("google sign in was unsuccesful. Try Again later");
   };
 
-  
+  let [numberformat, setNumberformat] = useState(null);
+
+  useEffect(() => {
+    setFormData({ ...formData, price: numberformat });
+  }, [numberformat]);
+  const handleDiscChange = (e) => {
+    setFormData({ ...formData, discount: e.target.value });
+  };
+  const handleCatChange = (e) => {
+    setFormData({ ...formData, category: e.target.value });
+  };
+
+  console.log(formData)
 
   return (
-    
-    
-    
     <LayoutDefault>
       <div className="Row">
         merchant Dashboard
@@ -157,17 +174,58 @@ const Merchant = () => {
                         <FileBase
                           type="file"
                           multiple={false}
-                          
                           onDone={({ base64 }) => {
-                            setFormData({ ...formData, selectedFile: base64 });
+                            setFormData({ ...formData, logo: base64 });
                           }}
                         />
                       </div>
                     </Grid>
-                   
                   </>
                 )}
-
+                {isSignup && (
+                  <Grid style={{padding:"8px"}} container spacing={2} alignItems="center">
+                    <Grid item xs={4} sm={4} md={4}>
+                      <NumberInput
+                        numberformat={numberformat}
+                        setNumberformat={setNumberformat}
+                      />
+                    </Grid>
+                    <Grid item xs={4} sm={4} md={4}>
+                      <FormControl fullWidth>
+                        <InputLabel id="discount-label">Discount</InputLabel>
+                        <Select
+                          labelId="discount-label"
+                          variant="outlined"
+                          id="discount"
+                          value={formData.discount}
+                          label="Discount"
+                          onChange={handleDiscChange}
+                        >
+                          {discounts.map((discount) => (
+                            <MenuItem value={discount}>{discount}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                    <Grid item xs={4} sm={4} md={4}>
+                      <FormControl fullWidth>
+                        <InputLabel id="category-label">Category</InputLabel>
+                        <Select
+                          labelId="category-label"
+                          variant="outlined"
+                          id="category"
+                          value={formData.category}
+                          label="Category"
+                          onChange={handleCatChange}
+                        >
+                          {categories.map((category) => (
+                            <MenuItem value={category}>{category}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                )}
                 <Input
                   name="password"
                   label="Password"
@@ -216,12 +274,15 @@ const Merchant = () => {
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Button onClick={switchMode}>
-                    <Link to={`/merchant/${isSignup ? "login" : "become-a-merchant"}`}>
-                    {isSignup
-                      ? "Already have an account? SIgn In"
-                      : "Don't have an account? Sign Up"}
+                    <Link
+                      to={`/merchant/${
+                        isSignup ? "login" : "become-a-merchant"
+                      }`}
+                    >
+                      {isSignup
+                        ? "Already have an account? SIgn In"
+                        : "Don't have an account? Sign Up"}
                     </Link>
-                    
                   </Button>
                 </Grid>
               </Grid>

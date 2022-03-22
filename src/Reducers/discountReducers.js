@@ -2,7 +2,7 @@ import { FETCH_ALL, FETCH_DISCOUNT } from "../constants";
 
 
 
-const discounts = (state={discounts:[]}, action) => {
+const discountReducers = (state={discounts:[]}, action) => {
     switch (action.type) {
         case FETCH_ALL:
         return {...state, discounts:action.payload}
@@ -12,4 +12,4 @@ const discounts = (state={discounts:[]}, action) => {
     }
 }
 
-export default discounts
+export default discountReducers
