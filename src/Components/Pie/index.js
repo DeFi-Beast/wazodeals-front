@@ -14,7 +14,7 @@ const Pie = (props) => {
       <CircularProgressbarWithChildren
         value={percentage}
         strokeWidth={5}
-        styles={buildStyles({ pathColor: "#AE00BB" })}
+        styles={buildStyles({ pathColor: "red" })}
       >
         <div className="piePoint">
           <strong style={{ fontSize: "20px" }}>

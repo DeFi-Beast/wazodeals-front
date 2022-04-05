@@ -23,11 +23,13 @@ export const usersignup = (user, navigate) => async(dispatch) => {
     }
 
 }
-export const merchantsignin = (merchant) => async(dispatch) => {
+export const merchantsignin = (merchant, navigate) => async(dispatch) => {
     try {
         const {data} = await api.merchantSignIn(merchant)
 
         console.log(data)
+        dispatch({type:SIGN_IN, data:data})
+        navigate(`/merchants/dashboard/${data.merchant._id}`)
     } catch (error) {
         
     }
@@ -40,7 +42,7 @@ export const merchantsignup = (merchant, navigate) => async(dispatch) => {
 
         dispatch({type:SIGN_IN, data:data})
         console.log(data.merchant._id)
-        navigate(`/merchant/${data.merchant._id}`)
+        navigate(`/merchants/dashboard/${data.merchant._id}`)
         console.log(data)
         
     } catch (error) {

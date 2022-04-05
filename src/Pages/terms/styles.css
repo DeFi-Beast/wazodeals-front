@@ -1,0 +1,10 @@
+
+.terms-container {
+    height: 70vh;
+    overflow-y: scroll;
+    margin-top: 30px;
+
+}
+.bold {
+    font-weight: bold;
+}

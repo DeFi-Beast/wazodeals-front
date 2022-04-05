@@ -9,12 +9,13 @@ const Banner = ()  => {
         <Row>
             <Div>
                 <h2>
-                Join our Referral contest to be among the 5 luckiest winners with a Grand prize of #15,000 naira
+                {/* Join our Referral contest to be among the 5 luckiest winners with a Grand prize of #15,000 naira */}
+                We are the #1 and the leading student loyalty platforms
                 </h2>
                 <p className={Classes.Content}>
                 Earn additional 25 points upon signup, Refer &amp; earn 12.5 points per referral
                 </p>
-                <Button as="a" href="/register" >SIGN UP NOW</Button>
+                <Button as="a" href="/user/signup" >SIGN UP NOW</Button>
             </Div>
             <Div className="banner">
                 <img src={BannerItem} alt="Banner"></img>

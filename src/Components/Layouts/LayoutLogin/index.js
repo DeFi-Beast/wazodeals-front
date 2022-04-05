@@ -1,7 +1,7 @@
 import { Div } from "./LayoutStyled";
 // import background from "../../../Assets/women.png"
 
-const LayoutLogin = (props) => {
+const Layout = (props) => {
   return (
     <div style={{ display: "flex" }}>
       <Div>
@@ -12,4 +12,4 @@ const LayoutLogin = (props) => {
   );
 };
 
-export default LayoutLogin;
+export default Layout;

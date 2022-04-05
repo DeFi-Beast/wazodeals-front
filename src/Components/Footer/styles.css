@@ -1,0 +1,29 @@
+
+a {
+    text-decoration: none;
+    
+}
+
+.footer {
+    background: black;
+    color: white;
+
+    /* padding-top: 100px !important; */    
+}
+.footer a {
+    color:#dfb9b9;
+}
+.footer a:hover{
+    color: red;
+    color: white;
+}
+@media only screen and (min-width:600px){
+    .Copyright {
+        text-align: right;
+    }
+}
+@media only screen and (max-width:600px){
+    .Container {
+        flex-direction: column  !important;
+    }
+}

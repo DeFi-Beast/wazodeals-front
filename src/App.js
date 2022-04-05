@@ -17,11 +17,17 @@ import Forgot from "./Pages/Forgot";
 import Reset from "./Pages/Reset";
 // import Discounts from "./Pages/Discounts";
 import MerchantForm from "./Pages/Become-A-Merchant";
-import Merchant from "./Pages/Merchant";
+import Merchants from "./Pages/Merchants";
+import About from "./Pages/AboutUs";
+import Faq from "./Pages/Faq";
+import Terms from "./Pages/terms";
+import Privacy from "./Pages/privacy"
+import Merchant from "./Pages/Merchants/Merchant";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllMerchants, getAllDiscounts } from "./actions";
 import Discounts from "./Pages/Discounts";
+import Dashboard from "../src/Components/Dashboard/Dashboard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -50,7 +56,7 @@ const App = () => {
           <Route path="/signup" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/activate" element={<Activate />}></Route>
-          <Route path="/discounts" >
+          <Route path="/discounts">
             <Route index element={<Discounts />} />
           </Route>
 
@@ -58,30 +64,42 @@ const App = () => {
           <Route path="/user/:id" element={<User />} />
           <Route path="/forgot-password" element={<Forgot />} />
           <Route path="/reset-password" element={<Reset />} />
-          <Route path="/merchant">
+          <Route path="/merchant" element={<Merchant />} />
+          <Route path="/merchants">
             <Route
               index
               element={
                 user?.merchant?.role[0] === "merchant" ? (
-                  <Merchant />
+                  <Merchants />
                 ) : (
                   <Navigate to="/" />
                 )
               }
             />
+          <Route path="/merchants/discounts/:id" element={<Merchants />} />
+
+            <Route path="/merchants/dashboard" element={<Dashboard />} />
             <Route
-              path="/merchant/:id"
+              path="/merchants/dashboard/:id"
               element={
                 user?.merchant?.role[0] === "merchant" ? (
-                  <Merchant />
+                  <Dashboard />
                 ) : (
-                  <Navigate to="/" />
+                  // <Navigate to="/" />
+                  <Dashboard />
+
                 )
               }
             />
+
             <Route path="login" element={<MerchantForm />} />
             <Route path="become-a-merchant" element={<MerchantForm />} />
           </Route>
+          <Route path="/about-us" element={<About />} />
+          <Route path="/faq" element={<Faq />} />
+          <Route path="/privacy-policy" element={<Privacy />} />
+          <Route path="/terms-and-condition" element={<Terms />} />
+          
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </div>

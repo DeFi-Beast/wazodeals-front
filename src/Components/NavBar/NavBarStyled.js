@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const Row = styled.div`
     width:100%;
-    background-image:linear-gradient(to right , #FF0076, #AE00BB);
+    background-image:linear-gradient(to right , #FF0076, red);
     padding:10px 0px;
 `;
 export const RowWrapper = styled.div`

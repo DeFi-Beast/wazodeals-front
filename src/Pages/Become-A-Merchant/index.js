@@ -275,7 +275,7 @@ const Merchant = () => {
                 <Grid item>
                   <Button onClick={switchMode}>
                     <Link
-                      to={`/merchant/${
+                      to={`/merchants/${
                         isSignup ? "login" : "become-a-merchant"
                       }`}
                     >

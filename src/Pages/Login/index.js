@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import LayoutDefault from "../../Components/Layouts/LayoutDefault";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
@@ -15,23 +14,23 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { GoogleLogin } from "react-google-login";
-
-
 import useStyles from "../../Components/LoginFiles/styles";
 import Input from "../../Components/LoginFiles/Input";
 import Icon from "../../Components/LoginFiles/icon";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { usersignup, usersignin } from "../../actions/auth";
+import UserLayout from "../../Components/Layouts/UserLayout";
 import FileBase from "react-file-base64";
+import "./styles.css";
 
 const initialState = {
-  name:"",
-  phone:"",
+  name: "",
+  phone: "",
   password: "",
   confirmPassword: "",
   email: "",
-  referrer:""
+  referrer: "",
 };
 
 const Login = () => {
@@ -39,9 +38,9 @@ const Login = () => {
   const classes = useStyles();
   const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -55,8 +54,11 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+  const handleCheck= (e) => {
+    setIsChecked(!isChecked);
+  };
 
-  console.log(formData)
+  console.log(formData);
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
@@ -80,10 +82,16 @@ const Login = () => {
     console.log("google sign in was unsuccesful. Try Again later");
   };
 
+  const handleSignup = () => {
+    setIsSignup(true);
+  };
+  const handleLogin = () => {
+    setIsSignup(false);
+  };
+
   return (
-    <LayoutDefault>
-      <div className="Row">
-        Login Dashboard
+    <UserLayout>
+      <div className="Row RowPadding Login">
         <Container component="main" maxWidth="sm">
           <Paper className={classes.paper} elevation={3}>
             <Grid
@@ -94,17 +102,15 @@ const Login = () => {
                 justifyContent: "space-around",
               }}
             >
-              <Grid item xs={6} >
-                <Link to={`/user/${isSignup ? "signup" : "login"}`}>
-                  {isSignup ? "User Sign Up" : "User Login"}
-                </Link>
+              <Grid item xs={6} className={!isSignup ? "colorBg" : ""}>
+                <Button onClick={handleLogin}>
+                  <Link to={"/user/login"}>User Login</Link>
+                </Button>
               </Grid>
-              <Grid xs={6} >
-                <Link
-                  to={`/merchant/${isSignup ? "become-a-merchant" : "login"}?${isSignup ? `login=${!isSignup}` : `login=${!isSignup}`}`}
-                >
-                  {isSignup ? "Become A Merchant" : "Merchant Login"}
-                </Link>
+              <Grid xs={6} className={isSignup ? "colorBg" : ""}>
+                <Button onClick={handleSignup}>
+                  <Link to={"/user/signup"}>User Sign up</Link>
+                </Button>
               </Grid>
             </Grid>
             <Avatar className={classes.avatar}>
@@ -115,14 +121,12 @@ const Login = () => {
             </Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-                
                 <Input
                   name="email"
                   label="Email"
                   handleChange={handleChange}
                   type="email"
                   required={true}
-                
                 />
                 {isSignup && (
                   <>
@@ -141,8 +145,6 @@ const Login = () => {
                       handleChange={handleChange}
                       twothird
                     />
-                    
-                   
                   </>
                 )}
 
@@ -169,10 +171,22 @@ const Login = () => {
                     label="Referrer Code"
                     handleChange={handleChange}
                     type="text"
-                    
                   />
                 )}
-
+                {/* {isSignup && (
+                  <div className="agreement-Box">
+                    <input
+                      name=""
+                      label="Referrer Code"
+                      handleCheck={handleCheck}
+                      type="checkbox"
+                    />
+                    <span>
+                      Do you agree to our{" "}
+                      <Link to="/terms-and-condition">Terms and condition</Link>
+                    </span>{" "}
+                  </div>
+                )} */}
               </Grid>
 
               <Button
@@ -184,7 +198,7 @@ const Login = () => {
               >
                 {isSignup ? "Sign Up" : "Sign In"}
               </Button>
-              <GoogleLogin
+              {/* <GoogleLogin
             clientId="57511145551-jofdo3npaipgfj4u8nkeh496jf526gbf.apps.googleusercontent.com"
             render={(renderProps) => (
               <Button
@@ -202,10 +216,10 @@ const Login = () => {
             onSuccess={googleSuccess}
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
-          />
+          /> */}
               <Grid container justifyContent="flex-end">
                 <Grid item>
-                  <Button onClick={switchMode}>
+                  <Button onClick={switchMode} >
                     <Link to={`/user/${isSignup ? "login" : "signup"}`}>
                       {isSignup
                         ? "Already have an account? SIgn In"
@@ -218,7 +232,7 @@ const Login = () => {
           </Paper>
         </Container>
       </div>
-    </LayoutDefault>
+    </UserLayout>
   );
 };
 

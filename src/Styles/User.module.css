@@ -68,7 +68,7 @@ h4 {
     /* margin: 0 ; */
 }
 .Button:hover a{
-    color:#AE00BB ;
+    color:red ;
 }
 .UserCard a {
     text-decoration: none;
@@ -76,7 +76,7 @@ h4 {
     
 }
 .UserCard a:hover{
-    color: #AE00BB;
+    color: red;
 }
 
 

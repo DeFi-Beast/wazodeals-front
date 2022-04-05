@@ -1,0 +1,11 @@
+.Login a {
+    color: red;
+}
+.colorBg {
+    background: yellow;
+}
+.agreement-Box {
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+}

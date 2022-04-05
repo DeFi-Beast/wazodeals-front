@@ -19,7 +19,7 @@
 }
 
 input,  button {
-    border: 1px solid rgba(176, 0, 185, 1);
+    border: 1px solid red;
     max-width: 100%;
     border-radius: 5px;
     outline: none;
@@ -43,7 +43,7 @@ input::focus{
     margin-bottom: 40px;
 } */
 .button{
-    background-color: rgba(176, 0, 185, 1);
+    background-color: red;
     color: white;
     cursor: pointer;
     width: 100%;
@@ -61,7 +61,7 @@ input::focus{
   }
 .styledLink {
     text-decoration: none;
-    color: rgba(176, 0, 185, 1);
+    color: red;
 }
 
 

@@ -23,23 +23,26 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-const Index = () => {
+const Merchants = () => {
   const [currentId, setCurrentId] = useState(null);
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
 
-  const dispatch = useDispatch();
+
   const classes = useStyles();
   const query = useQuery();
-  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const page = query.get("page") || 1;
   const searchQuery = query.get("searchQuery");
-  console.log(currentId);
+  // console.log(currentId);
   const { id } = useParams();
-  const { discountsByMerchant } = useSelector((state) => state.discounts);
+  const { discounts } = useSelector((state) => state.discounts);
+  const allDiscounts  = discounts?.discounts?.filter(discount => discount.merchant === id);
+  
+console.log(discounts)
 
+console.log(allDiscounts)
   console.log(id);
   // const searchPost = () => {
   //   if (search.trim() || tags) {
@@ -54,17 +57,17 @@ const Index = () => {
   const handleAdd = (tag) => {
     setTags([...tags, tag]);
   };
-  console.log(tags);
+  // console.log(tags);
 
   const handleDelete = (tagToDelete) => {
     setTags(tags.filter((tag) => tag !== tagToDelete));
   };
 
-  useEffect(() => {
-    dispatch(getAllDiscountsById(id));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getAllDiscountsById(id));
+  // }, []);
 
-  console.log(user);
+  // console.log(user);
 
  
   return (
@@ -77,15 +80,15 @@ const Index = () => {
           spacing={3}
           className={classes.gridContainer}
         >
-          {discountsByMerchant ?
+          {allDiscounts ? (allDiscounts.length > 0 ? 
           (<Grid item xs={12} sm={6} md={9}>
             {/* <Discounts setCurrentId={setCurrentId} /> */}
             <Grid container spacing={2} className={classes.mainContainer}>
-              {discountsByMerchant?.discounts?.map((discount) => (
+              {allDiscounts?.map((discount) => (
                 <StyledCoupon discount={discount} setCurrentId={setCurrentId} />
               ))}
             </Grid>
-          </Grid>)
+          </Grid>) : <div style={{textAlign:"center", display:"flex", alignItems:"center", height:"100vh", width:"50%"}}><h1 style={{fontSize:"3.5rem", textAlign:"left"}}>Create your first campaign!!</h1></div>)
           :
           (<div style={{textAlign:"center", display:"flex", alignItems:"center", height:"100vh", width:"50%"}}><h1 style={{fontSize:"3.5rem", textAlign:"left"}}>Create your first campaign!!</h1></div>)
           }
@@ -104,4 +107,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Merchants;

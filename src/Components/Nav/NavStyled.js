@@ -43,14 +43,14 @@ export const StyledNavLink = styled(NavLink)`
   align-items: center;
   flex-direction: column;
   &:hover {
-    color: #ae00bb;
+    color: red;
   }
   &[aria-current] {
-    color: #ae00bb;
+    color: red;
   }
   &[aria-current]:after {
     content: "";
-    background: #ae00bb;
+    background: red;
     width: 70%;
     height: 2px;
     margin: 3px 0 auto;

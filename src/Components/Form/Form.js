@@ -18,7 +18,7 @@ import {
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 // import { creatediscount, updatediscount } from "../../actions/discounts";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "../DatePicker";
 import NumberInput from "../NumberInput";
 import ImageUploads from "../ImageUploads"
@@ -34,9 +34,13 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
   const user = JSON.parse(localStorage.getItem("profile"))
   const {merchants} = useSelector(state => state.merchants)
+  const [images, setImages] = useState([]);
   const discount = useSelector((state) =>
-    currentId ? state.discounts.discounts.discount.find((p) => p._id === currentId) : null
+    currentId ? state.discounts?.discounts?.discounts?.find((p) => p._id === currentId) : null
   );
+
+  const { id } = useParams();
+  const merchant = merchants?.merchant?.find(merchant => merchant._id === id);
 
   const [discountData, setDiscountData] = useState({
     title: "",
@@ -67,18 +71,18 @@ const Form = ({ currentId, setCurrentId }) => {
    
   }, [discount]);
 
-  useEffect(() => {
-    if (user) 
-    setDiscountData({...discountData, merchant:(merchants?.merchant?.find((p) => p._id === user?.merchant?._id)).merchantName});
+  // useEffect(() => {
+  //   if (user) 
+  //   setDiscountData({...discountData, merchant:(merchants?.merchant?.find((p) => p._id === user?.merchant?._id)).merchantName});
    
-  }, []);
+  // }, []);
 
   console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
   console.log(discountData)
 
-const newMerch = merchants?.merchant?.find((p) => p._id === user?.merchant?._id) 
+// const newMerch = merchants?.merchant?.find((p) => p._id === user?.merchant?._id) 
 
-console.log(newMerch)
+// console.log(newMerch)
  
   // const discounted = useSelector((state) =>
   //    state.discounts.discounts
@@ -95,8 +99,6 @@ console.log(newMerch)
   
 
 
-
-  const [images, setImages] = useState([]);
   console.log(images);
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
@@ -324,7 +326,7 @@ console.log(newMerch)
                 labelId="merchant-label"
                 variant="outlined"
                 id="merchant"
-                value={discountData.merchant}
+                value={discountData.merchant || merchant?.merchantName}
                 label="Discount"
                 onChange={handleMerchantChange}
               >

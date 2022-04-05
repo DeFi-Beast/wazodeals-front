@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Button = styled.button`
   cursor: pointer;
   text-decoration: none;
-  color: ${(props) => (props.bg === "white" ? "#AE00BB" : "white")};
-  background-color: ${(props) => (props.bg === "white" ? "white" : "#AE00BB")};
+  color: ${(props) => (props.bg === "white" ? "red" : "white")};
+  background-color: ${(props) => (props.bg === "white" ? "white" : "red")};
   padding: ${(props) => (props.bg === "white" ? "7px 20px" : "10px 30px")};
   border-radius: 6px;
   text-align: center;
@@ -14,17 +14,17 @@ export const Button = styled.button`
 
   &:hover {
     border: ${(props) =>
-      props.bg === "white" ? "1px solid white" : "1px solid #AE00BB"};
+      props.bg === "white" ? "1px solid white" : "1px solid red"};
     background-color: ${(props) =>
-      props.bg === "white" ? "#AE00BB" : "white"};
-    color: ${(props) => (props.bg === "white" ? "white" : "#AE00BB")};
+      props.bg === "white" ? "red" : "white"};
+    color: ${(props) => (props.bg === "white" ? "white" : "red")};
     padding: ${(props) => (props.bg === "white" ? "7px 20px" : "10px 30px")};
   }
 `;
 export const OrderBtn = styled.button`
   cursor: pointer;
   text-decoration: none;
-  color: #ae00bb;
+  color: red;
   background-color: transparent;
   padding: 5px auto;
   width: 90%;
@@ -32,11 +32,11 @@ export const OrderBtn = styled.button`
   border-radius: 6px;
   text-align: center;
   margin-top:16px;
-  border: 1px solid #ae00bb;
+  border: 1px solid red;
   display:block;
 
   &:hover {
-    background: #ae00bb;
+    background: red;
     color: white;
   }
 `;

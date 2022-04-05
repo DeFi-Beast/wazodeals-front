@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faStar } from "@fortawesome/free-solid-svg-icons";
 import useStyles from "./styles";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { useParams } from "react-router-dom";
 
 
 
@@ -21,6 +22,14 @@ const StyledCoupon = ({discount, setCurrentId}) => {
   const merchant =  merchants?.merchant?.find(merchant => merchant?._id === discount?.merchant)
   const merchantArr = merchant?.address.split(",")
    
+
+  const { id } = useParams();
+ 
+  const allDiscounts  = discounts?.discounts?.filter(discount => discount.merchant !== id);
+  
+console.log(discounts)
+  
+
   
   console.log(merchant)
  
@@ -47,7 +56,6 @@ const StyledCoupon = ({discount, setCurrentId}) => {
             onClick={(e) => {
              
               e.stopPropagation();
-              e.preventDefault()
               setCurrentId(discount._id);
             }}
             style={{ color: "white" }}
