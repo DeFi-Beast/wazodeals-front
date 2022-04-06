@@ -15,7 +15,7 @@ const Banner = ()  => {
                 <p className={Classes.Content}>
                 Earn additional 25 points upon signup, Refer &amp; earn 12.5 points per referral
                 </p>
-                <Button as="a" href="/user/signup" >SIGN UP NOW</Button>
+                <Button as="a" href="/signup" >SIGN UP NOW</Button>
             </Div>
             <Div className="banner">
                 <img src={BannerItem} alt="Banner"></img>

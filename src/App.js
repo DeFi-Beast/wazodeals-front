@@ -21,13 +21,16 @@ import Merchants from "./Pages/Merchants";
 import About from "./Pages/AboutUs";
 import Faq from "./Pages/Faq";
 import Terms from "./Pages/terms";
-import Privacy from "./Pages/privacy"
+import Privacy from "./Pages/privacy";
 import Merchant from "./Pages/Merchants/Merchant";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllMerchants, getAllDiscounts } from "./actions";
 import Discounts from "./Pages/Discounts";
 import Dashboard from "../src/Components/Dashboard/Dashboard";
+import { ToastContainer, toast } from 'react-toastify';
+
+  import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -37,24 +40,48 @@ const App = () => {
   }, []);
   const user = JSON.parse(localStorage.getItem("profile"));
 
+  // const notify = () => toast("Wow so easy !");
+  const notify = () => {
+    toast("Default Notification !");
+
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER
+    });
+
+    toast.error("Error Notification !", {
+      position: toast.POSITION.TOP_LEFT
+    });
+
+    toast.warn("Warning Notification !", {
+      position: toast.POSITION.BOTTOM_LEFT
+    });
+
+    toast.info("Info Notification !", {
+      position: toast.POSITION.BOTTOM_CENTER
+    });
+
+    toast("Custom Style Notification with css class!", {
+      position: toast.POSITION.BOTTOM_RIGHT,
+      className: 'foo-bar'
+    });
+  };
+
   return (
     <Router>
       <div className="App">
+      {/* <button onClick={notify}>Notify !</button> */}
+        <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/food" element={<Food />}></Route>
-          <Route path="/user">
-            <Route index element={<Login />} />
-            <Route
-              path="login"
-              exact
-              element={!user ? <Login /> : <Navigate to="/" />}
-            />
-            <Route path="signup" element={<Login />} />
-            <Route path="*" element={<ErrorPage />} />
-          </Route>
+          <Route
+            path="login"
+            exact
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
+          <Route path="signup" element={!user ? <Login /> : <Navigate to="/" />} />
+          <Route path="*" element={<ErrorPage />} />
           <Route path="/signup" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
           <Route path="/activate" element={<Activate />}></Route>
           <Route path="/discounts">
             <Route index element={<Discounts />} />
@@ -76,7 +103,7 @@ const App = () => {
                 )
               }
             />
-          <Route path="/merchants/discounts/:id" element={<Merchants />} />
+            <Route path="/merchants/discounts/:id" element={<Merchants />} />
 
             <Route path="/merchants/dashboard" element={<Dashboard />} />
             <Route
@@ -87,7 +114,6 @@ const App = () => {
                 ) : (
                   // <Navigate to="/" />
                   <Dashboard />
-
                 )
               }
             />

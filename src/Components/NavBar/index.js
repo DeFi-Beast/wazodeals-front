@@ -11,10 +11,12 @@ import BaseURL from "../Helper";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LOG_OUT } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 
 const NavBar = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const user = JSON.parse(localStorage.getItem("profile"))
 
@@ -23,7 +25,7 @@ const NavBar = () => {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch({type:LOG_OUT})
-    
+    navigate("/")
   };
 
   return (
@@ -57,7 +59,7 @@ const NavBar = () => {
               </Button>
             </div>
           ) : (
-            <Button as="a" href="/user/login" bg="white">
+            <Button as="a" href="/login" bg="white">
               Login
             </Button>
           )}

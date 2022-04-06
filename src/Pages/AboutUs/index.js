@@ -17,7 +17,7 @@ const About = () => {
           <br></br>
         </p>
           </Grid>
-          <Grid  sm={6} xs={12}>
+          <Grid  sm={6} xs={12} pt={4}>
               <p className="contact">
           <span style={{fontWeight:"bold"}}>CONTACT US</span> <br></br>
           09049793930 <br></br> support@wazodeals.com

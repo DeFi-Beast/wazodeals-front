@@ -1,11 +1,21 @@
-import {SIGN_UP, SIGN_IN} from "../constants"
+import {SIGN_UP, SIGN_IN, START_LOADING, END_LOADING, NOTIFY} from "../constants"
 import * as api from "../api"
+import {toast} from "react-toastify"
 
 export const usersignin = (user, navigate) => async(dispatch) => {
     try {
+        dispatch({type:START_LOADING})
         const {data} = await api.userSignIn(user)
+        console.log(data)
+        
+    
         dispatch({type:SIGN_IN, data:data})
-        navigate("/")
+        dispatch({type:END_LOADING})
+        data.success && navigate("/")
+        data.success && dispatch( toast.success(<>{data.message}</>))
+        data.error && dispatch( toast.error(<>{data.message}</>))
+
+
         
     } catch (error) {
         
@@ -15,9 +25,36 @@ export const usersignin = (user, navigate) => async(dispatch) => {
 export const usersignup = (user, navigate) => async(dispatch) => {
 
     try {
-        const {data} = await api.userSignup(user)
 
+        dispatch({type:START_LOADING})
+        const {data} = await api.userSignup(user)
+        console.log(data)
         
+    
+        dispatch({type:SIGN_IN, data:data})
+        dispatch({type:END_LOADING})
+        data.success && navigate("/activate")
+        data.success && dispatch( toast.success(<>{data.message}</>))
+        data.error && dispatch( toast.error(<>{data.message}</>))
+    } catch (error) {
+        
+    }
+
+}
+export const useractivate = (user, navigate) => async(dispatch) => {
+
+    try {
+
+        dispatch({type:START_LOADING})
+        const {data} = await api.userActivate(user)
+        console.log(data)
+        
+    
+        dispatch({type:SIGN_IN, data:data})
+        dispatch({type:END_LOADING})
+        data.success && navigate("/")
+        data.success && dispatch( toast.success(<>{data.message}</>))
+        data.error && dispatch( toast.error(<>{data.message}</>))
     } catch (error) {
         
     }

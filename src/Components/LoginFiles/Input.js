@@ -16,7 +16,8 @@ const Input = ({
   rows,
   multiline,
   twothird,
-  required
+  required,
+  value
 
 }) => {
   return (
@@ -32,6 +33,7 @@ const Input = ({
         type={type}
         rows={4}
         multiline={multiline}
+        value={value}
         InputProps={
           name === "password"
             ? {

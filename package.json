@@ -1,5 +1,5 @@
 {
-  "proxy": "https://wazodeal.herokuapp.com",
+  "proxy": "http://localhost:5000",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -35,6 +35,7 @@
     "react-number-format": "^4.9.1",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.2.1",
+    "react-toastify": "^8.2.0",
     "recharts": "^2.1.9",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
@@ -46,7 +47,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
+    "build": " react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

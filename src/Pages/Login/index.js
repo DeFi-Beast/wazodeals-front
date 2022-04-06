@@ -23,6 +23,9 @@ import { usersignup, usersignin } from "../../actions/auth";
 import UserLayout from "../../Components/Layouts/UserLayout";
 import FileBase from "react-file-base64";
 import "./styles.css";
+// import Notify from "../../Components/Notify";
+import { useSelector } from "react-redux";
+import Loader from "../../Components/Loader";
 
 const initialState = {
   name: "",
@@ -39,6 +42,9 @@ const Login = () => {
   const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
+  const isLoading = useSelector(state => state.auth.isLoading);
+
+  console.log(isLoading)
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -104,12 +110,12 @@ const Login = () => {
             >
               <Grid item xs={6} className={!isSignup ? "colorBg" : ""}>
                 <Button onClick={handleLogin}>
-                  <Link to={"/user/login"}>User Login</Link>
+                  <Link to={"/login"}>User Login</Link>
                 </Button>
               </Grid>
               <Grid xs={6} className={isSignup ? "colorBg" : ""}>
                 <Button onClick={handleSignup}>
-                  <Link to={"/user/signup"}>User Sign up</Link>
+                  <Link to={"/signup"}>User Sign up</Link>
                 </Button>
               </Grid>
             </Grid>
@@ -196,7 +202,7 @@ const Login = () => {
                 color="primary"
                 className={classes.submit}
               >
-                {isSignup ? "Sign Up" : "Sign In"}
+                {isSignup ?( isLoading ? <Loader/> : "Sign Up" ):( isLoading ? <Loader/> : "Sign In")}
               </Button>
               {/* <GoogleLogin
             clientId="57511145551-jofdo3npaipgfj4u8nkeh496jf526gbf.apps.googleusercontent.com"
@@ -220,7 +226,7 @@ const Login = () => {
               <Grid container justifyContent="flex-end">
                 <Grid item>
                   <Button onClick={switchMode} >
-                    <Link to={`/user/${isSignup ? "login" : "signup"}`}>
+                    <Link to={`/${isSignup ? "login" : "signup"}`}>
                       {isSignup
                         ? "Already have an account? SIgn In"
                         : "Don't have an account? Sign Up"}
@@ -230,6 +236,8 @@ const Login = () => {
               </Grid>
             </form>
           </Paper>
+        
+
         </Container>
       </div>
     </UserLayout>
