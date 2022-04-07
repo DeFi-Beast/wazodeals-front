@@ -1,112 +1,145 @@
 import { useState, useEffect } from "react";
-import LayoutLogin from "../../Components/Layouts/LayoutLogin";
-import { StyledDiv, StyledLogo } from "../../Components/Logo/Logo";
-import Classes from "../../Styles/Login.module.css";
-import Logbg from "../../Assets/Logbg.png";
-import LoginLogo from "../../Assets/Loginlogo.png";
-import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import {
+  Avatar,
+  Button,
+  Paper,
+  Grid,
+  Typography,
+  Container,
+  TextField,
+  TextareaAutosize,
+} from "@material-ui/core";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import useStyles from "../../Components/LoginFiles/styles";
+import Input from "../../Components/LoginFiles/Input";
+import { useDispatch } from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
+import { userreset} from "../../actions/auth";
+import UserLayout from "../../Components/Layouts/UserLayout";
+
+import "./styles.css";
+
+import { useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
 
-import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+const initialState = {
+  email: "",
+  token: "",
+  newPassword: "",
+  confirmPassword:""
+};
 
 
-
-const Reset = ({ dispatch }) => {
-  const [showText, setShowText] = useState(false);
-  const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [code, setCode] = useState("");
-  const [success, setSuccess] = useState(false);
-  const [userId, setUserId] = useState("")
- 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
 
   
 
+
+const Reset = () => {
+  const classes = useStyles();
+  const [formData, setFormData] = useState(initialState);
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const query = useQuery();
+  
+  useEffect(() => {
+    setFormData({...formData, email:query.get("email") || null})
+    
+  }, [])
+  
+  console.log (query.get("email") || null)
   
 
+
+
+  console.log(isLoading);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShow(true);
-    let queryObj = {
-      
-      newPassword: password,
-      confirmPassword: confirmPassword,
-      token: code,
-      
-    };
-
+      dispatch(userreset(formData, navigate));
+    
+  };
+console.log(formData)
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleShowPassword = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
   return (
-    <LayoutLogin>
-      <div className={Classes.Wrapper}>
-        <div className={Classes.LogoWrapper}>
-          <StyledDiv>
-            <img src={Logbg} alt="amoeba"></img>
-          </StyledDiv>
+    <UserLayout>
+      <div className="Row RowPadding Login">
+        <Container component="main" maxWidth="sm">
+          <Paper className={classes.paper} elevation={3}>
+            <Grid
+              className={classes.menu}
+              style={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-around",
+              }}
+            ></Grid>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography variant="h5">Reset Password</Typography>
+            <form className={classes.form} onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+              <Input
+                  name="email"
+                  label="Email"
+                  type="email"
+                  value={formData.email}
+                  required={true}
+                />
+                <Input
+                  name="token"
+                  label="Enter the Code sent to your email"
+                  handleChange={handleChange}
+                  type="text"
+                  required={true}
+                />
+                 <Input
+                  name="newPassword"
+                  label="New Password"
+                  handleChange={handleChange}
+                  type={showPassword ? "text" : "password"}
+                  handleShowPassword={handleShowPassword}
+                  required={true}
+                />
+                
+                  <Input
+                    name="confirmPassword"
+                    label="Repeat Password"
+                    handleChange={handleChange}
+                    type="password"
+                    required
+                  />
+                
+              </Grid>
 
-          <Link to={"/"}>
-         <StyledLogo src={LoginLogo}></StyledLogo>
-         </Link>
-        </div>
-
-        <div className={Classes.formContainer}>
-          <form
-            action="/forgot"
-            onSubmit={handleSubmit}
-            method="POST"
-            
-          >
-            <h1>Reset Password</h1>
-            {/* <div>{success &&  <p>{message}</p>}</div> */}
-
-            <div>
-              
-                   <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Enter new password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-          
-              
-                   <input
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                placeholder="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-                   <input
-                type="text"
-                name="code"
-                id="code"
-                placeholder="code"
-                value={code}
-                onChange={(e) => setCode(e.target.value)}
-              />
-             
-            </div>
-
-            <button type="submit" className={Classes.button}>
-              {show ? (
-                <div>
-                  <Loader></Loader>
-                </div>
-              ) : (
-                "Reset Password"
-              )}
-            </button>
-          </form>
-        </div>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                {isLoading ? <Loader /> : "Reset Your Password"}
+              </Button>
+            </form>
+          </Paper>
+        </Container>
       </div>
-    </LayoutLogin>
+    </UserLayout>
   );
 };
 

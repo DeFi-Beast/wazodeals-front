@@ -84,6 +84,7 @@ const Login = () => {
                   label="Code"
                   handleChange={handleChange}
                   type="text"
+                  required={true}
                 />
               </Grid>
 

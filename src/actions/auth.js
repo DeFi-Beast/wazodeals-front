@@ -11,7 +11,7 @@ export const usersignin = (user, navigate) => async(dispatch) => {
     
         dispatch({type:SIGN_IN, data:data})
         dispatch({type:END_LOADING})
-        data.success && navigate("/")
+        data.success && navigate(`/user/${data.user._id}`)
         data.success && dispatch( toast.success(<>{data.message}</>))
         data.error && dispatch( toast.error(<>{data.message}</>))
 
@@ -53,6 +53,45 @@ export const useractivate = (user, navigate) => async(dispatch) => {
         dispatch({type:SIGN_IN, data:data})
         dispatch({type:END_LOADING})
         data.success && navigate("/")
+        data.success && dispatch( toast.success(<>{data.message}</>))
+        data.error && dispatch( toast.error(<>{data.message}</>))
+    } catch (error) {
+        
+    }
+
+}
+export const userforgot = (email, navigate) => async(dispatch) => {
+
+    try {
+
+        dispatch({type:START_LOADING})
+        const {data} = await api.userForgot(email)
+        console.log(data)
+        
+        console.log(email)
+        // dispatch({type:SIGN_IN, data:data})
+        dispatch({type:END_LOADING})
+        data.success && navigate(`/reset-password?email=${data.email}`)
+        data.error && navigate(`/`)
+        data.success && dispatch( toast.success(<>{data.message}</>))
+        data.error && dispatch( toast.error(<>{data.message}</>))
+    } catch (error) {
+        
+    }
+
+}
+export const userreset = (user, navigate) => async(dispatch) => {
+
+    try {
+
+        dispatch({type:START_LOADING})
+        const {data} = await api.userReset(user)
+        console.log(data)
+        
+        console.log(user)
+        dispatch({type:SIGN_IN, data:data})
+        dispatch({type:END_LOADING})
+        data.success && navigate(`/signup`)
         data.success && dispatch( toast.success(<>{data.message}</>))
         data.error && dispatch( toast.error(<>{data.message}</>))
     } catch (error) {

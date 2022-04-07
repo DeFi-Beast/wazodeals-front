@@ -8,3 +8,6 @@
 
 # production
 
+
+# Local Netlify folder
+.netlify

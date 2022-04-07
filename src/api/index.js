@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({baseURL:'http://localhost:5000'})
-// const API = axios.create({baseURL:'https://wazodeal.herokuapp.com'})
+// const API = axios.create({baseURL:'http://localhost:5000'})
+const API = axios.create({baseURL:'https://wazodeal.herokuapp.com'})
 
 
 export const fetchAllDiscounts =() => API.get('/discounts')
@@ -13,5 +13,7 @@ export const fetchAllMerchants =() => API.get('/merchant')
 export const userSignIn =(user) => API.post(`/user/login`, user)
 export const userSignup =(user) => API.post(`/user/signup`, user)
 export const userActivate =(user) => API.patch(`/activate`, user)
+export const userForgot =(email) => API.patch(`/forgot`, email)
+export const userReset =(user) => API.patch(`/reset`, user)
 export const merchantSignIn =(merchant) => API.get(`/merchant/login`, merchant)
 export const merchantSignup =(merchant) => API.post(`/merchant/signup`, merchant)

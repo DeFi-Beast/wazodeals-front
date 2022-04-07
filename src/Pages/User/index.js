@@ -1,7 +1,6 @@
 // import UserLayout from "../../Components/Layouts/UserLayout.js"
 
 import { useState, useEffect } from "react";
-import LayoutDefault from "../../Components/Layouts/LayoutDefault";
 import Classes from "../../Styles/User.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
@@ -11,131 +10,55 @@ import axios from "axios";
 import Pie from "../../Components/Pie";
 import BaseURL from "../../Components/Helper";
 import { useDispatch, useSelector } from 'react-redux'
+import UserLayout from "../../Components/Layouts/UserLayout";
 
 
 
 
 const User = () => {
-  const [email, setEmail] = useState("");
-  const [token, setToken] = useState("");
-  const [userId, setUserId] = useState("");
+
   const [referred, setReferred] = useState("");
-  const [code, setCode] = useState("");
-  const [point, setPoint] = useState();
   const [copied, setCopied] = useState(false);
+  const user = JSON.parse(localStorage.getItem("profile"))
  
   const dispatch = useDispatch()
-
-
-
-  
 
   const CopyToClipboard = () => {
     //   console.log(navigator.clipboard.write.length)
     if (navigator.clipboard.write.length >= 1) {
       setCopied("true");
     }
-    navigator.clipboard.writeText(`https://wazodeals.com/register?user=${code}`);
+    navigator.clipboard.writeText(`https://wazodeals.com/signup?user=${user?.user?.referralCode}`);
   };
 
   
 
+const totalPoint =  user?.user?.point + (user?.user?.referrals.length * 12.5)
 
-
-
-  // useEffect(() => {
-  // setUserId(localStorage.getItem("userId"));
-  //   const headers ={
-  //     "Content-type": "application/json",
-  //     authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   }
-  //   axios.get(`${BaseURL}/user/${userId}`)
-  //     .then((res) => res.json())
-  //     .then(
-  //       (data) => {
-  //         console.log(data)
-  //       },
-  //       (error) => {
-  //         console.log(error)
-  //       }
-  //     );
-  // }, []);
-
-  // useEffect(() => {
-  //   // setEmail(localStorage.getItem("email"));
-  //   setToken(localStorage.getItem("token"));
-  //   setUserId(localStorage.getItem("userId"));
-
-  //   console.log(`${userId}`);
-  //   console.log(`${BaseURL}/user/${userId}`);
-  //   // ${BaseURL}/user/${userId}
-  //   // const headers = {
-  //   //   'Content-Type': 'application/json',
-  //   //   'X-Auth-Token': `${localStorage.getItem("token")}`,
-  //   // };
-  //   // axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-  //     axios.get(`${BaseURL}/user/${userId}`).then((response) => {
-  //     console.log(response);
-  //     const result = response.data;
-
-  //     // console.log(`${BaseURL}/user/${localStorage.getItem("userId")}`)
-  //     if (result.success) {
-  //       console.log(result.user);
-  //       setCode(result.user.referralCode);
-  //     }
-  //   });
-
-  //   // axios.get(`${BaseURL}/user`).then((response) => {
-  //   //   console.log(response);
-
-  //   //   // axios.get(`/user`).then((response) => {
-  //   //   const result = response.data;
-  //   //   //   console.log(result);
-  //   //   if (result.success) {
-  //   //     // console.log("user");
-  //   //     // console.log(result.users);
-  //   //   }
-  //   // });
-  //   // const config = {
-  //   //   headers: {
-  //   //     "Content-type": "application/json",
-  //   //     Authorization: `Bearer ${localStorage.getItem("token")}`,
-  //   //   },
-  //   // };
-  //   // axios.get(`${BaseURL}/referred`, config).then((response) => {
-  //   //   // axios.get(`/referred`, config).then((response) => {
-  //   //   const result = response.data;
-  //   //   //   console.log(result);
-  //   //   if (result.success) {
-  //   //     let accounts = [];
-  //   //     result.accounts.map((account) => {
-  //   //       if (account.active) {
-  //   //         return accounts.push(account);
-  //   //       } else console.log("not referred");
-  //   //     });
-  //   //     console.log(accounts);
-  //   //     console.log(result.accounts);
-  //   //     setPoint(100 + accounts.length * 30);
-  //   //     setReferred(accounts.length);
-  //   //   }
-  //   // });
-  // });
-
+console.log(totalPoint)
+  
   return (
-    <LayoutDefault>
-      <div className="Row">
-        User Dashboard
+    <UserLayout>
+      <div className="Row RowPadding">
+        <p style={{marginBottom:"10px"}}>
+        Welcome, <h4 style={{display:"inline"}}>{user?.user?.name || "Anon"}</h4> 
+
+        </p>
         <div className={Classes.UserContainer}>
           <div className={Classes.UserCard}>
             <div>
               <div className={Classes.UserCardRow}>
                 <FontAwesomeIcon icon={faUserCheck} />
                 <div className="circularContainer">
-                  <Pie point={point}></Pie>
+                  <Pie point={totalPoint}></Pie>
                 </div>
               </div>
-              <Button className={Classes.Button} disabled>
-                <Link to={"/"}>Redeem</Link>
+              <Button className={Classes.Button} disabled={totalPoint >= 125 ? false : true}>
+                <Link to={totalPoint >= 125 ? "/" : "#"}>
+                
+                  Redeem
+                 
+                  </Link>
               </Button>
             </div>
           </div>
@@ -145,21 +68,21 @@ const User = () => {
             </div>
             <div className={Classes.UserCodeRow}>
               <div className={Classes.UserCode}>
-                <p ><a href={`https://wazodeals.com/register?user=${code}`}> https://wazodeals.com/register?user={code}</a></p>
+                <p ><a href={`https://wazodeals.com/signup?user=${user?.user?.referralCode}`}> https://wazodeals.com/signup?user={user?.user?.referralCode}</a></p>
               </div>
               <Button className={Classes.Button} onClick={CopyToClipboard}>
                 {copied ? "Copied!" : "Copy"}
               </Button>
             </div>
             <div style={{ marginTop: "20px", textAlign: "left" }}>
-              <h3>Referred : {referred} Persons</h3>
+              <h3>Referred : {user?.user?.referrals.length} Persons</h3>
             </div>
           </div>
 
           <div className={Classes.UserColumn}>History Review</div>
         </div>
       </div>
-    </LayoutDefault>
+    </UserLayout>
   );
 };
 

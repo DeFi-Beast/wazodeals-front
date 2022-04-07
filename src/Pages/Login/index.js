@@ -18,7 +18,7 @@ import useStyles from "../../Components/LoginFiles/styles";
 import Input from "../../Components/LoginFiles/Input";
 import Icon from "../../Components/LoginFiles/icon";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation,useParams } from "react-router-dom";
 import { usersignup, usersignin } from "../../actions/auth";
 import UserLayout from "../../Components/Layouts/UserLayout";
 import FileBase from "react-file-base64";
@@ -36,6 +36,10 @@ const initialState = {
   referrer: "",
 };
 
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const classes = useStyles();
@@ -43,6 +47,30 @@ const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
   const isLoading = useSelector(state => state.auth.isLoading);
+  const location = useLocation()
+  
+
+  const query = useQuery();
+
+  // const referrer = query.get("user");
+
+  useEffect(() => {
+    setFormData({ ...formData, referrer: query.get("user") });
+  
+  }, [])
+  
+
+  console.log(location.pathname)
+
+  useEffect(() => {
+    if(location.pathname === "/signup") {
+      setIsSignup(true)
+    }
+    else
+    setIsSignup(false)
+    
+  }, [location])
+  
 
   console.log(isLoading)
   const dispatch = useDispatch();
@@ -177,6 +205,7 @@ const Login = () => {
                     label="Referrer Code"
                     handleChange={handleChange}
                     type="text"
+                    value={formData.referrer}
                   />
                 )}
                 {/* {isSignup && (
@@ -223,7 +252,7 @@ const Login = () => {
             onFailure={googleFailure}
             cookiePolicy="single_host_origin"
           /> */}
-              <Grid container justifyContent="flex-end">
+              <Grid container justifyContent="space-between">
                 <Grid item>
                   <Button onClick={switchMode} >
                     <Link to={`/${isSignup ? "login" : "signup"}`}>
@@ -233,6 +262,14 @@ const Login = () => {
                     </Link>
                   </Button>
                 </Grid>
+                {!isSignup  && <Grid item>
+                  <Button onClick={switchMode} >
+                    <Link to="/forgot-password">
+                     
+                        Forgot Password
+                    </Link>
+                  </Button>
+                </Grid>}
               </Grid>
             </form>
           </Paper>
