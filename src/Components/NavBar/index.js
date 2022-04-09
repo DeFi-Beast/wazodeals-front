@@ -12,35 +12,42 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LOG_OUT } from "../../constants";
 import { useNavigate } from "react-router-dom";
-
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import "./styles.css";
 
 const NavBar = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const cart= useSelector((state) => state.addToCart.cart);
 
-  const user = JSON.parse(localStorage.getItem("profile"))
+  const user = JSON.parse(localStorage.getItem("profile"));
 
-  console.log(user)
+  console.log(user);
 
   const handleLogout = (e) => {
     e.preventDefault();
-    dispatch({type:LOG_OUT})
-    navigate("/")
+    dispatch({ type: LOG_OUT });
+    navigate("/");
   };
 
   return (
     <Row>
       <RowWrapper className="Row">
         <div className="ann-bar">
-          <p style={{textAlign:"justify"}}>Site still in Beta Phase,Join our Referral contest for a grand prize of #15,000 naira and also every point earned is equivalent to #20 naira</p>
+          <p style={{ textAlign: "justify" }}>
+            Site still in Beta Phase,Join our Referral contest for a grand prize
+            of #15,000 naira and also every point earned is equivalent to #20
+            naira
+          </p>
         </div>
         <Logo>Hi</Logo>
+
         <Div>
           <StyledInput
             className="hide-input"
             placeholder="Try Searching.."
-          ></StyledInput>{user ?
-         (
+          ></StyledInput>
+          {user ? (
             <div>
               <Link to={`/user`}>
                 <FontAwesomeIcon
@@ -63,6 +70,12 @@ const NavBar = () => {
               Login
             </Button>
           )}
+          <Link to="/cart" className="cartContainer">
+            <FontAwesomeIcon className="cartIcon" icon={faCartPlus} />
+            <div className="cartNumber">
+              <p>{cart.length || 0}</p>
+            </div>
+          </Link>
         </Div>
       </RowWrapper>
     </Row>

@@ -1,28 +1,34 @@
-import { FETCH_ALL, FETCH_DISCOUNT, FETCH_ALL_MERCHANTS } from "../constants";
+import { FETCH_ALL, FETCH_DISCOUNT, FETCH_ALL_MERCHANTS, START_LOADING, END_LOADING } from "../constants";
 import * as api from '../api'
 
-export const getAllDiscounts = ()=> async(dispatch) => {
+export const getAllDiscounts = (page)=> async(dispatch) => {
 
     try {
+        dispatch({type:START_LOADING})
 
-        const {data} = await api.fetchAllDiscounts({})
+        const {data} = await api.fetchAllDiscounts(page)
 
         dispatch({type:FETCH_ALL, payload:data})
+
+        dispatch({type:END_LOADING})
+
         
     } catch (error) {
         
     }
 
 }
-export const getAllDiscountsById = (id)=> async(dispatch) => {
+export const getDiscountById = (id)=> async(dispatch) => {
 
     try {
+        dispatch({type:START_LOADING})
 
-        const {data} = await api.fetchAllDiscountsById(id)
+        const {data} = await api.fetchDiscountById(id)
+        dispatch({type:END_LOADING})
 
         console.log(data)
 
-        // dispatch({type:FETCH_ALL, payload:data})
+        dispatch({type:FETCH_DISCOUNT, payload:data})
         
     } catch (error) {
         

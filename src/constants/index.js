@@ -11,6 +11,7 @@ export const NOTIFY = 'NOTIFY'
 
 export const START_LOADING = 'START_LOADING'
 export const END_LOADING = 'END_LOADING'
+export const ADD_TO_CART = 'ADD_TO_CART'
 
 
 export const discounts = [5, 10, 15, 20, 25];

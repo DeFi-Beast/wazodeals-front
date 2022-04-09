@@ -1,11 +1,22 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
+import { minHeight } from '@mui/system';
 
 export default makeStyles((theme) => ({
   gridContainer: {
     margin:'2px',
     marginBottom:'20px',
-    width:'100%'
+    width:'100%',
+    minHeight:'400px'
+  },
+  productContainer: {
+    margin:'2px',
+    marginBottom:'20px',
+    width:'100%',
+    minHeight:'320px'
+  },
+  whiteBg:{
+    background:"white"
   },
   overlay2: {
     position: 'absolute',
@@ -40,6 +51,9 @@ export default makeStyles((theme) => ({
   userName: {
     display: 'flex',
     alignItems: 'center',
+  },
+  productLinksContainer :{
+
   },
   brandContainer: {
     display: 'flex',

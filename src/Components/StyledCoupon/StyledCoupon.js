@@ -6,10 +6,13 @@ export const StyledDiv = styled.div`
 //   min-width: ${(props) => (props.type === "deals" ? "0px" : "160px")};
   box-shadow: 3px 3px 6px #00000029;
   border-radius: 0px 0px 5px 5px;
+  height:100%;
+
 
   & div.StyledImgWrapper {
     max-width: 100%;
     position: relative;
+  
 
     &::after {
       content: "";
@@ -31,7 +34,7 @@ export const StyledDiv = styled.div`
 export const Div = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 5px;
+  padding: 20px 10px;
   flex-grow: 1;
   justify-content: space-between;
   position: relative;

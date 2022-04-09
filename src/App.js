@@ -26,9 +26,13 @@ import Merchant from "./Pages/Merchants/Merchant";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllMerchants, getAllDiscounts } from "./actions";
+import Discount from "./Pages/Discounts/Discount";
 import Discounts from "./Pages/Discounts";
+import Cart from "./Pages/Cart";
 import Dashboard from "../src/Components/Dashboard/Dashboard";
+import Deals from "./Pages/Deals"
 import { ToastContainer, toast } from 'react-toastify';
+
 
   import 'react-toastify/dist/ReactToastify.css';
 
@@ -36,35 +40,9 @@ const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllMerchants());
-    dispatch(getAllDiscounts());
+    dispatch(getAllDiscounts(1));
   }, []);
   const user = JSON.parse(localStorage.getItem("profile"));
-
-  // const notify = () => toast("Wow so easy !");
-  const notify = () => {
-    toast("Default Notification !");
-
-    toast.success("Success Notification !", {
-      position: toast.POSITION.TOP_CENTER
-    });
-
-    toast.error("Error Notification !", {
-      position: toast.POSITION.TOP_LEFT
-    });
-
-    toast.warn("Warning Notification !", {
-      position: toast.POSITION.BOTTOM_LEFT
-    });
-
-    toast.info("Info Notification !", {
-      position: toast.POSITION.BOTTOM_CENTER
-    });
-
-    toast("Custom Style Notification with css class!", {
-      position: toast.POSITION.BOTTOM_RIGHT,
-      className: 'foo-bar'
-    });
-  };
 
   return (
     <Router>
@@ -85,9 +63,11 @@ const App = () => {
           <Route path="/activate" element={<Activate />}></Route>
           <Route path="/discounts">
             <Route index element={<Discounts />} />
+            <Route path=":id" element={<Discount />} />
           </Route>
 
           <Route path="/user" element={<Users />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/user/:id" element={<User />} />
           <Route path="/forgot-password" element={<Forgot />} />
           <Route path="/reset-password" element={<Reset />} />
@@ -120,6 +100,17 @@ const App = () => {
 
             <Route path="login" element={<MerchantForm />} />
             <Route path="become-a-merchant" element={<MerchantForm />} />
+          </Route>
+          <Route path="/deals">
+            <Route
+              index
+              element={<Deals/>
+              }
+            />
+            <Route path="discounts" element={<Deals />} />
+
+            <Route path="coupons" element={<Deals/>} />
+           
           </Route>
           <Route path="/about-us" element={<About />} />
           <Route path="/faq" element={<Faq />} />

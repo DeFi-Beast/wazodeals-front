@@ -1,0 +1,12 @@
+.cartContainer a{
+    /* height: 100vh; */
+    display: block;
+    color: red;
+    
+}
+.cartContainer p {
+    text-align: left;
+}
+table {
+    width: 100%;
+}

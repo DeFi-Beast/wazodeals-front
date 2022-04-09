@@ -1,9 +1,10 @@
+
 .App {
   font-family: 'Poppins', sans-serif;
 }
 .Row {
-  width: 85%;
-  margin: 0 auto;
+  width: 85% !important;
+  margin: 0 auto !important;
 }
 .RowPadding {
   padding: 50px 0px 80px;
@@ -19,6 +20,9 @@ li {
 
 button {
   font-size: 14px;
+}
+.product-btn-color a {
+  color: #FF0076;
 }
 
 p {

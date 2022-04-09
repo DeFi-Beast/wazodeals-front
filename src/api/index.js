@@ -4,8 +4,8 @@ import axios from "axios";
 const API = axios.create({baseURL:'https://wazodeal.herokuapp.com'})
 
 
-export const fetchAllDiscounts =() => API.get('/discounts')
-export const fetchAllDiscountsById =(id) => API.get(`/discounts/merchants/${id}`)
+export const fetchAllDiscounts =(page) => API.get(`/discounts?page=${page}`)
+export const fetchDiscountById =(id) => API.get(`/discounts/${id}`)
 export const updateDiscount =(id, discount) => API.patch(`/discounts/${id}`, discount)
 export const fetchAllMerchants =() => API.get('/merchant')
 // export const fetchDiscount = (id) =>  API.get(`/discount/${id}`)
