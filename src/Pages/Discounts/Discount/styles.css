@@ -28,3 +28,8 @@
     color: #FF0076;
 
 }
+.chipLinks {
+    color: white !important;
+    background-color: #FF0076 !important;
+    border-radius: 23px !important;
+}

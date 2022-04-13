@@ -16,7 +16,12 @@ ul {
 li {
   list-style-type: none;
 }
-
+.containerpadding {
+  padding-top: 100px;
+}
+.dealscontainerpadding {
+  padding-top: 70px;
+}
 
 button {
   font-size: 14px;

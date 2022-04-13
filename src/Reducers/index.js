@@ -4,7 +4,7 @@ import discounts from "./discountReducers";
 import merchants from "./merchantReducers";
 import auth from "./authReducers";
 import notify from "./notifyReducers"
-import addToCart from "./addToCartReducers"
+import addToCart from "./CartReducers"
 
 const reducers = combineReducers({
     discounts, merchants, auth, notify, addToCart

@@ -18,7 +18,7 @@ import "./styles.css";
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const cart= useSelector((state) => state.addToCart.cart);
+  const cart= JSON.parse(localStorage.getItem("cart"));
 
   const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -31,7 +31,7 @@ const NavBar = () => {
   };
 
   return (
-    <Row>
+    <Row className="navbar">
       <RowWrapper className="Row">
         <div className="ann-bar">
           <p style={{ textAlign: "justify" }}>

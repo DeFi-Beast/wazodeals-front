@@ -101,13 +101,23 @@ const App = () => {
             <Route path="login" element={<MerchantForm />} />
             <Route path="become-a-merchant" element={<MerchantForm />} />
           </Route>
+          
+
           <Route path="/deals">
             <Route
               index
               element={<Deals/>
               }
             />
-            <Route path="discounts" element={<Deals />} />
+            <Route path="discounts"  >
+            <Route
+              index
+              element={<Deals/>
+              }
+            />
+          <Route path="search" exact element={<Deals/>}/>
+
+              </Route>
 
             <Route path="coupons" element={<Deals/>} />
            

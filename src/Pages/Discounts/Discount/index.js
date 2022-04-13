@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 import { getDiscountById } from "../../../actions";
 import UserLayout from "../../../Components/Layouts/UserLayout";
 import { Grid, Typography, Chip } from "@mui/material";
+import BreadCrumbs from "../../../Components/BreadCrumbs";
+
 
 import "./styles.css";
 
@@ -13,19 +15,20 @@ const Discount = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
   const { discount } = useSelector((state) => state.discounts.discount);
-  const cart= useSelector((state) => state.addToCart.cart);
   const files = discount?.selectedFiles.split("|");
   const { merchants } = useSelector((state) => state.merchants);
   const merchant = merchants?.merchant?.find(
     (merchant) => merchant?._id === discount?.merchant
   );
-  const categories = discount?.categories.split(",");
- console.log(cart)
- console.log(cart.length)
-  // console.log(files[0])
-  console.log(discount);
-  console.log(merchant);
-  console.log(categories);
+  const categories = discount?.categories;
+ const cart = JSON.parse(localStorage.getItem("cart"));
+ const [cartText, setCartText] = useState(false)
+let activeMerchant = merchant?.merchantName || merchant?.merchant
+
+
+localStorage.setItem("merchant", activeMerchant)
+
+
   useEffect(() => {
     dispatch(getDiscountById(id));
   }, [id]);
@@ -39,10 +42,19 @@ const Discount = () => {
       dispatch({type:'ADD_TO_CART', payload:discount})
   }
 
+  useEffect(() => {
+    const check = cart.find(
+      (cart) => cart._id === discount?._id
+    );
+    if(check){
+      setCartText(true)
+    }
+  }, [cart])
   return (
     <UserLayout>
-      <div className="Row RowPadding">
-        <Grid container>
+      <div className="Row RowPadding containerpadding">
+        <BreadCrumbs/>
+        <Grid container mt={5}>
           <Grid container sm={6} xs={10} m="0 auto">
             <Grid item>
               <img src={files?.[selected]} alt="image" />
@@ -88,13 +100,14 @@ const Discount = () => {
                   href={`/${category}`}
                   variant="outlined"
                   clickable
+                  className="chipLinks"
                 />
               ))}
             </Grid>
             <Grid mt={3}>
               <h4>Description</h4>
               <Grid pt={3}>
-                <Typography>{discount?.description}</Typography>
+                <Typography style={{textTransform:"capitalize"}}>{discount?.description}</Typography>
               </Grid>
               
             </Grid>
@@ -103,7 +116,8 @@ const Discount = () => {
               <Grid container  sm={6} className="product-cart" >
                 <Link to='#' onClick={()=>handleAddToCart(discount)}>
                   
-                  Add To Cart
+                {cartText ? <span style={{color:'black'}}>Added</span> : "Add To Cart"}
+
                   </Link>
               </Grid>
               

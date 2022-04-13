@@ -1,5 +1,5 @@
 {
-  "proxy": "https://wazodeal.herokuapp.com",
+  "proxy": "http://localhost:5000",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,

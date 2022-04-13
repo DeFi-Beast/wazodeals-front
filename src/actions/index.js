@@ -35,6 +35,25 @@ export const getDiscountById = (id)=> async(dispatch) => {
     }
 
 }
+export const getDiscountsBySearch = (searchQuery)=> async(dispatch) => {
+    
+    try {
+        dispatch({type:START_LOADING})
+
+        const {data} = await api.fetchDiscountsBySearch(searchQuery)
+
+        
+        dispatch({type:END_LOADING})
+
+
+        dispatch({type:FETCH_ALL, payload:data})
+       
+        
+    } catch (error) {
+        
+    }
+
+}
 export const updateDiscount = (id, discount)=> async(dispatch) => {
 
     try {

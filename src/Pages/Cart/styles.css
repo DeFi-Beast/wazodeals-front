@@ -3,6 +3,7 @@
     display: block;
     color: red;
     
+    
 }
 .cartContainer p {
     text-align: left;
@@ -10,3 +11,45 @@
 table {
     width: 100%;
 }
+td {
+    text-align: center;
+}
+
+.cart-row> td:first-child:before{
+    content:url('../../Assets/circle.svg');
+    height: 30px;
+    width: 30px;
+    /* position: absolute; */
+    display: block;
+    text-align: center;
+    cursor: pointer;
+
+}
+.cart-row td {
+    padding: 30px;
+    
+}
+.cart-row td.description{
+    text-align: left;
+    text-transform: capitalize;
+}
+.cart-total {
+    font-weight: 600;
+    font-size: 20px;
+} 
+.cart-checkout {
+    background:#FF0076;
+    padding: 20px;
+    color: white;
+}
+ @media only screen and (max-width:600px) {
+    .cartContainer a{
+   
+        width: 600px;
+    
+        
+    }
+    .scrollContainer {
+        overflow: scroll;
+    }
+ }
