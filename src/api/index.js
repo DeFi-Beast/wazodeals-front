@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API = axios.create({baseURL:'http://localhost:5000'})
-// const API = axios.create({baseURL:'https://wazodeal.herokuapp.com'})
+// const API = axios.create({baseURL:'http://localhost:5000'})
+const API = axios.create({baseURL:'https://wazodeal.herokuapp.com'})
 
 
 export const fetchAllDiscounts =(page) => API.get(`/discounts?page=${page}`)
