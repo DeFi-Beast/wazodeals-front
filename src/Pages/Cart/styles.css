@@ -63,12 +63,8 @@ td {
 }
 
 @media only screen and (max-width: 600px) {
-  .cartContainer a {
-    width: 600px;
-  }
-  .scrollContainer {
-    overflow: scroll;
-  }
+ 
+  
   .cart-resp {
     padding-top: 20px;
   }
