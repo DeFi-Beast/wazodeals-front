@@ -71,7 +71,7 @@ const Cart = () => {
    
     dispatch({ type: "CART_QTY_PLUS", payload: { id: id } });
   };
-  const handleQtyMinus = (id, index) => {
+  const handleQtyMinus = (qty,id, index) => {
     if (qty <= 1) {
       return;
     }
@@ -79,7 +79,8 @@ const Cart = () => {
     const refCart = cart?.find((cart) => cart._id === id);
     setRefCart(refCart);
  
-    refCart.qty -=1 ;
+    refCart.qty = Number(refCart.qty) - 1;
+
     console.log(refCart.qty)
     console.log(refCart);
 
@@ -250,7 +251,7 @@ const Cart = () => {
                             justifyContent="center"
                             alignItems="center"
                           >
-                            <span className="cart-qty-btn cart-qty-decrease" onClick={() => handleQtyMinus(item._id, index)}>
+                            <span className="cart-qty-btn cart-qty-decrease" onClick={() => handleQtyMinus(item.qty,item._id, index)}>
                               {" "}
                               -{" "}
                             </span>
@@ -293,9 +294,9 @@ const Cart = () => {
                           ) : (
                             ""
                           )}
-                          {Number(
-                            item.price - (item.price * item.discount) / 100
-                          ).toLocaleString("en-US")}
+                          {(Number(
+                            (item.price - (item.price * item.discount) / 100) * Number(item.qty)
+                          ).toLocaleString("en-US")) }
                         </Grid>
                       </Grid>
                     </Grid>
