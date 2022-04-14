@@ -73,7 +73,7 @@ const NavBar = () => {
           <Link to="/cart" className="cartContainer">
             <FontAwesomeIcon className="cartIcon" icon={faCartPlus} />
             <div className="cartNumber">
-              <p>{cart.length || 0}</p>
+              <p>{cart?.length || 0}</p>
             </div>
           </Link>
         </Div>

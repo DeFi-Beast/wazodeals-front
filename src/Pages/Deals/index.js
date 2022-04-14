@@ -123,23 +123,24 @@ console.log(selectedMerchant)
               {Location.pathname=== "/deals/discounts/search" ? (
                 <Grid container direction='row'>
                   <Grid>
-                  <h4 mb={5}>
+                  <h1 mb={5}>
                   {discounts?.discounts?.length} results found for{" "} 
-                </h4>
+                </h1>
                   </Grid>
                 
-                  <Grid style={{display:"inline"}}>(
+                  <h1 style={{display:"inline"}}>(
                   {pathMerchant ? <>Merchant= {selectedMerchant?.merchant} </> : ""}
                   {discount && <>Discount= {discount},</>}
                   {category && <>Category= {category}</>})
-                  </Grid>
+                  </h1>
                 </Grid>
               
               ) : (
-                <Typography mb={5}>
-                  Showing {discounts?.discounts?.length} of {discounts?.total}{" "}
-                  results
-                </Typography>
+               
+                  <h1 >  Showing {discounts?.discounts?.length} of {discounts?.total}{" "}
+                  results</h1>
+                
+                
               )}
             </Grid>
 
@@ -148,6 +149,7 @@ console.log(selectedMerchant)
                 container
                 className="productContainer"
                 justifyContent="space-between"
+                mt={3}
               >
                 {discounts?.discounts?.map((discount) => (
                   <StyledCoupon discount={discount} />

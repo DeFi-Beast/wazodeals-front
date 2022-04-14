@@ -24,6 +24,12 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
     (merchant) => merchant?._id === discount?.merchant
   );
   const merchantArr = merchant?.address.split(",");
+
+  console.log("=========================merchantArr=============")
+  console.log(merchant)
+  console.log(merchantArr)
+  console.log("=========================merchantArr=============")
+
   const user = JSON.parse(localStorage.getItem("profile"));
   const [options, setOptions] = useState(false);
   const [cartText, setCartText] = useState(false);
@@ -46,7 +52,7 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
   }, [Location]);
 
   useEffect(() => {
-    const check = cart.find((cart) => cart._id === discount?._id);
+    const check = cart?.find((cart) => cart._id === discount?._id);
     if (check) {
       setCartText(true);
     }

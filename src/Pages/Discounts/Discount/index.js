@@ -43,13 +43,16 @@ localStorage.setItem("merchant", activeMerchant)
   }
 
   useEffect(() => {
-    const check = cart.find(
-      (cart) => cart._id === discount?._id
-    );
-    if(check){
-      setCartText(true)
+    if(cart?.length > 0){
+      const check = cart?.find(
+        (cart) => cart._id === discount?._id
+      );
+      if(check){
+        setCartText(true)
+      }
     }
-  }, [cart])
+    
+  }, [id])
   return (
     <UserLayout>
       <div className="Row RowPadding containerpadding">
