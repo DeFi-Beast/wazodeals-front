@@ -48,8 +48,8 @@ const NavBar = () => {
             placeholder="Try Searching.."
           ></StyledInput>
           {user ? (
-            <div>
-              <Link to={`/user`}>
+            <div style={{display:"flex" , alignItems:"center"}}>
+              <Link to={`/user/${user?.user?._id}`}>
                 <FontAwesomeIcon
                   style={{ color: "white" }}
                   icon={faUserAlt}
@@ -61,6 +61,7 @@ const NavBar = () => {
                 bg="white"
                 log="logout"
                 onClick={handleLogout}
+                className="LogoutBtn"
               >
                 Logout
               </Button>

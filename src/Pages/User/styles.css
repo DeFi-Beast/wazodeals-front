@@ -1,0 +1,23 @@
+td {
+    font-size: 12px;
+}
+.user-profile span{
+    color: #808080b3;
+}
+.redeemBtn {
+    color: white;
+    background-color: red;
+}
+.disabledBtn {
+    border: 1px solid gray !important;
+    /* color: gray !important; */
+
+}
+@media only screen and (max-width:425px){
+    .css-heg063-MuiTabs-flexContainer {
+        overflow: scroll !important;
+    }
+    .modal {
+        width: 250px !important;
+    }
+}

@@ -43,14 +43,14 @@ const Cart = () => {
 
   console.log(screenSize);
   const handleQty = (e, id, index) => {
-    let refCart = null
+    let refCart = null;
     if (e.target.value <= 0) {
-      return refCart.qty = 1;
+      return (refCart.qty = 1);
     }
     setIndex(index);
     refCart = cart?.find((cart) => cart._id === id);
     setRefCart(refCart);
- 
+
     refCart.qty = e.target.value;
     console.log(refCart);
 
@@ -58,36 +58,31 @@ const Cart = () => {
     console.log(value, id);
     dispatch({ type: "CART_QTY", payload: { value: value, id: id } });
   };
-  
+
   const handleQtyPlus = (id, index) => {
-    
     setIndex(index);
     let refCart = cart?.find((cart) => cart._id === id);
     setRefCart(refCart);
- 
-    refCart.qty = Number(refCart.qty) + 1;
-    
 
-   
+    refCart.qty = Number(refCart.qty) + 1;
+
     dispatch({ type: "CART_QTY_PLUS", payload: { id: id } });
   };
-  const handleQtyMinus = (qty,id, index) => {
+  const handleQtyMinus = (qty, id, index) => {
     if (qty <= 1) {
       return;
     }
     setIndex(index);
     const refCart = cart?.find((cart) => cart._id === id);
     setRefCart(refCart);
- 
+
     refCart.qty = Number(refCart.qty) - 1;
 
-    console.log(refCart.qty)
+    console.log(refCart.qty);
     console.log(refCart);
 
-  
     dispatch({ type: "CART_QTY_MINUS", payload: { id: id } });
   };
-  
 
   return (
     <UserLayout>
@@ -124,7 +119,7 @@ const Cart = () => {
                       <Grid
                         bgcolor="#80808087"
                         py={2}
-                        md={0.5}
+                        md={0.2}
                         sm={1}
                         textAlign="center"
                       ></Grid>
@@ -144,7 +139,7 @@ const Cart = () => {
                       ml={1}
                       py={2}
                       bgcolor="#80808087"
-                      md={6.5}
+                      md={6}
                       sm={9}
                       xs={9.2}
                       textAlign="center"
@@ -197,7 +192,7 @@ const Cart = () => {
                         justifyContent="center"
                         textAlign="center"
                         className="cart-row-remove-btn"
-                        md={0.5}
+                        md={0.2}
                         sm={1}
                         xs={12}
                         sx={{ justifyContent: "right" }}
@@ -206,13 +201,7 @@ const Cart = () => {
                       <Grid ml={1} textAlign="center" md={1} sm={1} xs={2}>
                         {index + 1}
                       </Grid>
-                      <Grid
-                        ml={1}
-                        md={6.5}
-                        sm={8}
-                        xs={9}
-                        className="description"
-                      >
+                      <Grid ml={1} md={6} sm={8} xs={9} className="description">
                         {item.description} &nbsp;
                         <span
                           style={{
@@ -240,7 +229,7 @@ const Cart = () => {
                       >
                         <Grid>
                           {screenSize.dynamicWidth < 900 ? (
-                            <Grid p={1} bgcolor="#80808087" color="white">
+                            <Grid my={1} p={1} bgcolor="#80808087" color="white">
                               Qty
                             </Grid>
                           ) : (
@@ -251,7 +240,12 @@ const Cart = () => {
                             justifyContent="center"
                             alignItems="center"
                           >
-                            <span className="cart-qty-btn cart-qty-decrease" onClick={() => handleQtyMinus(item.qty,item._id, index)}>
+                            <span
+                              className="cart-qty-btn cart-qty-decrease"
+                              onClick={() =>
+                                handleQtyMinus(item.qty, item._id, index)
+                              }
+                            >
                               {" "}
                               -{" "}
                             </span>
@@ -269,7 +263,10 @@ const Cart = () => {
                                   : item.qty
                               }
                             />
-                            <span className="cart-qty-btn cart-qty-decrease" onClick={() => handleQtyPlus(item._id, index)}>
+                            <span
+                              className="cart-qty-btn cart-qty-decrease"
+                              onClick={() => handleQtyPlus(item._id, index)}
+                            >
                               {" "}
                               +{" "}
                             </span>
@@ -279,24 +276,24 @@ const Cart = () => {
                       <Grid
                         container
                         flexDirection="column"
-              
                         alignItems={"center"}
                         xs={3}
                         textAlign="center"
                         md={2}
                         className="cart-resp"
                       >
-                        <Grid>
+                        <Grid style={{fontWeight:"600"}}>
                           {screenSize.dynamicWidth < 900 ? (
-                            <Grid p={1} bgcolor="#80808087" color="white">
+                            <Grid my={1} p={1} bgcolor="#80808087" color="white">
                               Price
                             </Grid>
                           ) : (
                             ""
                           )}
-                          {(Number(
-                            (item.price - (item.price * item.discount) / 100) * Number(item.qty)
-                          ).toLocaleString("en-US")) }
+                          {Number(
+                            (item.price - (item.price * item.discount) / 100) *
+                              Number(item.qty)
+                          ).toLocaleString("en-US")}
                         </Grid>
                       </Grid>
                     </Grid>

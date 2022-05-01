@@ -17,7 +17,9 @@ const Input = ({
   multiline,
   twothird,
   required,
-  value
+  value, 
+  disabled, 
+  readonly
 
 }) => {
   return (
@@ -27,6 +29,8 @@ const Input = ({
         onChange={handleChange}
         variant="outlined"
         required={required}
+        readonly={readonly}
+        disabled={disabled}
         fullWidth
         label={label}
         autoFocus={autoFocus}

@@ -168,7 +168,7 @@ const Login = () => {
                     <Input
                       name="phone"
                       label="Mobile Phone"
-                      handleChange={handleChange}
+                      onChange={handleChange}
                       type="tel"
                       half
                       quarter

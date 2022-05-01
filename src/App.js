@@ -18,7 +18,7 @@ import Reset from "./Pages/Reset";
 // import Discounts from "./Pages/Discounts";
 import MerchantForm from "./Pages/Become-A-Merchant";
 import Merchants from "./Pages/Merchants";
-import About from "./Pages/AboutUs";
+
 import Faq from "./Pages/Faq";
 import Terms from "./Pages/terms";
 import Privacy from "./Pages/privacy";
@@ -35,14 +35,24 @@ import { ToastContainer, toast } from 'react-toastify';
 
 
   import 'react-toastify/dist/ReactToastify.css';
+import { createWallet } from "./actions/wallets";
 
 const App = () => {
+  const user = JSON.parse(localStorage.getItem("profile"));
+  
+  const wallet = {
+    firstName:"test",
+    lastName:"test",
+    email:user?.user?.email,
+  }
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllMerchants());
     dispatch(getAllDiscounts(1));
+    if(user) {
+    dispatch(createWallet(wallet));
+    }
   }, []);
-  const user = JSON.parse(localStorage.getItem("profile"));
 
   return (
     <Router>
@@ -122,7 +132,7 @@ const App = () => {
             <Route path="coupons" element={<Deals/>} />
            
           </Route>
-          <Route path="/about-us" element={<About />} />
+          
           <Route path="/faq" element={<Faq />} />
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/terms-and-condition" element={<Terms />} />

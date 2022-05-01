@@ -19,7 +19,7 @@
 }
 
 input,  button {
-    border: 1px solid red;
+    /* border: 1px solid red; */
     max-width: 100%;
     border-radius: 5px;
     outline: none;

@@ -1,9 +1,9 @@
 .UserContainer {
     display: flex;
     /* align-items: center; */
-    justify-content: space-between;
+    justify-content: center;
     text-align: center;
-    flex-direction: column;
+    /* flex-direction: column; */
     flex-wrap: wrap;
     align-items: center;
 }
@@ -72,7 +72,7 @@ h4 {
 }
 .UserCard a {
     text-decoration: none;
-    color: white;
+    /* color: white; */
     
 }
 .UserCard a:hover{
@@ -96,7 +96,7 @@ h4 {
     .UserColumn {
         margin-top: 20px;
     }
-    .UserCard{width: 50%;}
+    .UserCard{width: 40%;}
     .UserCodeRow {
         flex-direction: row;
     }
@@ -108,10 +108,17 @@ h4 {
     }
 
 }
+@media only screen and (min-width:700px){
+    .userContainer {
+    justify-content: space-between;
+
+    }
+
+}
 @media only screen and (min-width:1000px){
-    .UserCard{width: 30%;}
+    .UserCard{width: 25%;}
     .UserCardMargin {
-    margin: 0px 40px;
+    margin: 0px 20px;
 }
 .UserContainer{flex-direction: row; align-items: center;}
 }
