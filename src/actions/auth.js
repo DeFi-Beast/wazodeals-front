@@ -11,7 +11,8 @@ export const usersignin = (user, navigate) => async(dispatch) => {
     
         dispatch({type:SIGN_IN, data:data})
         dispatch({type:END_LOADING})
-        data.success && navigate(`/user/${data.user._id}`)
+        data.success && navigate(`/`)
+        // data.success && navigate(`/user/${data.user._id}`)
         data.success && dispatch( toast.success(<>{data.message}</>))
         data.error && dispatch( toast.error(<>{data.message}</>))
 
@@ -111,6 +112,7 @@ export const merchantsignin = (merchant, navigate) => async(dispatch) => {
     }
     
 }
+
 export const merchantsignup = (merchant, navigate) => async(dispatch) => {
 
     try {

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,38 +27,90 @@ import Merchant from "./Pages/Merchants/Merchant";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getAllMerchants, getAllDiscounts } from "./actions";
+import { getAllCoupons } from "./actions/coupon";
+import { getReceiptById } from "./actions/receipts";
 import Discount from "./Pages/Discounts/Discount";
 import Discounts from "./Pages/Discounts";
 import Cart from "./Pages/Cart";
 import Dashboard from "../src/Components/Dashboard/Dashboard";
-import Deals from "./Pages/Deals"
-import { ToastContainer, toast } from 'react-toastify';
-
-
-  import 'react-toastify/dist/ReactToastify.css';
-import { createWallet } from "./actions/wallets";
+import Deals from "./Pages/Deals";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
+import { updateUserTotalPoint } from "./actions/user";
 
 const App = () => {
   const user = JSON.parse(localStorage.getItem("profile"));
-  
-  const wallet = {
-    firstName:"test",
-    lastName:"test",
-    email:user?.user?.email,
-  }
+  const { receipt } = useSelector((state) => state.receipts);
+
+  let [newReceipts, setNewReceipts] = useState(null);
+  let [receiptTotal, setReceiptTotal] = useState(null);
+  let [newReferrals, setNewReferrals] = useState(null);
+
+  console.log(receipt);
+
+  useEffect(() => {
+    const receiptTotal = receipt?.receipt?.filter((receipt) => {
+      return (
+        new Date(receipt.createdAt).getTime() >=
+        new Date(user?.user?.redeemDate).getTime()
+      );
+    }).reduce(function (previousValue, currentValue) {
+      return (
+        previousValue +
+        currentValue.point 
+      )
+    }, 0);
+    return setReceiptTotal(receiptTotal)
+
+    // new Date(receipt.createdAt).getTime() >= new Date(user?.user?.redeemDate).getTime()
+  }, [user]);
+  // useEffect(() => {
+  //   receiptTotal = receipt?.receipt?.reduce(function (
+  //     previousValue,
+  //     currentValue
+  //   ) {
+  //     return previousValue + currentValue.point;
+  //   },
+  //   0);
+  //   return setReceiptTotal(receiptTotal);
+  // }, [user]);
+
+  console.log(receiptTotal);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllMerchants());
     dispatch(getAllDiscounts(1));
-    if(user) {
-    dispatch(createWallet(wallet));
-    }
+    dispatch(getAllCoupons(1));
+  
   }, []);
+
+  useEffect(() => {
+    dispatch(getReceiptById(user?.user?._id));
+  }, [user?.user?._id]);
+  useEffect(() => {
+    const newReferrals = user?.user?.referrals.filter((referral) => {
+      return (
+        new Date(referral.signupDate).getTime() >=
+        new Date(user?.user?.redeemDate).getTime()
+      );
+    })    
+
+    setNewReferrals(newReferrals)
+  }, [user?.user?._id]);
+
+  const totalPoint =
+    user?.user?.point + newReferrals?.length * 12.5 + receiptTotal;
+
+  useEffect(() => {
+    dispatch(updateUserTotalPoint(user?.user?._id, { totalPoint }));
+  }, [totalPoint]);
 
   return (
     <Router>
       <div className="App">
-      {/* <button onClick={notify}>Notify !</button> */}
+        {/* <button onClick={notify}>Notify !</button> */}
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -67,7 +120,10 @@ const App = () => {
             exact
             element={!user ? <Login /> : <Navigate to="/" />}
           />
-          <Route path="signup" element={!user ? <Login /> : <Navigate to="/" />} />
+          <Route
+            path="signup"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
           <Route path="*" element={<ErrorPage />} />
           <Route path="/signup" element={<Login />}></Route>
           <Route path="/activate" element={<Activate />}></Route>
@@ -111,32 +167,21 @@ const App = () => {
             <Route path="login" element={<MerchantForm />} />
             <Route path="become-a-merchant" element={<MerchantForm />} />
           </Route>
-          
 
           <Route path="/deals">
-            <Route
-              index
-              element={<Deals/>
-              }
-            />
-            <Route path="discounts"  >
-            <Route
-              index
-              element={<Deals/>
-              }
-            />
-          <Route path="search" exact element={<Deals/>}/>
+            <Route index element={<Deals />} />
+            <Route path="discounts">
+              <Route index element={<Deals />} />
+              <Route path="search" exact element={<Deals />} />
+            </Route>
 
-              </Route>
-
-            <Route path="coupons" element={<Deals/>} />
-           
+            <Route path="coupons" element={<Deals />} />
           </Route>
-          
+
           <Route path="/faq" element={<Faq />} />
           <Route path="/privacy-policy" element={<Privacy />} />
           <Route path="/terms-and-condition" element={<Terms />} />
-          
+
           <Route path="*" element={<ErrorPage />}></Route>
         </Routes>
       </div>

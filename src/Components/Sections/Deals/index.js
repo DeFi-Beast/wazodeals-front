@@ -12,8 +12,7 @@ import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 const Deals = () => {
   const { discounts } = useSelector((state) => state.discounts);
   const { merchants } = useSelector((state) => state.merchants);
-  // const merchant = discounts?.discount?.map(discount => merchants?.merchant?.find(merchant => merchant?._id === discount?.merchant))
-  //  console.log(merchants)
+ 
 
   return (
     <div>

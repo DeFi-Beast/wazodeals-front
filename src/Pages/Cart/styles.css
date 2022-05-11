@@ -24,6 +24,7 @@ td {
   display: block;
   text-align: center;
   cursor: pointer;
+  color: black;
 }
 .cart-row td {
   padding: 30px;
@@ -39,11 +40,24 @@ td {
   font-weight: 600;
   font-size: 20px;
 }
-.cart-checkout {
-  background: #ff0076;
+.cart-total-sub {
+  font-weight: 900;
+  font-size: 26px;
   padding: 20px;
-  color: white;
 }
+.cart-total-point {
+  font-weight: 500;
+  font-size: 16px;
+}
+.cart-checkout {
+  background: #ff0076 !important;
+  padding: 20px !important;
+  color: white !important;
+  outline: none !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+
 .cart-qty {
   margin: 0px 3px;
   width: 30px;
@@ -64,8 +78,17 @@ td {
 
 @media only screen and (max-width: 600px) {
  
-  
+  .cart-row-remove-btn{
+    justify-content: right !important;
+  }
   .cart-resp {
     padding-top: 20px;
+  }
+  .cart-total{
+    font-size: 17px
+  }
+  .cart-total-sub{
+    font-size: 20px;
+    padding: 10px;
   }
 }

@@ -10,7 +10,7 @@ const Pie = (props) => {
 
   // const user = JSON.parse(localStorage.getItem("profile"))
 
-  const percentage = props.point * 100 / 1000;
+  const percentage = props.point * 100 / 250;
   
 
   return (

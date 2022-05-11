@@ -1,0 +1,10 @@
+.discount_title {
+    color: black;
+}
+.discount_title:hover {
+    color: rgba(0, 0, 0, 0.479);
+}
+.viewBtn {
+    padding: 10px ;
+}
+

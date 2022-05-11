@@ -2,6 +2,10 @@ export const FETCH_ALL = 'FETCH_ALL'
 export const FETCH_DISCOUNT = 'FETCH_DISCOUNT'
 export const FETCH_ALL_MERCHANTS = 'FETCH_ALL_MERCHANTS'
 
+export const FETCH_ALL_COUPON = 'FETCH_ALL_COUPON'
+export const FETCH_COUPON = 'FETCH_COUPON'
+export const UPDATE_CLICK = 'UPDATE_CLICK'
+
 
 export const SIGN_IN = 'SIGN_IN'
 export const SIGN_UP = 'SIGN_UP'

@@ -14,6 +14,7 @@ const Home = () => {
   
     const dispatch = useDispatch()
     const {discounts} = useSelector(state => state.discounts)
+    const {coupons} = useSelector(state => state.coupons)
     const state = useSelector(state => state);
 
     console.log(state)
@@ -32,6 +33,7 @@ const Home = () => {
         <TopDeal></TopDeal>
         <Partners></Partners>
         <Deals discounts={discounts}></Deals>
+        <Featured coupons={coupons}/>
       </div>
     </LayoutDefault>
   );

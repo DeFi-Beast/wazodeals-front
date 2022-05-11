@@ -154,9 +154,11 @@ const User = () => {
     );
   };
 
-  const totalPoint = user?.user?.point + user?.user?.referrals.length * 12.5 + receiptTotal ;
+  // const totalPoint = user?.user?.point + user?.user?.referrals.length * 12.5 + receiptTotal ;
 
-  console.log(totalPoint);
+  
+  
+  // console.log(totalPoint);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -215,7 +217,6 @@ const User = () => {
   };
   useEffect(() => {
     setFormData({ ...formData, user: user?.user?._id });
-    dispatch(getReceiptById(id));
   }, []);
 
   console.log(formData);
@@ -232,12 +233,13 @@ const User = () => {
               <div className={Classes.UserCardRow}>
                 <FontAwesomeIcon icon={faUserCheck} />
                 <div className="circularContainer">
-                  <Pie point={totalPoint}></Pie>
+                  <Pie point={user?.user?.totalPoint}></Pie>
+                  
                 </div>
               </div>
               <Button
-                className={totalPoint >= 750 ? "redeemBtn" : "disabledBtn" }
-                disabled={totalPoint >= 750 ? false : true}
+                className={user?.user?.totalPoint >= 250 ? "redeemBtn" : "disabledBtn" }
+                disabled={user?.user?.totalPoint >= 250 ? false : true}
                 href="/"
                 
                 >
@@ -245,37 +247,6 @@ const User = () => {
                
                 Redeem
               </Button>
-            </div>
-          </div>
-          <div className={`${Classes.UserCard} ${Classes.UserCardMargin}`}>
-            <div className={Classes.UserCardRow}>
-              <h4>Your Referral Code</h4>
-            </div>
-            <div className={Classes.UserCodeRow}>
-              <div className={Classes.UserCode}>
-                <p>
-                  <a
-                    href={`https://wazodeals.com/signup?user=${user?.user?.referralCode}`}
-                  >
-                    {" "}
-                    https://wazodeals.com/signup?user={user?.user?.referralCode}
-                  </a>
-                </p>
-              </div>
-              <Button
-                className={Classes.Button}
-                onClick={CopyToClipboard}
-                style={{
-                  background: "white",
-                  color: "red",
-                  boxShadow: "1px 1px black",
-                }}
-              >
-                {copied ? "Copied!" : "Copy"}
-              </Button>
-            </div>
-            <div style={{ marginTop: "20px", textAlign: "left" }}>
-              <h3>Referred : {user?.user?.referrals.length} Persons</h3>
             </div>
           </div>
           <div className={Classes.UserCard}>
@@ -410,7 +381,7 @@ const User = () => {
                                   }}
                                 >
                                   Upload A Clear Copy of Your Shopping
-                                  Receipt(s) Copy of Your Shopping Receipt
+                                  Receipt(s) 
                                 </p>
                               )}
                             </Grid>
@@ -432,6 +403,38 @@ const User = () => {
               </Grid>
             </div>
           </div>
+          <div className={`${Classes.UserCard} ${Classes.UserCardMargin}`}>
+            <div className={Classes.UserCardRow}>
+              <h4>Your Referral Code</h4>
+            </div>
+            <div className={Classes.UserCodeRow}>
+              <div className={Classes.UserCode}>
+                <p>
+                  <a
+                    href={`https://wazodeals.com/signup?user=${user?.user?.referralCode}`}
+                  >
+                    {" "}
+                    https://wazodeals.com/signup?user={user?.user?.referralCode}
+                  </a>
+                </p>
+              </div>
+              <Button
+                className={Classes.Button}
+                onClick={CopyToClipboard}
+                style={{
+                  background: "white",
+                  color: "red",
+                  boxShadow: "1px 1px black",
+                }}
+              >
+                {copied ? "Copied!" : "Copy"}
+              </Button>
+            </div>
+            <div style={{ marginTop: "20px", textAlign: "left" }}>
+              <h3>Referred : {user?.user?.referrals.length} Persons</h3>
+            </div>
+          </div>
+         
         </div>
         <Grid mt={3}>
           <Box sx={{ width: "100%", overflow: "auto !important" }}>

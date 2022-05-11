@@ -15,6 +15,7 @@ const authReducers = (state={Auth: null, isLoading:false}, action) => {
         case LOG_OUT:
             console.log("logout")
             localStorage.clear()
+            window.location.reload("/login")
 
             return {...state, Auth:null}
         case START_LOADING:

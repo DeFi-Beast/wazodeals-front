@@ -28,8 +28,36 @@
     color: #FF0076;
 
 }
+.product-cart a.buyBtn {
+   
+    box-shadow: none ;
+    
+
+}
+
 .chipLinks {
     color: white !important;
     background-color: #FF0076 !important;
     border-radius: 23px !important;
 }
+
+.buyBtn {
+    cursor: pointer;
+  text-decoration: none;
+  color: red;
+  background-color: transparent;
+  padding: 1px auto !important;
+  width: 100%;
+  text-align: center;
+  border-radius: 6px;
+  text-align: center;
+  margin-top:16px;
+  border: 1px solid red !important;
+  display:block;
+outline: none;
+ 
+}
+.buyBtn:hover {
+    background: #ff0076;
+    color: white;
+  }

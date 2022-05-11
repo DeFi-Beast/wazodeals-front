@@ -3,19 +3,19 @@ import styled from "styled-components";
 export const BrandCoupon = styled.div`
     display:flex;
     margin:0 auto;
-
+    position:relative;
     margin-bottom:30px;
     cursor:pointer;
     box-shadow: 3px 3px 6px #00000029;
 
     
     @media only screen and (min-width:900px) {
-        width:45%;
-        margin: 0 0 30px 0px;
+        width:100%;
+        // margin: 0 0 30px 0px;
 
     }
     @media only screen and (min-width:1300px) {
-        width:31%;
+      
     }
     
     

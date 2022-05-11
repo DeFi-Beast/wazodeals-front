@@ -9,7 +9,12 @@ import useStyles from "./styles";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Link, useLocation } from "react-router-dom";
 
+
+
 import { Grid, CardMedia, Button } from "@material-ui/core";
+import "./styles.css"
+
+
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -23,24 +28,29 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
   const merchant = merchants?.merchant?.find(
     (merchant) => merchant?._id === discount?.merchant
   );
+  const image = merchant?.logo[0]?.base64;
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+  const [options, setOptions] = useState(false);
+  const [cartText, setCartText] = useState(false);
+  const query = useQuery();
+  const page = query.get("page");
+  const Location = useLocation();
+  const cart = JSON.parse(localStorage.getItem("cart"));
   const merchantArr = merchant?.address.split(",");
+
+
 
   console.log("=========================merchantArr=============")
   console.log(merchant)
   console.log(merchantArr)
   console.log("=========================merchantArr=============")
 
-  const user = JSON.parse(localStorage.getItem("profile"));
-  const [options, setOptions] = useState(false);
-  const [cartText, setCartText] = useState(false);
 
-  const query = useQuery();
-  const page = query.get("page");
 
-  const Location = useLocation();
 
-  const cart = JSON.parse(localStorage.getItem("cart"));
 
+  
   useEffect(() => {
     if (
       Location.pathname === "/deals/discounts" ||
@@ -62,6 +72,14 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
     e.preventDefault();
     dispatch({ type: "ADD_TO_CART", payload: discount });
   };
+ 
+
+
+
+ 
+
+console.log(merchant, merchant?.logo[0]?.base64)
+
   return (
     <Grid
       xs={10}
@@ -71,11 +89,15 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
     >
       <StyledDiv>
         <div className="StyledImgWrapper">
+          
           <CardMedia
             className={classes.media}
             image={
-              files[0] ||
-              "https://user-images.githubusercontent.com/194400/49531010-48dad180-f8b1-11e8-8d89-1e61320e1d82.png"
+          
+                 image ||
+                 files[0] 
+                 
+
             }
             height="194"
             title={discount.title}
@@ -98,11 +120,14 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
         </div>
         <Div className={options && classes.whiteBg}>
           <div>
-            <h3>
+          <Link to={`/discounts/${discount._id}`} className="discount_title">
+          <h3>
               {discount?.title.length > 40
                 ? `${discount?.title.substring(0, 40)}....`
                 : `${discount?.title}`}
             </h3>
+          </Link>
+            
           </div>
           {!options && (
             <div>
@@ -175,17 +200,33 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
                 </Link>
               </Grid>
             ) : (
-              <OrderBtn
-                as="a"
-                href="/login"
+              <Grid
+              className={Classes.productLinksContainer}
+              container
+              justifyContent="space-between"
+            >
+              {/* <Link to={`/discounts/${discount._id}`}>View</Link> */}
+              <Link
+                to={!page ? "#" : `/deals/discounts?page=${page}`}
                 onClick={(e) => handleAddToCart(discount, e)}
               >
                 {cartText ? (
-                  <span style={{ color: "black" }}>Added</span>
+                  <span style={{ color: "grey" }}>Added</span>
                 ) : (
                   "Add To Cart"
                 )}
-              </OrderBtn>
+              </Link>
+                  <OrderBtn as='a' className="viewBtn" href={`/discounts/${discount._id}`} >
+                    <Link to={`/discounts/${discount._id}`}>
+                    View Deal
+
+                    </Link>
+                  </OrderBtn>
+
+          
+              
+            </Grid>
+             
             )}
           </div>
         </Div>

@@ -26,8 +26,8 @@ export const OrderBtn = styled.button`
   text-decoration: none;
   color: red;
   background-color: transparent;
-  padding: 5px auto;
-  width: 90%;
+  padding: 10px auto;
+  width: 40%;
   text-align: center;
   border-radius: 6px;
   text-align: center;
@@ -35,8 +35,24 @@ export const OrderBtn = styled.button`
   border: 1px solid red;
   display:block;
 
+  & a {
+  padding: 10px auto;
+
+  }
   &:hover {
-    background: red;
+    background:#ff0076 ;
     color: white;
   }
+  & a:hover {
+    background:#ff0076 ;
+    color: white;
+  }
+  &:hover a {
+    background:#ff0076 ;
+    color: white;
+  }
+  // & a {
+  //   background:#ff0076 ;
+  //   color: white;
+  // }
 `;
