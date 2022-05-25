@@ -17,7 +17,7 @@ import useStyles from "../../Components/LoginFiles/styles";
 import Input from "../../Components/LoginFiles/Input";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useractivate} from "../../actions/auth";
+import { useractivate } from "../../actions/auth";
 import UserLayout from "../../Components/Layouts/UserLayout";
 import "./styles.css";
 
@@ -39,14 +39,12 @@ const Login = () => {
     setFormData({ ...formData, email: user?.email });
   }, []);
 
-
-  console.log(isLoading);
+ 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-      dispatch(useractivate(formData, navigate));
-    
+    dispatch(useractivate(formData, navigate));
   };
 
   const handleChange = (e) => {

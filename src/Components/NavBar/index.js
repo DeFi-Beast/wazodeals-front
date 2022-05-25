@@ -2,24 +2,20 @@ import { Button } from "../Button";
 import { StyledInput } from "../Input";
 import Logo from "../Logo";
 import { Row, Div, RowWrapper } from "./NavBarStyled";
-import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import BaseURL from "../Helper";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { LOG_OUT } from "../../constants";
 import { useNavigate } from "react-router-dom";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+
 import "./styles.css";
 
 const NavBar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const cart= JSON.parse(localStorage.getItem("cart"));
-
   const user = JSON.parse(localStorage.getItem("profile"));
 
   console.log(user);

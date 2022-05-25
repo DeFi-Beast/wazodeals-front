@@ -1,4 +1,3 @@
-// Import react-circular-progressbar module and styles
 import {
   CircularProgressbarWithChildren,
   buildStyles,
@@ -8,10 +7,7 @@ import "react-circular-progressbar/dist/styles.css";
 const Pie = (props) => {
   console.log(props.point);
 
-  // const user = JSON.parse(localStorage.getItem("profile"))
-
-  const percentage = props.point * 100 / 250;
-  
+  const percentage = (props.point * 100) / 250;
 
   return (
     <div>
@@ -21,9 +17,7 @@ const Pie = (props) => {
         styles={buildStyles({ pathColor: "red" })}
       >
         <div className="piePoint">
-          <strong style={{ fontSize: "20px" }}>
-            {props.point}
-          </strong>
+          <strong style={{ fontSize: "20px" }}>{props.point}</strong>
 
           <br></br>
           {/* <span style={{ fontSize: "17px" }}>&nbsp; NGN</span> */}

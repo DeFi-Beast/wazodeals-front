@@ -1,5 +1,4 @@
 import { Div } from "./LayoutStyled";
-// import background from "../../../Assets/women.png"
 
 const Layout = (props) => {
   return (

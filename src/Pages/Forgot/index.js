@@ -1,7 +1,4 @@
 import { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -9,15 +6,13 @@ import {
   Grid,
   Typography,
   Container,
-  TextField,
-  TextareaAutosize,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import useStyles from "../../Components/LoginFiles/styles";
 import Input from "../../Components/LoginFiles/Input";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userforgot} from "../../actions/auth";
+import { userforgot } from "../../actions/auth";
 import UserLayout from "../../Components/Layouts/UserLayout";
 import "./styles.css";
 
@@ -33,20 +28,17 @@ const Email = () => {
   const [formData, setFormData] = useState(initialState);
   const isLoading = useSelector((state) => state.auth.isLoading);
 
-
   console.log(isLoading);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-      dispatch(userforgot(formData, navigate));
-    
+    dispatch(userforgot(formData, navigate));
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
 
   return (
     <UserLayout>
@@ -67,15 +59,13 @@ const Email = () => {
             <Typography variant="h5">Forgot Password</Typography>
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
-              <Input
+                <Input
                   name="email"
                   label="Your Email"
                   handleChange={handleChange}
                   type="email"
                   required={true}
                 />
-                
-                
               </Grid>
 
               <Button

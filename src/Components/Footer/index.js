@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTwitter, faFacebook } from "@fortawesome/free-brands-svg-icons";
 import "./styles.css";
-import Logo from "../Logo"
+import Logo from "../Logo";
 
 const Footer = () => {
   return (
@@ -18,7 +18,7 @@ const Footer = () => {
         pt={5}
       >
         <Grid xs={12} sm={4}>
-          <Logo/>
+          <Logo />
         </Grid>
         <Grid align="center" xs={12} sm={8}>
           <Grid alignItems="center" container className="Container">
@@ -59,7 +59,7 @@ const Footer = () => {
           </Grid>
         </Grid>
       </Grid>
-      <hr style={{width:"100%", backgroundColor:"white", height:"1px"}}/>
+      <hr style={{ width: "100%", backgroundColor: "white", height: "1px" }} />
       <Grid
         container
         pt={5}
@@ -68,21 +68,18 @@ const Footer = () => {
         justify="center"
         spacing={2}
       >
-        <Grid  xs={12} sm={4}>
-          <Grid align="center" justifyContent="center" container >
+        <Grid xs={12} sm={4}>
+          <Grid align="center" justifyContent="center" container>
             <Grid item xs={1} sm={1}>
               <Link to="#">
                 <FontAwesomeIcon icon={faTwitter} />
               </Link>
-              
             </Grid>
             <Grid item xs={1} sm={1}>
               <Link to="#">
                 <FontAwesomeIcon icon={faFacebook} />
               </Link>
             </Grid>
-
-            
           </Grid>
         </Grid>
         <Grid xs={12} sm={8} fontSize={12} className="Copyright">

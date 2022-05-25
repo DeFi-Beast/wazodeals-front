@@ -4,7 +4,7 @@ import Classes from "../../../Styles/Coupon.module.css";
 
 const Featured = () => {
   const { coupons } = useSelector((state) => state.coupons);
-console.log(coupons)
+ 
   return (
     <div>
       <h2 className="Row title">Featured Coupons</h2>

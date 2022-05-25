@@ -1,12 +1,10 @@
-import { useState, useCallback } from "react";
-import { DropzoneArea , DropzoneDialog} from "material-ui-dropzone";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import CloseIcon from "@material-ui/icons/Close";
+import { useState } from "react";
+import { DropzoneArea } from "material-ui-dropzone";
+
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 const Index = ({ uploadImage, removeImages}) => {
-  const [open, setOpen] = useState(false);
+
 
   const useStyles = makeStyles((theme) =>
     createStyles({
@@ -22,16 +20,6 @@ const Index = ({ uploadImage, removeImages}) => {
 
  
   
-
-  const handleClose = () => {
-
-  }
-
-  
-
- 
-
- 
 
   return (
     <>

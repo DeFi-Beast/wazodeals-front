@@ -4,7 +4,6 @@ import PaginationItem from "@mui/material/PaginationItem";
 import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 import { getAllDiscounts } from "../../actions";
-// import { getPosts } from "../actions/posts";
 import { Link } from "react-router-dom";
 
 
@@ -16,7 +15,6 @@ const Paginate = ({ page }) => {
   console.log(numberOfPages)
   useEffect(() => {
     if (page) {
-      // dispatch(getPosts(page));
       dispatch(getAllDiscounts(page));
     }
   }, [dispatch, page]);

@@ -8,13 +8,9 @@ import { faMapMarkerAlt, faStar } from "@fortawesome/free-solid-svg-icons";
 import useStyles from "./styles";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Link, useLocation } from "react-router-dom";
-
-
-
 import { Grid, CardMedia, Button } from "@material-ui/core";
-import "./styles.css"
 
-
+import "./styles.css";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -29,7 +25,6 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
     (merchant) => merchant?._id === discount?.merchant
   );
   const image = merchant?.logo[0]?.base64;
-
   const user = JSON.parse(localStorage.getItem("profile"));
   const [options, setOptions] = useState(false);
   const [cartText, setCartText] = useState(false);
@@ -39,18 +34,6 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
   const cart = JSON.parse(localStorage.getItem("cart"));
   const merchantArr = merchant?.address.split(",");
 
-
-
-  console.log("=========================merchantArr=============")
-  console.log(merchant)
-  console.log(merchantArr)
-  console.log("=========================merchantArr=============")
-
-
-
-
-
-  
   useEffect(() => {
     if (
       Location.pathname === "/deals/discounts" ||
@@ -72,13 +55,6 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
     e.preventDefault();
     dispatch({ type: "ADD_TO_CART", payload: discount });
   };
- 
-
-
-
- 
-
-// console.log(merchant, merchant?.logo[0]?.base64)
 
   return (
     <Grid
@@ -89,16 +65,9 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
     >
       <StyledDiv>
         <div className="StyledImgWrapper">
-          
           <CardMedia
             className={classes.media}
-            image={
-              discount?.campaignFiles[0]?.base64 ||
-                 image ||
-                 files[0] 
-                 
-
-            }
+            image={discount?.campaignFiles[0]?.base64 || image || files[0]}
             height="194"
             title={discount.title}
             alt="hero image"
@@ -123,14 +92,13 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
         </div>
         <Div className={options && classes.whiteBg}>
           <div>
-          <Link to={`/discounts/${discount._id}`} className="discount_title">
-          <h3>
-              {discount?.title.length > 40
-                ? `${discount?.title.substring(0, 40)}....`
-                : `${discount?.title}`}
-            </h3>
-          </Link>
-            
+            <Link to={`/discounts/${discount._id}`} className="discount_title">
+              <h3>
+                {discount?.title.length > 40
+                  ? `${discount?.title.substring(0, 40)}....`
+                  : `${discount?.title}`}
+              </h3>
+            </Link>
           </div>
           {!options && (
             <div>
@@ -150,7 +118,7 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
               <p>
                 {" "}
                 <span className={`${Classes.bold} ${Classes.big}`}>
-                  {discount.discount/2} %
+                  {discount.discount / 2} %
                 </span>{" "}
                 Off
               </p>
@@ -163,7 +131,7 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
                 <span className={Classes.bold}>
                   {Number(
                     discount.price -
-                      (`${discount.discount/2}` * discount.price) / 100
+                      (`${discount.discount / 2}` * discount.price) / 100
                   ).toLocaleString("en-US")}
                 </span>{" "}
               </p>
@@ -204,32 +172,29 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
               </Grid>
             ) : (
               <Grid
-              className={Classes.productLinksContainer}
-              container
-              justifyContent="space-between"
-            >
-              {/* <Link to={`/discounts/${discount._id}`}>View</Link> */}
-              <Link
-                to={!page ? "#" : `/deals/discounts?page=${page}`}
-                onClick={(e) => handleAddToCart(discount, e)}
+                className={Classes.productLinksContainer}
+                container
+                justifyContent="space-between"
               >
-                {cartText ? (
-                  <span style={{ color: "grey" }}>Added</span>
-                ) : (
-                  "Add To Cart"
-                )}
-              </Link>
-                  <OrderBtn as='a' className="viewBtn" href={`/discounts/${discount._id}`} >
-                    <Link to={`/discounts/${discount._id}`}>
-                    View Deal
-
-                    </Link>
-                  </OrderBtn>
-
-          
-              
-            </Grid>
-             
+                {/* <Link to={`/discounts/${discount._id}`}>View</Link> */}
+                <Link
+                  to={!page ? "#" : `/deals/discounts?page=${page}`}
+                  onClick={(e) => handleAddToCart(discount, e)}
+                >
+                  {cartText ? (
+                    <span style={{ color: "grey" }}>Added</span>
+                  ) : (
+                    "Add To Cart"
+                  )}
+                </Link>
+                <OrderBtn
+                  as="a"
+                  className="viewBtn"
+                  href={`/discounts/${discount._id}`}
+                >
+                  <Link to={`/discounts/${discount._id}`}>View Deal</Link>
+                </OrderBtn>
+              </Grid>
             )}
           </div>
         </Div>

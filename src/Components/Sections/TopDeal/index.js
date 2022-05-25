@@ -2,35 +2,27 @@ import StyledCoupon from "../../StyledCoupon";
 import Classes from "../../../Styles/Coupon.module.css";
 
 // Import Swiper React components
-import  { Swiper, SwiperSlide} from "swiper/react";
-import SwiperCore, { Autoplay }from "swiper"
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay } from "swiper";
 
 // Import Swiper styles
 import "swiper/css";
 
-
-
-
-
-SwiperCore.use([Autoplay])
-
+SwiperCore.use([Autoplay]);
 
 const TopDeal = () => {
-  
   return (
     <div>
-        <div className="Row">
+      <div className="Row">
         <h1>Shop Today's Hot Deals, Save Big &amp; Earn Points</h1>
-
-        </div>
+      </div>
       <Swiper
         className={Classes.StyledCouponWrapper}
         loop={true}
         autoplay={{
-            "delay": 2500,
-            "disableOnInteraction": false,
-            
-          }}
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
         breakpoints={{
           512: {
             slidesPerView: 2,
@@ -49,15 +41,7 @@ const TopDeal = () => {
             spaceBetween: 50,
           },
         }}
-      >
-        {/* {topCoupon.map((coupon, index) => {
-          return (
-            <SwiperSlide key={index}>
-              <StyledCoupon coupon={coupon} ></StyledCoupon>
-            </SwiperSlide>
-          );
-        })} */}
-      </Swiper>
+      ></Swiper>
     </div>
   );
 };

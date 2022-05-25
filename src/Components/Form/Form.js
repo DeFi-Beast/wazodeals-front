@@ -13,18 +13,14 @@ import {
   FormControl,
   InputLabel,
   Grid,
-  Input,
 } from "@material-ui/core";
-import FileBase from "react-file-base64";
-import { useDispatch, useSelector } from "react-redux";
-// import { creatediscount, updatediscount } from "../../actions/discounts";
+import { useDispatch, useSelector } from "react-redux"; // import { creatediscount, updatediscount } from "../../actions/discounts";
 import { useNavigate, useParams } from "react-router-dom";
 import DatePicker from "../DatePicker";
 import NumberInput from "../NumberInput";
-import ImageUploads from "../ImageUploads"
-import {updateDiscount } from "../../actions";
+import ImageUploads from "../ImageUploads";
+import { updateDiscount } from "../../actions";
 import { categories, discounts } from "../../constants";
-
 
 const Form = ({ currentId, setCurrentId }) => {
   let [startDate, setStartDate] = useState();
@@ -32,15 +28,16 @@ const Form = ({ currentId, setCurrentId }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyles();
-  const user = JSON.parse(localStorage.getItem("profile"))
-  const {merchants} = useSelector(state => state.merchants)
+  const { merchants } = useSelector((state) => state.merchants);
   const [images, setImages] = useState([]);
   const discount = useSelector((state) =>
-    currentId ? state.discounts?.discounts?.discounts?.find((p) => p._id === currentId) : null
+    currentId
+      ? state.discounts?.discounts?.discounts?.find((p) => p._id === currentId)
+      : null
   );
 
   const { id } = useParams();
-  const merchant = merchants?.merchant?.find(merchant => merchant._id === id);
+  const merchant = merchants?.merchant?.find((merchant) => merchant._id === id);
 
   const [discountData, setDiscountData] = useState({
     title: "",
@@ -51,11 +48,15 @@ const Form = ({ currentId, setCurrentId }) => {
     endDate: "",
     price: null,
     discount: "",
-    merchant:""
+    merchant: "",
   });
 
   useEffect(() => {
-    setDiscountData({ ...discountData, startDate: startDate, endDate: endDate });
+    setDiscountData({
+      ...discountData,
+      startDate: startDate,
+      endDate: endDate,
+    });
   }, [startDate, endDate]);
 
   let [numberformat, setNumberformat] = useState(null);
@@ -64,42 +65,15 @@ const Form = ({ currentId, setCurrentId }) => {
     setDiscountData({ ...discountData, price: numberformat });
   }, [numberformat]);
 
-  console.log(discountData);
   useEffect(() => {
-    if (discount) 
-    setDiscountData({...discount, merchant:merchants?.merchant?.find((p) => p._id === discount.merchant), categories: discount.categories.split(",").filter(e => e) });
-   
+    if (discount)
+      setDiscountData({
+        ...discount,
+        merchant: merchants?.merchant?.find((p) => p._id === discount.merchant),
+        categories: discount.categories.split(",").filter((e) => e),
+      });
   }, [discount]);
 
-  // useEffect(() => {
-  //   if (user) 
-  //   setDiscountData({...discountData, merchant:(merchants?.merchant?.find((p) => p._id === user?.merchant?._id)).merchantName});
-   
-  // }, []);
-
-  console.log("hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii")
-  console.log(discountData)
-
-// const newMerch = merchants?.merchant?.find((p) => p._id === user?.merchant?._id) 
-
-// console.log(newMerch)
- 
-  // const discounted = useSelector((state) =>
-  //    state.discounts.discounts
-  // );
-  // db.users.find({}, { _id: 0, email: 1 })
-  console.log(merchants.merchant)
-
-  
-
-  console.log(discount)
- 
-
-  
-  
-
-
-  console.log(images);
   const ITEM_HEIGHT = 48;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -111,17 +85,13 @@ const Form = ({ currentId, setCurrentId }) => {
     },
   };
 
-
-
- 
-
   console.log(discountData);
 
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
-    
+
     setDiscountData({
       ...discountData,
       categories: typeof value === "string" ? value.split(",") : value,
@@ -131,15 +101,11 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleDiscChange = (e) => {
     setDiscountData({ ...discountData, discount: e.target.value });
   };
-  
-
 
   const handleMerchantChange = (e) => {
     e.preventDefault();
-   
-    setDiscountData({...discountData, merchant:e.target.value})
-    
-    
+
+    setDiscountData({ ...discountData, merchant: e.target.value });
   };
 
   const clear = () => {
@@ -153,26 +119,16 @@ const Form = ({ currentId, setCurrentId }) => {
       endDate: "",
       price: null,
       discount: "",
-      merchant:""
+      merchant: "",
     });
-    
-    setNumberformat(Number)
- 
-    setStartDate('')
-    
-    setEndDate('')
-    console.log(numberformat)
-  };
 
-  // if (!user?.result?.name) {
-  //   return (
-  //     <Paper className={classes.paper} elevation={6}>
-  //       <Typography variant="h6" align="center">
-  //         Please Sign in to create your own memory and like others memory
-  //       </Typography>
-  //     </Paper>
-  //   );
-  // }
+    setNumberformat(Number);
+
+    setStartDate("");
+
+    setEndDate("");
+    console.log(numberformat);
+  };
 
   const fileToDataUri = (image) => {
     return new Promise((res) => {
@@ -191,9 +147,9 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   const uploadImage = async (files) => {
-    console.log(files)
+    console.log(files);
     if (files && files.length > 0) {
-      console.log("test")
+      console.log("test");
       const newImagesPromises = [];
       for (let i = 0; i < files.length; i++) {
         newImagesPromises.push(fileToDataUri(files[i]));
@@ -204,30 +160,34 @@ const Form = ({ currentId, setCurrentId }) => {
       newImages.map((image) => {
         return newStrImages.push(image.base64);
       });
-      console.log(newStrImages)
+      console.log(newStrImages);
       setImages([...newStrImages]);
-      setDiscountData({...discountData, selectedFiles:newStrImages.join("|")})
-      
+      setDiscountData({
+        ...discountData,
+        selectedFiles: newStrImages.join("|"),
+      });
     }
-    
   };
-  
-  const removeImages = (files) => {
-      
-  }
-  
 
   const handleSubmit = (e) => {
-    const newDiscount = { ...discountData, categories:discountData?.categories?.join(","), merchant:discount?.merchant }
-  console.log(newDiscount)
+    const newDiscount = {
+      ...discountData,
+      categories: discountData?.categories?.join(","),
+      merchant: discount?.merchant,
+    };
     e.preventDefault();
     if (currentId) {
-      dispatch(updateDiscount(currentId, { ...discountData, categories:discountData.categories.join(","), merchant:discount.merchant }))
+      dispatch(
+        updateDiscount(currentId, {
+          ...discountData,
+          categories: discountData.categories.join(","),
+          merchant: discount.merchant,
+        })
+      );
     }
-    // dispatch(creatediscount({ ...discountData, name: user?.result?.name }, navigate));
-
     clear();
   };
+
   return (
     <Paper className={classes.paper}>
       <form
@@ -246,7 +206,9 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Title"
           fullWidth
           value={discountData.title}
-          onChange={(e) => setDiscountData({ ...discountData, title: e.target.value })}
+          onChange={(e) =>
+            setDiscountData({ ...discountData, title: e.target.value })
+          }
         />
         <TextField
           name="description"
@@ -297,9 +259,8 @@ const Form = ({ currentId, setCurrentId }) => {
         <Grid container spacing={3} alignItems="center">
           <Grid item xs={6} sm={6} md={6}>
             <NumberInput
-              numberformat={discount ?  discountData.price : numberformat}
+              numberformat={discount ? discountData.price : numberformat}
               setNumberformat={setNumberformat}
-              
             />
           </Grid>
           <Grid item xs={6} sm={6} md={6}>
@@ -321,23 +282,24 @@ const Form = ({ currentId, setCurrentId }) => {
           </Grid>
         </Grid>
         <FormControl fullWidth>
-              <InputLabel id="merchant-label">Merchant</InputLabel>
-              <Select
-                labelId="merchant-label"
-                variant="outlined"
-                id="merchant"
-                value={discountData.merchant || merchant?.merchantName}
-                label="Discount"
-                onChange={handleMerchantChange}
-              >
-                {merchants?.merchant?.map((merchant) => (
-                  <MenuItem value={merchant?.merchant || merchant?.merchantName }>{merchant?.merchant || merchant?.merchantName}</MenuItem>
-                  
-                ))}
-              </Select>
-            </FormControl>
-        
-        <ImageUploads  uploadImage={uploadImage}/>
+          <InputLabel id="merchant-label">Merchant</InputLabel>
+          <Select
+            labelId="merchant-label"
+            variant="outlined"
+            id="merchant"
+            value={discountData.merchant || merchant?.merchantName}
+            label="Discount"
+            onChange={handleMerchantChange}
+          >
+            {merchants?.merchant?.map((merchant) => (
+              <MenuItem value={merchant?.merchant || merchant?.merchantName}>
+                {merchant?.merchant || merchant?.merchantName}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+
+        <ImageUploads uploadImage={uploadImage} />
         <Button
           className={classes.buttonSubmit}
           variant="contained"

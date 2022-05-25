@@ -4,8 +4,6 @@
 }
 
 .sidebar-hide {
-    /* z-index: -2; */
-    /* height: 100vh; */
     position: relative;
 }
 .pagination {

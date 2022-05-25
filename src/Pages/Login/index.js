@@ -18,14 +18,13 @@ import useStyles from "../../Components/LoginFiles/styles";
 import Input from "../../Components/LoginFiles/Input";
 import Icon from "../../Components/LoginFiles/icon";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation,useParams } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { usersignup, usersignin } from "../../actions/auth";
 import UserLayout from "../../Components/Layouts/UserLayout";
-import FileBase from "react-file-base64";
-import "./styles.css";
-// import Notify from "../../Components/Notify";
 import { useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
+
+import "./styles.css";
 
 const initialState = {
   name: "",
@@ -46,35 +45,27 @@ const Login = () => {
   const [formData, setFormData] = useState(initialState);
   const [isSignup, setIsSignup] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  const isLoading = useSelector(state => state.auth.isLoading);
-  const location = useLocation()
-  
+  const isLoading = useSelector((state) => state.auth.isLoading);
+  const location = useLocation();
 
   const query = useQuery();
-
-  // const referrer = query.get("user");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setFormData({ ...formData, referrer: query.get("user") });
-  
-  }, [])
-  
+  }, []);
 
-  console.log(location.pathname)
+  console.log(location.pathname);
 
   useEffect(() => {
-    if(location.pathname === "/signup") {
-      setIsSignup(true)
-    }
-    else
-    setIsSignup(false)
-    
-  }, [location])
-  
+    if (location.pathname === "/signup") {
+      setIsSignup(true);
+    } else setIsSignup(false);
+  }, [location]);
 
-  console.log(isLoading)
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  console.log(isLoading);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -88,11 +79,9 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-  const handleCheck= (e) => {
-    setIsChecked(!isChecked);
-  };
 
   console.log(formData);
+
   const switchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
@@ -208,20 +197,6 @@ const Login = () => {
                     value={formData.referrer}
                   />
                 )}
-                {/* {isSignup && (
-                  <div className="agreement-Box">
-                    <input
-                      name=""
-                      label="Referrer Code"
-                      handleCheck={handleCheck}
-                      type="checkbox"
-                    />
-                    <span>
-                      Do you agree to our{" "}
-                      <Link to="/terms-and-condition">Terms and condition</Link>
-                    </span>{" "}
-                  </div>
-                )} */}
               </Grid>
 
               <Button
@@ -231,7 +206,17 @@ const Login = () => {
                 color="primary"
                 className={classes.submit}
               >
-                {isSignup ?( isLoading ? <Loader/> : "Sign Up" ):( isLoading ? <Loader/> : "Sign In")}
+                {isSignup ? (
+                  isLoading ? (
+                    <Loader />
+                  ) : (
+                    "Sign Up"
+                  )
+                ) : isLoading ? (
+                  <Loader />
+                ) : (
+                  "Sign In"
+                )}
               </Button>
               {/* <GoogleLogin
             clientId="57511145551-jofdo3npaipgfj4u8nkeh496jf526gbf.apps.googleusercontent.com"
@@ -254,7 +239,7 @@ const Login = () => {
           /> */}
               <Grid container justifyContent="space-between">
                 <Grid item>
-                  <Button onClick={switchMode} >
+                  <Button onClick={switchMode}>
                     <Link to={`/${isSignup ? "login" : "signup"}`}>
                       {isSignup
                         ? "Already have an account? SIgn In"
@@ -262,19 +247,16 @@ const Login = () => {
                     </Link>
                   </Button>
                 </Grid>
-                {!isSignup  && <Grid item>
-                  <Button onClick={switchMode} >
-                    <Link to="/forgot-password">
-                     
-                        Forgot Password
-                    </Link>
-                  </Button>
-                </Grid>}
+                {!isSignup && (
+                  <Grid item>
+                    <Button onClick={switchMode}>
+                      <Link to="/forgot-password">Forgot Password</Link>
+                    </Button>
+                  </Grid>
+                )}
               </Grid>
             </form>
           </Paper>
-        
-
         </Container>
       </div>
     </UserLayout>

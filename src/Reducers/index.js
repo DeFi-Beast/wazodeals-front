@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-
 import discounts from "./discountReducers";
 import coupons from "./couponReducers";
 import receipts from "./receiptReducers";

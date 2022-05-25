@@ -3,10 +3,13 @@ import { enGB } from "date-fns/locale";
 import { DateRangePicker, START_DATE, END_DATE } from "react-nice-dates";
 import { TextField } from "@material-ui/core";
 import "react-nice-dates/build/style.css";
-export default function DateRangePickerExample({startDate,endDate,setStartDate,setEndDate}) {
-  
-
-  console.log(startDate, endDate)
+export default function DateRangePickerExample({
+  startDate,
+  endDate,
+  setStartDate,
+  setEndDate,
+}) {
+  console.log(startDate, endDate);
   return (
     <DateRangePicker
       startDate={startDate}
@@ -20,8 +23,7 @@ export default function DateRangePickerExample({startDate,endDate,setStartDate,s
     >
       {({ startDateInputProps, endDateInputProps, focus }) => (
         <div className="date-range">
-         
-         <TextField
+          <TextField
             name="startDate"
             variant="outlined"
             className={"input" + (focus === START_DATE ? " -focused" : "")}
@@ -30,7 +32,7 @@ export default function DateRangePickerExample({startDate,endDate,setStartDate,s
             fullWidth
           />
           <span className="date-range_arrow" />
-         
+
           <TextField
             name="endDate"
             variant="outlined"

@@ -40,7 +40,7 @@ const initialState = {
   address: "",
   category: "",
   phone: "",
-  discount:"",
+  discount: "",
   price: null,
   logo: "",
 };
@@ -53,15 +53,12 @@ const Merchant = () => {
   const navigate = useNavigate();
   const query = useQuery();
   const location = useLocation();
-  // const login = query.get("login")
   const [isSignup, setIsSignup] = useState();
 
   useEffect(() => {
     setIsSignup(!JSON.parse(query.get("login")));
   }, []);
 
-  // console.log(login)
-  console.log(isSignup);
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -110,7 +107,7 @@ const Merchant = () => {
     setFormData({ ...formData, category: e.target.value });
   };
 
-  console.log(formData)
+ 
 
   return (
     <LayoutDefault>
@@ -183,7 +180,12 @@ const Merchant = () => {
                   </>
                 )}
                 {isSignup && (
-                  <Grid style={{padding:"8px"}} container spacing={2} alignItems="center">
+                  <Grid
+                    style={{ padding: "8px" }}
+                    container
+                    spacing={2}
+                    alignItems="center"
+                  >
                     <Grid item xs={4} sm={4} md={4}>
                       <NumberInput
                         numberformat={numberformat}

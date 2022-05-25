@@ -10,8 +10,6 @@ import "./styles.css"
 
 
 
-
-
 const Faq = () => {
   return (
     <UserLayout>

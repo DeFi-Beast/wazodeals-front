@@ -1,14 +1,9 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-import { useSelector } from 'react-redux'
 import moment from "moment"
 
 const Table = ({value}) => {
 
-    // const {receipt} = useSelector(state => state.receipts)
-
-    console.log("================receipts===============")
-    // console.log(receipt)
   return (
     <Grid sm={12}>
         <table style={{width:"100%"}}>

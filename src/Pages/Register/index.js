@@ -4,50 +4,23 @@ import { StyledDiv, StyledLogo } from "../../Components/Logo/Logo";
 import Classes from "../../Styles/Login.module.css";
 import Logbg from "../../Assets/Logbg.png";
 import LoginLogo from "../../Assets/Loginlogo.png";
+import Loader from "../../Components/Loader";
+import { Link, useLocation } from "react-router-dom";
 
-import  Loader  from "../../Components/Loader";
-
-
-import { Link , useLocation} from "react-router-dom";
-
-import Swal from "sweetalert2";
-
-
-
-const Register = ({dispatch}) => {
-  const [showText, setShowText] = useState(false);
+const Register = ({ dispatch }) => {
   const [show, setShow] = useState(false);
-  const [message, setMessage] = useState("hi");
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [referrer, setReferrer] = useState("");
-  const [username, setUsername] = useState( new URLSearchParams(useLocation().search).get('user'));
-  
-
-  // const useQuery = () => new URLSearchParams(useLocation().search);
-  // const username = useQuery().get('user');
-
-  
-
-  console.log(username)
-  console.log(email,password)
-
+  const [username, setUsername] = useState(
+    new URLSearchParams(useLocation().search).get("user")
+  );
 
   const handleSubmit = (e) => {
     setShow(true);
     e.preventDefault();
-    let queryObj = {
-      email: email,
-      password: password,
-      confirmPassword: confirmPassword,
-      referrer:referrer || username,
-      name:name
-    };
-  
-
-    
   };
 
   return (
@@ -59,8 +32,8 @@ const Register = ({dispatch}) => {
           </StyledDiv>
 
           <Link to={"/"}>
-         <StyledLogo src={LoginLogo}></StyledLogo>
-         </Link>
+            <StyledLogo src={LoginLogo}></StyledLogo>
+          </Link>
         </div>
         {/* <div>{message}</div> */}
         <div className={Classes.formContainer}>
@@ -71,15 +44,22 @@ const Register = ({dispatch}) => {
             target="_blank"
           >
             <div>
-              <input type="email" name="email" id="email" placeholder="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
-              <input type="string" name="name" id="name" placeholder="name (optional)"
-              value={name}
-              onChange={e => setName(e.target.value)}
+              <input
+                type="string"
+                name="name"
+                id="name"
+                placeholder="name (optional)"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
-              {/* <input type="text" name="username" id="username" placeholder="username"  /> */}
 
               <input
                 type="password"
@@ -87,8 +67,7 @@ const Register = ({dispatch}) => {
                 id="password"
                 placeholder="password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
-
+                onChange={(e) => setPassword(e.target.value)}
               />
               <input
                 type="password"
@@ -96,7 +75,7 @@ const Register = ({dispatch}) => {
                 id="confirmPassword"
                 placeholder="confirm Password"
                 value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
               <input
                 type="text"
@@ -104,7 +83,7 @@ const Register = ({dispatch}) => {
                 id="referrer"
                 placeholder="referral code? (optional)"
                 value={referrer || username}
-                onChange={e => setReferrer(e.target.value)}
+                onChange={(e) => setReferrer(e.target.value)}
               />
             </div>
 
@@ -117,7 +96,6 @@ const Register = ({dispatch}) => {
                 "Register"
               )}
             </button>
-           
           </form>
           <div className={Classes.formExtended}>
             <a href="/" className={Classes.styledLink}>

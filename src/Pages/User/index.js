@@ -1,15 +1,9 @@
-// import UserLayout from "../../Components/Layouts/UserLayout.js"
-
 import { useState, useEffect } from "react";
 import Classes from "../../Styles/User.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCheck } from "@fortawesome/free-solid-svg-icons";
-// import { Button } from "../../Components/Button";
-import { Link, Navigate, useParams } from "react-router-dom";
 import CloseIcon from "@mui/icons-material/Close";
-import axios from "axios";
 import Pie from "../../Components/Pie";
-import BaseURL from "../../Components/Helper";
 import { useDispatch, useSelector } from "react-redux";
 import UserLayout from "../../Components/Layouts/UserLayout";
 import AddIcon from "@material-ui/icons/Add";
@@ -28,8 +22,8 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Input from "../../Components/LoginFiles/Input";
 import FileBase from "react-file-base64";
-import { createReceipt, getReceiptById } from "../../actions/receipts";
-import { updateUser} from "../../actions/user";
+import { createReceipt } from "../../actions/receipts";
+import { updateUser } from "../../actions/user";
 import { useNavigate } from "react-router-dom";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -87,16 +81,15 @@ const style = {
 const initialState = {
   merchant: "",
   user: "",
-  userEmail:JSON.parse(localStorage.getItem("profile"))?.user?.email,
+  userEmail: JSON.parse(localStorage.getItem("profile"))?.user?.email,
   selectedFiles: [],
 };
 const initialProfileState = {
   phone: "",
-  id:"",
+  id: "",
 };
 
 const User = () => {
-  const [referred, setReferred] = useState("");
   const [copied, setCopied] = useState(false);
   const user = JSON.parse(localStorage.getItem("profile"));
   const [open, setOpen] = useState(false);
@@ -113,40 +106,29 @@ const User = () => {
   const isLoading = useSelector((state) => state.auth.isLoading);
   const navigate = useNavigate();
   const [value, setValue] = useState(0);
-  const { id } = useParams();
-  const [showPassword, setShowPassword] = useState(false);
-  const {receipt} = useSelector(state => state.receipts)
+  const { receipt } = useSelector((state) => state.receipts);
   let [receiptTotal, setReceiptTotal] = useState(null);
 
-  console.log(receipt)
+  console.log(receipt);
 
   useEffect(() => {
-    
-   receiptTotal = receipt?.receipt?.reduce(function (previousValue, currentValue) {
-      return (
-        previousValue +
-        currentValue.point 
-      )
-    }, 0);
-    return setReceiptTotal(receiptTotal)
-    
-  }, [user])
+    receiptTotal = receipt?.receipt?.reduce(function (
+      previousValue,
+      currentValue
+    ) {
+      return previousValue + currentValue.point;
+    },
+    0);
+    return setReceiptTotal(receiptTotal);
+  }, [user]);
 
+  console.log(receiptTotal);
 
-
-  
-
-  console.log(receiptTotal)
-  
-  const handleShowPassword = () => {
-    setShowPassword((prevShowPassword) => !prevShowPassword);
-  };
   const handleTabChange = (event, newValue) => {
     setValue(newValue);
   };
 
   const CopyToClipboard = () => {
-    //   console.log(navigator.clipboard.write.length)
     if (navigator.clipboard.write.length >= 1) {
       setCopied("true");
     }
@@ -155,25 +137,24 @@ const User = () => {
     );
   };
 
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
- 
 
-  console.log(profileData);
   const uploadImages = (files) => {
     setFormData({
       ...formData,
       selectedFiles: files.map((file) => file.base64),
     });
   };
+
   const clear = () => {
     setFormData({
       merchant: "",
       selectedFiles: [],
     });
   };
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
@@ -191,26 +172,26 @@ const User = () => {
       );
       handleClose();
       clear();
-      // window.location.reload(false);
     }
   };
+
   const handleProfileChange = (e) => {
     setProfileData({ ...profileData, [e.target.name]: e.target.value });
   };
 
   useEffect(() => {
-    
-  setProfileData({...profileData, id:user?.user?._id})
-  }, [])
-  console.log(profileData)
+    setProfileData({ ...profileData, id: user?.user?._id });
+  }, []);
+
   const handleUpdateProfile = (e) => {
     e.preventDefault();
-    dispatch(updateUser(profileData))
+    dispatch(updateUser(profileData));
+  };
 
-  };
   const handleVerifyPhone = (e) => {
-    e.preventDefault()
+    e.preventDefault();
   };
+
   useEffect(() => {
     setFormData({ ...formData, user: user?.user?._id });
   }, []);
@@ -230,17 +211,15 @@ const User = () => {
                 <FontAwesomeIcon icon={faUserCheck} />
                 <div className="circularContainer">
                   <Pie point={user?.user?.totalPoint}></Pie>
-                  
                 </div>
               </div>
               <Button
-                className={user?.user?.totalPoint >= 250 ? "redeemBtn" : "disabledBtn" }
+                className={
+                  user?.user?.totalPoint >= 250 ? "redeemBtn" : "disabledBtn"
+                }
                 disabled={user?.user?.totalPoint >= 250 ? false : true}
                 href="/"
-                
-                >
-                {/* <Link to="/">Redeem</Link> */}
-               
+              >
                 Redeem
               </Button>
             </div>
@@ -377,7 +356,7 @@ const User = () => {
                                   }}
                                 >
                                   Upload A Clear Copy of Your Shopping
-                                  Receipt(s) 
+                                  Receipt(s)
                                 </p>
                               )}
                             </Grid>
@@ -430,7 +409,6 @@ const User = () => {
               <h3>Referred : {user?.user?.referrals.length} Persons</h3>
             </div>
           </div>
-         
         </div>
         <Grid mt={3}>
           <Box sx={{ width: "100%", overflow: "auto !important" }}>
@@ -459,37 +437,36 @@ const User = () => {
                   {user?.user?.phone
                     ? `${user?.user?.phone}`
                     : "Add Phone Number"}
-                  <form onSubmit={handleVerifyPhone} >
+                  <form onSubmit={handleVerifyPhone}>
                     {user?.user?.phone ? (
                       <Grid container>
-                      <Grid mx={3}>
-                      <Button
-                        onClick={handleProfileOpen}
-                        type="submit"
-                        style={{
-                          background: "white",
-                          color: "red",
-                          boxShadow: "1px 1px red",
-                        }}
-                      >
-                        Update
-                      </Button>
+                        <Grid mx={3}>
+                          <Button
+                            onClick={handleProfileOpen}
+                            type="submit"
+                            style={{
+                              background: "white",
+                              color: "red",
+                              boxShadow: "1px 1px red",
+                            }}
+                          >
+                            Update
+                          </Button>
+                        </Grid>
+
+                        <Button
+                          onClick={handleProfileOpen}
+                          type="submit"
+                          style={{
+                            background: "white",
+                            // color: "red",
+                            boxShadow: "1px 1px red",
+                          }}
+                          disabled
+                        >
+                          Verify
+                        </Button>
                       </Grid>
-                       
-                      <Button
-                        onClick={handleProfileOpen}
-                        type="submit"
-                        style={{
-                          background: "white",
-                          // color: "red",
-                          boxShadow: "1px 1px red",
-                        }}
-                        disabled
-                      >
-                        Verify
-                      </Button>
-                      </Grid>
-                     
                     ) : (
                       <Button
                         onClick={handleProfileOpen}

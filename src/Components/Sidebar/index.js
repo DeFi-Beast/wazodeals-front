@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-
 import { Grid, Button } from "@material-ui/core";
 import { useState } from "react";
-
 import BreadCrumbs from "../BreadCrumbs";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -14,19 +12,13 @@ import "./styles.css";
 import { categories } from "../../constants";
 import { discounts } from "../../constants";
 
-
-
-
 const Sidebar = ({ handleInputChange, handleSearch }) => {
- 
   const { merchants } = useSelector((state) => state.merchants);
   const [page, setPage] = useState(1);
-  
   const LIMIT = 6;
   const startIndex = (Number(page) - 1) * LIMIT;
   let total = merchants?.merchant?.length;
   let totalPage = Math.ceil(total / LIMIT);
-  console.log(startIndex, page * LIMIT);
   const merchantinView = merchants?.merchant?.slice(startIndex, page * LIMIT);
 
   const handleNav = () => {
@@ -38,7 +30,6 @@ const Sidebar = ({ handleInputChange, handleSearch }) => {
     }
   };
 
- 
   return (
     <form className="sideDrawerContainer" onSubmit={handleSearch}>
       <Grid item sm={3} className="sideDrawerContainer">
@@ -166,9 +157,12 @@ const Sidebar = ({ handleInputChange, handleSearch }) => {
           </Grid>
         </Grid>
         <Grid className="searchBtn" sm={3} container justifyContent="flex-end">
-          {/* <Link to="#">Search</Link> */}
-          <Button variant="contained" style={{backgroundColor:"#FF0076", color:"white"}} type="submit">
-                      Search
+          <Button
+            variant="contained"
+            style={{ backgroundColor: "#FF0076", color: "white" }}
+            type="submit"
+          >
+            Search
           </Button>
         </Grid>
       </Grid>

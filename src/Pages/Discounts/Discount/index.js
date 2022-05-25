@@ -24,9 +24,7 @@ const Discount = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
   const { discount } = useSelector((state) => state.discounts.discount);
-  // const files = discount?.selectedFiles.split("|");
-  const files = discount?.campaignFiles || discount?.selectedFiles.split("|")
-  
+  const files = discount?.campaignFiles || discount?.selectedFiles.split("|");
   const { merchants } = useSelector((state) => state.merchants);
   const merchant = merchants?.merchant?.find(
     (merchant) => merchant?._id === discount?.merchant
@@ -57,7 +55,6 @@ const Discount = () => {
   }, [id]);
 
   const handleSelectedImg = (index) => {
-    // console.log(index);
     setSelected(index);
   };
 
@@ -73,29 +70,29 @@ const Discount = () => {
       }
     }
   }, [id]);
-  console.log(cartText)
 
   useEffect(() => {
     setTotal(discount?.price - (discount?.price * discount?.discount) / 200);
     let orderItem = [];
 
-    // orderItem.push({productId: discount?._id, orderQty:1, orderPrice:(discount?.price*1)})
     setOrderData({
       ...orderData,
       orderTotal:
         discount?.price - (discount?.price * discount?.discount) / 200,
-      amount_paid: discount?.price - (discount?.price*discount?.discount / 200)?.toFixed(0),
+      amount_paid:
+        discount?.price -
+        ((discount?.price * discount?.discount) / 200)?.toFixed(0),
       order: [
         {
           productId: discount?._id,
           orderQty: 1,
-          orderPrice: (discount?.price - (discount?.price*discount?.discount / 200)) * 1,
+          orderPrice:
+            (discount?.price - (discount?.price * discount?.discount) / 200) *
+            1,
         },
       ],
     });
   }, [discount]);
-
-  console.log(orderData);
 
   const handlePaystackSuccessAction = (reference) => {
     // Implementation for whatever you want to do with reference and after success call.
@@ -104,13 +101,7 @@ const Discount = () => {
       // console.log((orderData))
       dispatch(postOrder(orderData));
     }
-    console.log(cart);
     let message = "Payment complete! Reference: " + reference.reference;
-    // dispatch( toast.success(<>{message}</>))
-
-    // localStorage.removeItem("cart");
-    // localStorage.removeItem("cartTotal");
-    // navigate("/");
 
     console.log(reference);
   };
@@ -127,7 +118,6 @@ const Discount = () => {
     onSuccess: (reference) => handlePaystackSuccessAction(reference),
     onClose: handlePaystackCloseAction,
   };
-
 
   return (
     <UserLayout>
@@ -165,10 +155,15 @@ const Discount = () => {
                 by: <span>{merchant?.merchantName || merchant?.merchant}</span>
               </Grid>
               <Grid item>
-                for: <span>&#8358;{discount?.price - (discount?.price*discount?.discount / 200)}</span>
+                for:{" "}
+                <span>
+                  &#8358;
+                  {discount?.price -
+                    (discount?.price * discount?.discount) / 200}
+                </span>
               </Grid>
               <Grid item>
-                at: <span>{discount?.discount/2}% </span>discount
+                at: <span>{discount?.discount / 2}% </span>discount
               </Grid>
             </Grid>
             <Grid mt={3}>
@@ -201,20 +196,12 @@ const Discount = () => {
                   )}
                 </Link>
                 {user ? (
-            
                   <PaystackButton className="buyBtn" {...componentProps} />
-
-              
-            ) : (
-              
-                <Link
-                  className="buyBtn"
-                  to="/login"
-                >
-                  Buy Deal
-                </Link>
-              
-            )}
+                ) : (
+                  <Link className="buyBtn" to="/login">
+                    Buy Deal
+                  </Link>
+                )}
               </Grid>
             </Grid>
           </Grid>

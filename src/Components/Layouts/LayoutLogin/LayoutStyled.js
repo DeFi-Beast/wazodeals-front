@@ -17,12 +17,10 @@ export const Div = styled.div`
   align-items: center;
   justify-content: center;
 
-
-
-  @media(max-width:750px) {
-    display:none
+  @media (max-width: 750px) {
+    display: none;
   }
-  @media(min-width:1000px) {
+  @media (min-width: 1000px) {
     min-width: 60%;
   }
 

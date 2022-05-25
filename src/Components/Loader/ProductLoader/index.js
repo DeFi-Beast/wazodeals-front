@@ -1,5 +1,6 @@
-import Classes from "../../../Styles/Loader.module.css";
+
 import "./styles.css"
+
 const ProductLoader = () => {
   return (
     <div  style={{position:"absolute"}}>
