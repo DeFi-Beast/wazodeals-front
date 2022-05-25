@@ -78,7 +78,7 @@ const StyledCoupon = ({ discount, setCurrentId }) => {
 
  
 
-console.log(merchant, merchant?.logo[0]?.base64)
+// console.log(merchant, merchant?.logo[0]?.base64)
 
   return (
     <Grid
@@ -93,7 +93,7 @@ console.log(merchant, merchant?.logo[0]?.base64)
           <CardMedia
             className={classes.media}
             image={
-          
+              discount?.campaignFiles[0]?.base64 ||
                  image ||
                  files[0] 
                  
@@ -117,6 +117,9 @@ console.log(merchant, merchant?.logo[0]?.base64)
               </Button>
             </div>
           )}
+          <div className="logo">
+            <img src={image}></img>
+          </div>
         </div>
         <Div className={options && classes.whiteBg}>
           <div>
@@ -147,7 +150,7 @@ console.log(merchant, merchant?.logo[0]?.base64)
               <p>
                 {" "}
                 <span className={`${Classes.bold} ${Classes.big}`}>
-                  {discount.discount} %
+                  {discount.discount/2} %
                 </span>{" "}
                 Off
               </p>
@@ -160,7 +163,7 @@ console.log(merchant, merchant?.logo[0]?.base64)
                 <span className={Classes.bold}>
                   {Number(
                     discount.price -
-                      (`${discount.discount}` * discount.price) / 100
+                      (`${discount.discount/2}` * discount.price) / 100
                   ).toLocaleString("en-US")}
                 </span>{" "}
               </p>

@@ -64,7 +64,7 @@ const Cart = () => {
       amount_paid_in_card: Number(orderData?.amount_paid_in_card)?.toFixed(2),
       amount_paid_in_point: Number(orderData?.amount_paid_in_point)?.toFixed(2),
     },
-  publicKey: "pk_live_82bde11c458f4742f21b07d93ee6c5567a8ce755",
+  publicKey: "pk_test_350f98a7c9674e816f407d23956b66f2b8b7f8e7",
   };
   // publicKey: "pk_live_82bde11c458f4742f21b07d93ee6c5567a8ce755",
   // publicKey: "pk_test_350f98a7c9674e816f407d23956b66f2b8b7f8e7",
@@ -165,7 +165,7 @@ const Cart = () => {
         previousValue +
         currentValue.qty *
           (currentValue.price -
-            (currentValue.price * currentValue.discount) / 100)
+            (currentValue.price * currentValue.discount) / 200)
       );
     }, 0);
     setTotal(total);
@@ -178,9 +178,10 @@ const Cart = () => {
       orderItem.push({
         productId: cart._id,
         orderQty: cart.qty,
-        orderPrice: cart.price * cart.qty,
+        orderPrice: ((cart.price - (cart.price* cart.discount/200))),
+        orderProductTotal: ((cart.price - (cart.price* cart.discount/200)) * cart.qty),
+        merchant:cart.merchant,
         productTitle: cart._title,
-        cart
       });
     });
     console.log(orderItem);
@@ -260,6 +261,7 @@ const Cart = () => {
       if (total > totalPointNaira) {
         setOrderData({
           ...orderData,
+          id:user?.user?._id,
           amount_paid_in_point: totalPointNaira?.toFixed(2),
           email: user?.user?.email,
           order: [...orderItem],
@@ -272,6 +274,8 @@ const Cart = () => {
       } else {
         setOrderData({
           ...orderData,
+          id:user?.user?._id,
+
           amount_paid_in_point: total?.toFixed(2),
           email: user?.user?.email,
           order: [...orderItem],
@@ -287,6 +291,8 @@ const Cart = () => {
       console.log("optionfalse");
       setOrderData({
         ...orderData,
+        id:user?.user?._id,
+
         amount_paid_in_point: 0,
         pay_stack_ref_id: config?.reference,
         email: user?.user?.email,
@@ -437,7 +443,7 @@ const Cart = () => {
                         >
                           You saved &#8358;
                           {Number(
-                            (item.qty * item.discount * item.price) / 100
+                            (item.qty * item.discount/2 * item.price) / 100
                           ).toLocaleString("en-US")}{" "}
                           on this item{" "}
                         </span>
@@ -526,7 +532,7 @@ const Cart = () => {
                             ""
                           )}
                           {Number(
-                            (item.price - (item.price * item.discount) / 100) *
+                            (item.price - (item.price * item.discount/2) / 100) *
                               Number(item.qty)
                           ).toLocaleString("en-US")}
                         </Grid>

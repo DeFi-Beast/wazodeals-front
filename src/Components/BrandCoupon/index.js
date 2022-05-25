@@ -11,12 +11,19 @@ import { useDispatch } from "react-redux";
 import { updateClick } from "../../actions/coupon"
 import { useSelector } from "react-redux";
 import "./styles.css"
+import { toast } from "react-toastify";
 const Coupon = ({coupon}) => {
   const ref = useRef();
   const [click, setClick] = useState(false)
   const user = JSON.parse(localStorage.getItem('profile'))
   const allCoupons = JSON.parse(localStorage.getItem('coupons'))
   const {coupons} = useSelector(state => state.coupons)
+  const { merchants } = useSelector((state) => state.merchants);
+
+  const merchant = merchants?.merchant?.find(
+    (merchant) => merchant?._id === coupon?.merchant
+  );
+  const image = merchant?.logo[0]?.base64;
 const [counter, setCounter] = useState(Math.abs((new Date(coupon?.endDate).getTime() - new Date().getTime())/1000));
 const dispatch = useDispatch()
 // console.log(Math.abs((new Date(coupon?.endDate).getTime() - new Date().getTime())/1000))
@@ -96,13 +103,15 @@ const userData = {
       console.log( user?.user?._id)
       if(boolCheck){
         console.log("present")
+        toast.success(<>Already Copied</>)
         return
       } else {
         console.log("absent")
 
         dispatch({type:"UPDATE_CLICK", payload:{id,userData} })
         dispatch(updateClick(id,userData ))
-  
+        toast.success(<>Copied</>)
+        
       }
     
     console.log(check)
@@ -122,8 +131,8 @@ const userData = {
   <FrontSide  >
   <>
       <BrandCoupon>
-        <div className={Classes.CouponImg}>
-          <img src={CouponLogo} alt="coupon"></img>
+        <div style={{width:"230px", height:"200px"}} >
+          <img style={{width:"100%", height:"100%"}} src={image || CouponLogo} alt="coupon"></img>
         </div>
         <Div>
             <div>

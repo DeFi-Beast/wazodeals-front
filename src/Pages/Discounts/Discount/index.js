@@ -24,7 +24,9 @@ const Discount = () => {
   const dispatch = useDispatch();
   const [selected, setSelected] = useState(0);
   const { discount } = useSelector((state) => state.discounts.discount);
-  const files = discount?.selectedFiles.split("|");
+  // const files = discount?.selectedFiles.split("|");
+  const files = discount?.campaignFiles || discount?.selectedFiles.split("|")
+  
   const { merchants } = useSelector((state) => state.merchants);
   const merchant = merchants?.merchant?.find(
     (merchant) => merchant?._id === discount?.merchant
@@ -74,20 +76,20 @@ const Discount = () => {
   console.log(cartText)
 
   useEffect(() => {
-    setTotal(discount?.price - (discount?.price * discount?.discount) / 100);
+    setTotal(discount?.price - (discount?.price * discount?.discount) / 200);
     let orderItem = [];
 
     // orderItem.push({productId: discount?._id, orderQty:1, orderPrice:(discount?.price*1)})
     setOrderData({
       ...orderData,
       orderTotal:
-        discount?.price - (discount?.price * discount?.discount) / 100,
-      amount_paid: discount?.price - (discount?.price*discount?.discount / 100)?.toFixed(0),
+        discount?.price - (discount?.price * discount?.discount) / 200,
+      amount_paid: discount?.price - (discount?.price*discount?.discount / 200)?.toFixed(0),
       order: [
         {
           productId: discount?._id,
           orderQty: 1,
-          orderPrice: (discount?.price - (discount?.price*discount?.discount / 100)) * 1,
+          orderPrice: (discount?.price - (discount?.price*discount?.discount / 200)) * 1,
         },
       ],
     });
@@ -125,6 +127,8 @@ const Discount = () => {
     onSuccess: (reference) => handlePaystackSuccessAction(reference),
     onClose: handlePaystackCloseAction,
   };
+
+
   return (
     <UserLayout>
       <div className="Row RowPadding containerpadding">
@@ -132,7 +136,7 @@ const Discount = () => {
         <Grid container mt={5}>
           <Grid container sm={6} xs={10} m="0 auto">
             <Grid item>
-              <img src={files?.[selected]} alt="image" />
+              <img src={files?.[selected]?.base64} alt="image" />
             </Grid>
             <Grid container sm={12} display="block">
               {files?.slice(0, 3).map((file, index) => (
@@ -144,7 +148,7 @@ const Discount = () => {
                   xs={3}
                   sm={2}
                 >
-                  <img src={file} alt="image" />
+                  <img src={file.base64} alt="image" />
                 </Grid>
               ))}
             </Grid>
@@ -161,10 +165,10 @@ const Discount = () => {
                 by: <span>{merchant?.merchantName || merchant?.merchant}</span>
               </Grid>
               <Grid item>
-                for: <span>&#8358;{discount?.price - (discount?.price*discount?.discount / 100)}</span>
+                for: <span>&#8358;{discount?.price - (discount?.price*discount?.discount / 200)}</span>
               </Grid>
               <Grid item>
-                at: <span>{discount?.discount}% </span>discount
+                at: <span>{discount?.discount/2}% </span>discount
               </Grid>
             </Grid>
             <Grid mt={3}>

@@ -23,7 +23,7 @@ const CartReducers = (state = { cart: [], cartTotal: 0 }, action) => {
             previousValue +
             currentValue.qty *
               (currentValue.price -
-                (currentValue.price * currentValue.discount) / 100)
+                (currentValue.price * currentValue.discount) / 200)
           );
         }, 0);
         localStorage.setItem("cart", JSON.stringify(initialState));
@@ -37,7 +37,7 @@ const CartReducers = (state = { cart: [], cartTotal: 0 }, action) => {
           previousValue +
           currentValue.qty *
             (currentValue.price -
-              (currentValue.price * currentValue.discount) / 100)
+              (currentValue.price * currentValue.discount) / 200)
         );
       }, 0);
 
@@ -56,7 +56,7 @@ const CartReducers = (state = { cart: [], cartTotal: 0 }, action) => {
           previousValue +
           currentValue.qty *
             (currentValue.price -
-              (currentValue.price * currentValue.discount) / 100)
+              (currentValue.price * currentValue.discount) / 200)
         );
       }, 0);
       localStorage.setItem("cart", JSON.stringify(initialState));
@@ -76,7 +76,7 @@ const CartReducers = (state = { cart: [], cartTotal: 0 }, action) => {
           previousValue +
           currentValue.qty *
             (currentValue.price -
-              (currentValue.price * currentValue.discount) / 100)
+              (currentValue.price * currentValue.discount) / 200)
         );
       }, 0);
       localStorage.setItem("cart", JSON.stringify(initialState));
@@ -96,7 +96,7 @@ const CartReducers = (state = { cart: [], cartTotal: 0 }, action) => {
           previousValue +
           currentValue.qty *
             (currentValue.price -
-              (currentValue.price * currentValue.discount) / 100)
+              (currentValue.price * currentValue.discount) / 200)
         );
       }, 0);
       localStorage.setItem("cart", JSON.stringify(initialState));
@@ -116,7 +116,7 @@ const CartReducers = (state = { cart: [], cartTotal: 0 }, action) => {
           previousValue +
           currentValue.qty *
             (currentValue.price -
-              (currentValue.price * currentValue.discount) / 100)
+              (currentValue.price * currentValue.discount) / 200)
         );
       }, 0);
       localStorage.setItem("cart", JSON.stringify(initialState));

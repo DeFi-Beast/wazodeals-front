@@ -84,7 +84,7 @@ const App = () => {
     dispatch(getAllDiscounts(1));
     dispatch(getAllCoupons(1));
   
-  }, []);
+  }, []); 
 
   useEffect(() => {
     dispatch(getReceiptById(user?.user?._id));

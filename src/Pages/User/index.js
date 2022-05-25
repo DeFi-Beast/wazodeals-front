@@ -87,6 +87,7 @@ const style = {
 const initialState = {
   merchant: "",
   user: "",
+  userEmail:JSON.parse(localStorage.getItem("profile"))?.user?.email,
   selectedFiles: [],
 };
 const initialProfileState = {
@@ -154,11 +155,6 @@ const User = () => {
     );
   };
 
-  // const totalPoint = user?.user?.point + user?.user?.referrals.length * 12.5 + receiptTotal ;
-
-  
-  
-  // console.log(totalPoint);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
